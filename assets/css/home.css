@@ -1,0 +1,627 @@
+* {
+    border-radius: 0 !important;
+}
+.container {
+  
+    max-width: 1300px;
+}
+
+/* loader css  */
+.loader{
+    width: 64px;
+    height: 64px;
+    margin: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: none;
+}
+
+.loader i{
+    font-size: 38px;
+}
+.loaderContainer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 19999;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.loaderContainer i {
+	font-size: 50px;
+	color: #212121;
+}
+
+/* Header */
+
+.headerMain {
+    width: 100%;
+    background-color: #ffffffb8  !important;
+    border-bottom: solid 1px #055E20;       
+}
+
+.headerMain .navbar{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar li {
+    margin-left: 14px;
+}
+
+.navbar li a {
+    font-size: 15px;
+    color: #055E20;
+}
+
+.navbar li a:hover .dropdown-menu,
+.navbar li a:focus .dropdown-menu {
+    background-color: white !important;
+    color: #055E20 !important;
+}
+
+.dropdown-item:hover {
+    background-color: #055E20 !important;
+    color: white;
+}
+#collapsibleNavbar {
+    justify-content: flex-end;
+} 
+
+@media (max-width: 768px) {
+    .menuBtn {
+        border: 0;
+    }
+
+    .menuBtn:focus {
+        outline: 0 !important;
+    }
+
+    .menuBtnIcon {
+        font-size: 24px;
+        color: #055E20;
+    }
+
+    .navbar-nav {
+        margin-top: 5px;
+    }
+
+    .navbar li {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+}
+
+/********************/
+
+/* Footer */
+.page-footer {
+    font-size: 14px;
+    color: #FFFFFF;
+    background-color: #055E20  !important;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    height: 30px;
+    position: fixed;
+    bottom: 0;
+}
+/********************/
+head{
+    width:100% !important;
+    /* font-family: "effra",sans-serif; */
+    font-family: "CostarBrown",Helvetica,Arial,sans-serif;
+}
+body {
+    /* font-family: "effra",sans-serif; */
+    font-family: "CostarBrown",Helvetica,Arial,sans-serif;
+    letter-spacing: 0.8px;
+    font-size: 10pt;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    width: 100% !important;
+    overflow-y: scroll;
+    padding-bottom:50px;
+}
+
+.form-control:focus,
+.btn:focus {
+    outline: none;
+    box-shadow: none !important;
+    /* border: 1px solid #CED4DA; */
+}
+ a:hover{
+    text-decoration: none !important;
+}
+
+.displayNone{
+    display:none;
+}
+
+
+.headerItemsCss{
+    font-size:14px;
+    margin-right:15px; 
+}
+
+table {
+    border-right: solid 1px #CCC;
+    border-top:solid 0px #CCC !important;
+    border-bottom:solid 1px #CCC !important;
+    border-left:solid 0px #CCC !important;
+   
+}
+th {
+    border-right:solid 0px #CCC !important;
+    border-bottom:solid 0px #CCC !important;
+    border-top:solid 1px #CCC !important;
+    border-left:solid 1px #CCC !important;
+}
+ td {
+    border-bottom:solid 0px #CCC !important;
+    border-right:solid 0px #CCC !important;
+    border-left:solid 1px #CCC !important;
+    border-top:solid 1px #CCC;
+}
+.table-condensed {
+    border-right:solid 0px !important;
+    border-left:solid 0px !important;
+    border-top:solid 0px !important;
+    border-bottom:solid 0px !important;
+}
+.table-condensed td{
+    border-right:solid 0px !important;
+    border-left:solid 0px !important;
+    border-top:solid 0px !important;
+    border-bottom:solid 0px !important;
+}
+
+.table-condensed th{
+    border-right:solid 0px !important;
+    border-left:solid 0px !important;
+    border-top:solid 0px !important;
+    border-bottom:solid 0px !important;
+}
+.table-condensed td{
+    border-right:solid 0px !important;
+    border-left:solid 0px !important;
+    border-top:solid 0px !important;
+    border-bottom:solid 0px !important;
+}
+
+
+
+/* parallax  */
+.parallax {
+    /* The image used */
+    background-image: url("https://lb961.com/assets/images/wide.jpg");
+    width: 100%;
+    /* Set a specific height */
+    height: 400px; 
+    /* Create the parallax scrolling effect */
+    /* background-attachment: fixed; */
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+
+  
+  }
+
+.facebookIcon{
+    color: #055E20;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    border: solid 2px;
+    border-radius: 50% !important;
+    padding-left: 6px;
+    padding-top: 4px;   
+    cursor:pointer;
+}
+
+.instaIcon{
+    color: #055E20;
+    font-size: 27px;
+    cursor:pointer;
+    margin-top:2px;
+}
+.linkedIcon {
+    color: #055E20;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    border: solid 2px;
+    border-radius: 50% !important;
+    padding-left: 6px;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+a{
+    color:#055E20;
+}
+a:hover{
+    color:#055E20;
+}
+
+/* .................BLUE BUTTON SUBMIT OR SEND................  */
+.greenButtonsCss{
+    background-color: #055E20;
+    color:white !important;
+}
+.redButtonsCss{
+    background-color: rgba(208, 0, 0, 0.87);
+    color:white !important;
+}
+
+
+/* ................MAIN HEADER CSS ................. */
+.mainHeaderIcons{
+    color: #055E20;
+    font-size:15px;
+    margin-right:6px;
+    margin-left:5px;
+}
+.mainHeaderButtons{
+    padding-top:7px;
+    padding-bottom: 7px;
+    font-size:14px;
+}
+.greenBackground{
+    background-color: #055E20;
+}
+.whiteColor{
+    color:white !important;
+}
+
+.mainFooterIcons{
+    color: white;
+    font-size:16px;
+    cursor: pointer;
+}
+
+.boxCss{
+    padding: 10px;
+    border: solid 1px #CCC;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #055E20 !important;
+}
+
+/* Selectpicker */
+.bs-searchbox {
+    padding: 0!important;
+}
+ 
+.bs-searchbox input {
+    height: 32px!important;
+}
+ 
+.bootstrap-select .dropdown-menu {
+    padding: 0!important;
+    transform: translate3d(0, -3px, 0) !important;
+} 
+
+
+.bootstrap-select button{
+    background-color: white !important;
+    border: solid 1px #ced4da !important;
+}
+.bootstrap-select .dropdown-menu li{
+    font-size:14px !important;
+}
+/* END OF Selectpicker */
+
+.greenButtonsCssModal {
+    color: #055E20 !important;
+    border: solid 1px;
+}
+.redButtonsCssModal {
+    color: red!important;
+    border: solid 1px red;
+    margin-right: 10px;
+}
+
+.closeModal {
+    color: red !important;
+    font-size: 29px !important;
+    opacity: 1 !important;
+}
+.modal-header .close {
+    padding: 11px 1rem !important;
+    margin: -1rem -1rem -1rem auto;
+}
+
+.dataTables_filter input, .dataTables_length select{
+    height:30px;
+    border:solid 1px #CCC;
+}
+
+/* X Button For Search DataTable */
+.clearSearchContainer {
+    position: relative;
+    right: -14px;
+    opacity: 0;
+
+    transition: 0.5s;
+}
+
+.clearSearchContainer i {
+    color: red;
+    cursor: pointer;
+    font-size: 17px;
+    margin-top: 6px;
+    position: absolute;
+    margin-left: -11px;
+}
+
+.moveClearSearchContainerLeft {
+    right: 7px !important;
+    opacity: 1;
+    font-size:14px;
+}
+/* END OF X Button For Search DataTable */
+
+
+table tr:hover > td {
+    background: #d1ffd570 !important
+} 
+
+.tooltip-inner{
+    background-color: #ffff99 !important;
+    color:black;
+    padding: 10px;
+    max-width:400px;
+}
+
+
+
+#forSaleFirstSection {
+    /* The image used */
+    background-image: url("https://lb961.com/assets/images/mainSaleHeader.png");
+    /* Set a specific height */
+    height: 220px;  
+    background-repeat: no-repeat;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+    /* background-attachment: fixed; */
+    /* background-position: center; */
+    background-position: revert;
+    background-size: cover;  
+    -webkit-background-size: cover;
+    -moz-background-size: cover; 
+    
+}
+
+#forRentFirstSection {
+    /* The image used */
+    background-image: url("https://lb961.com/assets/images/rectangleParallaxOne.png");
+    /* Set a specific height */
+    height: 400px;  
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+    /* background-position: center; */
+    background-size: cover;  
+}
+.layer {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+
+}
+
+
+.greenColor{
+    color: #055E20;
+}
+
+.blueButtonsCssModal {
+    color: rgb(38, 140, 228) !important;
+    border: solid 1px;
+}
+
+
+.cardStyle{
+    box-shadow: slategray 0px 5px 10px;
+    text-align: center !important;
+    height:390px;
+}
+
+.card-img-top{
+    height:190px;
+}
+.card-button{
+    border-radius: 20px !important;
+    background-color: #055E20 !important;
+    color: white;
+
+}
+.card-button:hover{
+    color: white !important;
+
+}
+.cardMainContainer{
+    position: relative;
+    width:286px;
+    height:420px;
+    cursor: pointer;
+}
+.theCard{
+    position: absolute;
+    width:100%;
+    height:100%;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+
+.theFront{
+    position: absolute;
+    width:100%;
+    height:100%;
+    backface-visibility: hidden;
+}
+.theBack{
+    position: absolute;
+    width:100%;
+    height:100%;
+    backface-visibility: hidden;
+    transform:rotateY(180deg);
+}
+.transformClass{
+    transform:rotateY(180deg);
+}
+
+.cardMainContainer p {
+    height: 69px;
+}
+
+
+.headerLogo{
+    width: 95px;
+    position: absolute;
+    left: 68px;
+    background: white;
+    border: 1px solid #055E20;
+    top: 10px;
+    z-index: 10;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+}
+
+
+.image-container {
+    position: relative;
+    width: 100%;
+}
+.image-container .after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #00a02e03;
+}
+.image-container:hover .after {
+    display: block;
+    
+}
+
+
+.headerParagraphToEdit{
+    color: #fff;
+    text-align: center;
+    font-size: 4.5rem;
+    text-shadow: 0 2px 50px rgba(0,0,0,.25),0 1px 1px rgba(0,0,0,.4);
+    margin-top: 68px;
+}
+
+.mainButtonInHeader{
+    color: #fff;
+    font-size: 1.3rem;
+    border: solid 1px rgba(0,0,0,.7)aliceblue;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    cursor: pointer;
+}
+
+.mainButtonInHeader2{
+    color: #fff;
+    font-size: 1.3rem;
+    background-color: rgba(0,0,0,.4);
+    padding: 15px;
+    cursor: pointer;
+}
+
+.mainButtonInHeader3{
+    color: #fff;
+    font-size: 1.3rem;
+    border: solid 1px rgba(0,0,0,.7)aliceblue;
+    background: rgba(0,0,0,.7);
+    padding: 15px;
+    margin-top: 11px;
+}
+
+.coordinates {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    bottom: 40px;
+    left: 10px;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 11px;
+}
+
+
+
+.mapboxgl-popup-content {
+    background: white;
+    padding: 0px 0px 0px;
+    border-radius: 14px !important;
+    pointer-events: auto;
+    color: rgba(0, 0, 0, 0.808);
+}
+
+/* for mapbox X CSS zid l font-size la tbayenn  */
+.mapboxgl-popup-close-button {
+    position: absolute;
+    border: 0;
+    border-radius: 0 3px 0 0;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 0px;
+    color: red;
+    padding-top: 5px;
+    padding-right: 5px;
+    color:white;
+
+  }
+
+
+
+.mapboxgl-popup-content{
+    max-height: 300px;
+    width: 210px;
+    /* overflow-y: auto; */
+}
+
+
+
+.coolBorderBackground {
+    margin-top: 80px;
+    padding: 10px;
+    background-color: #263521a8;
+    border: radiu;
+    border-radius: 49px;
+    border-radius: 10px !important;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+
+
+.propertyOnHover:hover{
+    border: solid 1px #055E20; 
+    background: antiquewhite;
+}
+
+.addClassHover{
+    border: solid 1px #055E20; 
+    background: antiquewhite;
+}
