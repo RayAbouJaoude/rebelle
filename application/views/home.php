@@ -294,7 +294,7 @@
             </span>
         </div>
         <div class="col-xl-4" >
-            <p style="margin-top:8px; color: #757575;">Copyright© 2021, Real Estate LB961, INC. All Rights Reserved.</p>
+            <p style="margin-top:8px; color: #757575;">Copyright© 2023, Re-Belle, INC. All Rights Reserved.</p>
         </div>
         <div class="col-xl-4" > 
             <p style="margin-top:8px; color: #757575;"><b>Disclaimer:</b> All information is subject to  <a href="/content/page/about">Terms of Use</a> and should be independently verified.</p>
