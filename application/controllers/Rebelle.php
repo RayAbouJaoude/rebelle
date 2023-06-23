@@ -63,7 +63,7 @@ class Rebelle extends CI_Controller {
 
 	public function index()
 	{
-		$data["page"] = "lb961";
+		$data["page"] = "rebelle";
 		$data["cssLinks"] = "<link rel='stylesheet' href='".base_url()."/assets/css/home.css?ran=" . rand(1, 100000000) . "' />";
 		$data["scripts"] = "<script src='".base_url()."/assets/js/home.js?ran=" . rand(1, 100000000) . "'></script>";
 		
