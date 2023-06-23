@@ -91,7 +91,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     if(isset($_SESSION["userId"])){
 ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>Lb961"  role="button">
+                                <a class="nav-link" href="<?php echo base_url(); ?>Rebelle"  role="button">
                                     MANAGE ACCOUNT
                                 </a>
                             </li>

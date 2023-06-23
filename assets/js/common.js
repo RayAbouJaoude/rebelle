@@ -24,7 +24,7 @@ $(document).ready(function () {
     // ----------------------------------------------------------- //
     $("#logoutButton").click(function(){
         $.ajax({
-            url: baseURL + "/Lb961/logoutButton",
+            url: baseURL + "/Rebelle/logoutButton",
             method: "POST",
             dataType: "json",
             beforeSend:function(){

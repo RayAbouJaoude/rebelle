@@ -12,7 +12,7 @@ class Login extends CI_Controller {
 	public function index() 
 	{
 		if (isset($_SESSION["sessionId"])) {
-			redirect("Lb961");
+			redirect("Rebelle");
 		} else {
 			$this->load->view("login");
 		}

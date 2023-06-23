@@ -43,7 +43,7 @@ function loginFormSubmit(postData)
 			} else {
 				$("#loginFormMessage").html(msg).removeClass("redColor").addClass("greenColor");
 				
-				window.location.href = BASE_URL + "Lb961";
+				window.location.href = BASE_URL + "Rebelle";
 			}
 		},
 		error: function () {

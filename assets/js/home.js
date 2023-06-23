@@ -24,7 +24,7 @@ $(document).ready(function (){
         });
         data.append('transactionId', $("#propertyIdHidden").val());        
         $.ajax({
-            url: `${baseURL}/Lb961/uploadFiles`,
+            url: `${baseURL}/Rebelle/uploadFiles`,
             method: 'POST',
             data: data,
             dataType: 'json',
@@ -438,7 +438,7 @@ $(document).ready(function (){
         latitude = $("#latitudeOfProperty").html();
         
         $.ajax({
-            url: baseURL + "/Lb961/submitProperty",
+            url: baseURL + "/Rebelle/submitProperty",
             method: "POST",
             data: postData + "&longitude=" + longitude + "&latitude=" + latitude,
             dataType: "json",
@@ -481,7 +481,7 @@ $(document).ready(function (){
             $(this).attr("isChecked",1);
         }
         $.ajax({
-            url: baseURL + "/Lb961/statusIcon",
+            url: baseURL + "/Rebelle/statusIcon",
             data: "isChecked=" + isChecked + "&dataId=" + dataId,
             method: "POST",
             dataType: "json",
@@ -508,7 +508,7 @@ $(document).ready(function (){
     $("body").on("click", ".displayPropertyToEdit", function(){
         id = $(this).attr("dataId");
         $.ajax({
-            url: baseURL + "/Lb961/displayPropertyToEdit",
+            url: baseURL + "/Rebelle/displayPropertyToEdit",
             method: "POST",
             data: "id=" + id,
             dataType: "json",
@@ -646,7 +646,7 @@ $(document).ready(function (){
     $("body").on("click", ".displayAdminPropertyInfoToEdit", function(){
         id = $(this).attr("dataId");
         $.ajax({
-            url: baseURL + "/Lb961/displayPropertyToEdit",
+            url: baseURL + "/Rebelle/displayPropertyToEdit",
             method: "POST",
             data: "id=" + id,
             dataType: "json",
@@ -692,7 +692,7 @@ $(document).ready(function (){
         $.ajax({
             method:"POST",
             data: "idToDelete=" + idToDeletePropertyButton ,
-            url: baseURL + "Lb961/deleteProperty",
+            url: baseURL + "Rebelle/deleteProperty",
             dataType:"JSON",
             success: function(data){
                 getAllPropertiesInBackEnd();
@@ -714,7 +714,7 @@ $(document).ready(function (){
         $.ajax({
             method:"POST",
             data: "idToDelete=" + idToDeletePropertyButtonInAdmin ,
-            url: baseURL + "Lb961/deletePropertyInAdmin",
+            url: baseURL + "Rebelle/deletePropertyInAdmin",
             dataType:"JSON",
             success: function(data){
                 getAllPropertiesForAdmin();
@@ -754,7 +754,7 @@ function hideAll(){
 // ----------------------------------------------------------- //
 function getAllPropertiesInBackEnd() {
     $.ajax({
-        url: baseURL + "/Lb961/getAllPropertiesInBackEnd",
+        url: baseURL + "/Rebelle/getAllPropertiesInBackEnd",
         method: "POST",
         dataType: "json",
         beforeSend:function(){
@@ -797,7 +797,7 @@ function getAllPropertiesInBackEnd() {
 // ----------------------------------------------------------- //
 function getAllPropertiesForAdmin() {
     $.ajax({
-        url: baseURL + "/Lb961/getAllPropertiesForAdmin",
+        url: baseURL + "/Rebelle/getAllPropertiesForAdmin",
         method: "POST",
         dataType: "json",
         beforeSend:function(){
@@ -874,7 +874,7 @@ function getAllPropertiesForAdmin() {
 // //**************************** */
 // function displayAllPins(){
 //     $.ajax({
-//         url: baseURL + "/Lb961/displayAllPins",
+//         url: baseURL + "/Rebelle/displayAllPins",
 //         method: "POST",
 //         dataType: "json",
 //         beforeSend:function(){
