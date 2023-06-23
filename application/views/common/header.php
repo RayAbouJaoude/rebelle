@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <nav class="navbar navbar-expand-sm" style="height:55px;">
                 <div class="container">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>/Home">
-                        <img class="headerLogo"  src="<?php echo base_url(); ?>assets/images/realestateLogo.png" >
+                        <img class="headerLogo"  src="<?php echo base_url(); ?>assets/images/rebelleLogo.png" >
                     </a>
                     <button class="navbar-toggler menuBtn" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <i class="fa fa-bars menuBtnIcon"></i>                      
@@ -47,36 +47,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>ForSale"  role="button">
-                                    FOR SALE
+                                    SHOP
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>ForRent"   role="button">
-                                    FOR RENT
+                                    STYLING TIPS
                                 </a>
                             </li>
-                            <!-- <li class="nav-item dropdown active">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    FOR SALE
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">
-                                        Homes For Sale
-                                    </a>
-                                    <a class="dropdown-item" href="#">Open Houses</a>
-                                    <a class="dropdown-item" href="#">Recently Listed Homes</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    FOR RENT
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                                    <a class="dropdown-item" href="#">Homes For Rent</a>
-                                    <a class="dropdown-item" href="#">Apartments For Rent</a>
-                                    <a class="dropdown-item" href="#">Open Houses</a>
-                                </div>
-                            </li> -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ABOUT
@@ -84,7 +62,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                                     <a class="dropdown-item" href="#">About Us</a>
                                     <a class="dropdown-item" href="#">Contact Us</a>
-                                    <!-- <a class="dropdown-item" href="#">Code Of Ethics</a> -->
                                 </div>
                             </li>
 <?php

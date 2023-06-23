@@ -18,12 +18,6 @@
         $dateOfBirth = "";
 
     }
-    if(isset($_SESSION["gender"]) && !empty($_SESSION["gender"])){
-        $gender = $_SESSION["gender"];
-    }else{
-        $gender = -1;
-    
-    }
     if(isset($_SESSION["userType"])){
         $userType = $_SESSION["userType"];
     }
@@ -42,7 +36,6 @@
     }
 ?>
 
-<!-- <img class="w-100"  src="<?php echo base_url(); ?>assets/images/mainPagePicOne.jpg" > -->
 
 <div class="container" style="margin-top:10px;"> 
 
@@ -50,23 +43,17 @@
     <div id= "mainHeader" name="mainHeader" class="mt-2">
         <div class="row ml-0 mr-0">
             <div class="col-xl-2 col-6 greenBackground">
-                <button type ="button" id="profileInfoHeaderButton" name="profileInfoHeaderButton" class =" whiteColor mainHeaderButtons btn btn-sm">
-                    <i class="mainHeaderIcons fas fa-id-badge   whiteColor"></i>
-                    Manage Profile
+                <button type ="button" id="manageItemsHeaderButton" name="manageItemsHeaderButton" class =" whiteColor mainHeaderButtons btn btn-sm">
+                    <i class="mainHeaderIcons fas fa-id-badge whiteColor"></i>
+                    Manage Items
                 </button>
             </div>
-            <div class="col-xl-2 col-6">
-                <button type ="button" id="managePropertiesHeaderButton" name="managePropertiesHeaderButton" class ="mainHeaderButtons btn btn-sm">
-                    <i class="fas fa-home mainHeaderIcons"></i>
-                    Manage Properties
+            <div class="col-xl-2 col-6 ">
+                <button type ="button" id="manageCartsHeaderButton" name="manageCartsHeaderButton" class ="  mainHeaderButtons btn btn-sm">
+                    <i class="mainHeaderIcons fas fa-id-badge  "></i>
+                    Manage Carts
                 </button>
-            </div>   
-            <div class="col-xl-2 col-6">
-                <button type ="button" id="adminSectionHeaderButton" name="adminSectionHeaderButton" class ="mainHeaderButtons btn btn-sm">
-                    <i class="fas fa-user-cog mainHeaderIcons"></i>
-                    Admin Section
-                </button>
-            </div> 
+            </div>
         </div>
     </div>
     <!-- end of main header  -->
@@ -90,15 +77,6 @@
                 </div>
             </div>
             <div class="row mt-1">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                    <label for="gender" class="" >Gender</label>
-                    <input type="hidden" id="hiddenInputForGender" value="<?php echo $gender ; ?>"/>
-                    <select name="gender" id="gender" class="form-control form-control-sm selectpicker" data-live-search="true" >
-                        <option value="-1">--select--</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                     <label for="dateOfBirth" class=" ">Date Of Birth</label>
                     <div class='input-group date' id='datetimepicker'>
@@ -163,16 +141,7 @@
                     <label for="propertyAddress">Address:</label>
                     <input type="text" name="propertyAddress" id="propertyAddress" class="form-control form-control-sm"  />
                 </div>
-                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="propertyListingStatus">Listing Status:</label>
-                    <select class="form-control form-control-sm selectpicker"  data-live-search="true" id="propertyListingStatus" name="propertyListingStatus">
-                        <option value="-1">-- Select --</option>
-                        <option value="2">For Sale</option>
-                        <option value="3">Under Contract - Option Pending (OP)</option>
-                        <option value="4">Under Contract - Option Continue To Show (PS)</option>
-                        <option value="5">Under Contract - Pending (P)</option>
-                    </select>   
-                </div>   -->
+                
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
                     <label for="propertyZipcode">Zip Code:</label>
                     <input type="text" name="propertyZipcode" id="propertyZipcode" class="form-control form-control-sm"  />
@@ -218,7 +187,7 @@
             </div>
             <div class="row mt-2">
                 <div class="col-xl-12">
-                    <h6>Amenitiessss</h6>
+                    <h6>Amenities</h6>
                 </div>
             </div>
             <div class="row boxCss ml-0 mr-0">
