@@ -6,7 +6,7 @@
     <img class="w-100"  style="transform: translateZ(0); image-rendering: -webkit-optimize-contrast; height: 520px;" src="<?php echo base_url(); ?>assets/images/greatestpic.png" >
 
     <div class="after">
-        <p class="headerParagraphToEdit">Find your next property</p>
+        <p class="headerParagraphToEdit">Find your next propertyaaaa</p>
 
         <div class="container" style=" margin-top:30px; max-width:750px;">
             <div>
