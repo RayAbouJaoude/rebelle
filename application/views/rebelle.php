@@ -218,7 +218,7 @@
             </div>
             <div class="row mt-2">
                 <div class="col-xl-12">
-                    <h6>Amenities</h6>
+                    <h6>Amenitiessss</h6>
                 </div>
             </div>
             <div class="row boxCss ml-0 mr-0">
