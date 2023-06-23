@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lb961 extends CI_Controller {
+class Rebelle extends CI_Controller {
 
 	public function __construct()
 	{
