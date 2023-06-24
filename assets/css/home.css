@@ -625,3 +625,43 @@ table tr:hover > td {
     border: solid 1px #055E20; 
     background: antiquewhite;
 }
+
+
+.lineClass{
+    height: 1px;
+    background-color: #ed3a96;
+    align-self: center;
+}
+.buttonStyle{
+    border-color: black;
+    border-radius:0;
+    border-width: 1px;
+    border-style: solid;
+    line-height: 1px;
+    font-weight: bold;
+    font-size :12px;
+    padding:9px;
+    width: 100%;
+    text-align: left;
+}
+
+/* ...............RED BUTTONS DELETE OR CANCEL...........*/
+.redButtonsCss{
+    background-color: #dc3545;
+    color:white !important;
+    font-size:13px;
+    margin-right: 10px;
+}
+
+/* .................BLUE BUTTON SUBMIT OR SEND................  */
+.blueButtonsCss{
+    background-color: #0193f5;;
+    color:white !important;
+    font-size:13px;
+    
+}
+.pinkButtonsCss{
+    background-color: #ed3a96;;
+    color:white !important;
+    font-size:13px;
+}

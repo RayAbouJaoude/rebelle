@@ -1,8 +1,5 @@
 $(document).ready(function (){ 
 
-
-
-
     $("#attachIconAdd").click(function(){
         if($("#propertyIdHidden").val() == ""){
             $("#saveFirstModal").modal("show");
@@ -45,8 +42,6 @@ $(document).ready(function (){
     
 
     //-------//
-
-
     $(".theCard").click(function(){
         $(this).addClass("transformClass");
     })
@@ -64,7 +59,6 @@ $(document).ready(function (){
         forceParse: false
     }); 
 
-
     $("#manageItemsHeaderButton").click(function(){
         hideAll();
         setTimeout(function(){
@@ -74,6 +68,7 @@ $(document).ready(function (){
             $("#profileInfo").removeClass("displayNone");
         },20)
     })
+
     $("#manageCartsHeaderButton").click(function(){
         hideAll();
         $("#manageCartsHeaderButton").parent().addClass("greenBackground");
@@ -98,6 +93,7 @@ $(document).ready(function (){
         $("#managePropertyForm").slideUp();
         $("#displayAdminSectionPropertyInfo").slideUp();
     })
+
     $("#addPropertyButton").click(function(){
         if ($("#map").length > 0 ){
             mapboxgl.accessToken = 'pk.eyJ1Ijoic2NvcmF5IiwiYSI6ImNrdWNxcmJmNjBlb3kzMHBoMTBlanRncnAifQ.nUzt6aDopRt2STolFgt9FQ';
@@ -280,49 +276,7 @@ $(document).ready(function (){
                         coordinates.style.display = 'block';
                         coordinates.innerHTML = `Longitude: <span id="longitudeOfProperty">${lngLat.lng} </span><br />Latitude: <span id="latitudeOfProperty">${lngLat.lat}</span>`;
                     }
-                        
                     marker.on('dragend', onDragEnd);
-
-                   
-
-
-
-                // const geojson = {
-                //     'type': 'FeatureCollection',
-                //     'features': [
-                //         {
-                //             'type': 'Feature',
-                //             'geometry': {
-                //             'type': 'Point',
-                //             'coordinates': [35.82841677706193, 33.92811062117468]
-                //             },
-                //             'properties': {
-                //             'title': 'Mapbox 500',
-                //             'description': 'Washington, D.C. 500'
-                //             }
-                            
-                //         }
-                //     ]
-                // };
-                // for (const feature of geojson.features) {
-                //     // create a HTML element for each feature
-                //     const el = document.createElement('div');
-                //     el.className = 'marker';
-                        
-                //     // make a marker for each feature and add it to the map
-                //     new mapboxgl.Marker(el)
-                //     .setLngLat(feature.geometry.coordinates)
-                //     .setPopup(
-                //         new mapboxgl.Popup({ offset: 25 }) // add popups
-                //         .setHTML(
-                //             `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
-                //         )
-                //     )
-                    
-                //     .addTo(map);
-                // }
-
-
                 }
 
                 $("#propertyCounterAddOrEdit").val(2);
@@ -356,8 +310,6 @@ $(document).ready(function (){
     })
 
 
-
-
     $("body").on("click", ".displayAdminPropertyInfoToEdit", function(){
         id = $(this).attr("dataId");
         $.ajax({
@@ -378,7 +330,6 @@ $(document).ready(function (){
                 $("#propertyZipcodeInAdmin").val(data["zipCode"]);
                 $("#propertyYearBuiltInAdmin").val(data["yearBuilt"]);
                 $("#propertySaleOrRentInAdmin").val(data["saleOrRent"]);
-    
                 $("#displayAdminSectionPropertyInfo").slideDown();
             },
             error: function (error) {
