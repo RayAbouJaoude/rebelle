@@ -30,10 +30,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
     <header>
         <div class="headerMain">
-            <nav class="navbar navbar-expand-sm" style="height:55px;">
+            <nav class="navbar navbar-expand-sm" style="height:45px;">
                 <div class="container">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>/Home">
-                        <img class="headerLogo"  src="<?php echo base_url(); ?>assets/images/rebelleLogo.png" >
+                        <img class="headerLogo"  src="<?php echo base_url(); ?>assets/images/rebelleLogo.jpg" >
                     </a>
                     <button class="navbar-toggler menuBtn" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <i class="fa fa-bars menuBtnIcon"></i>                      
@@ -69,11 +69,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>Rebelle"  role="button">
-                                    MANAGE ACCOUNT
+                                    ADMIN
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="cursor:pointer; color:#055E20" id="logoutButton"  role="button">
+                                <a class="nav-link" style="cursor:pointer;" id="logoutButton"  role="button">
                                     LOGOUT
                                 </a>
                             </li>
