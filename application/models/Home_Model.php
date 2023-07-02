@@ -2,6 +2,534 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home_Model extends CI_Model {
+
+
+    //...................ADD SURVBEY..................//
+    public function addItem($itemNameToAdd, $itemDescriptionToAdd, $itemQuantityToAdd, $itemBarCodeToAdd, $itemCategoryToAdd, $itemSizeToAdd, $itemPriceToAdd, $quantityArr, $sizeArr, $colorArr, $colorToAdd, $itemWeightToAdd){
+        $attachmentId=0;
+        $itemNameToAdd = $this->db->escape($itemNameToAdd);
+        $itemDescriptionToAdd = $this->db->escape($itemDescriptionToAdd);
+        $itemBarCodeToAdd = $this->db->escape($itemBarCodeToAdd);
+        $itemCategoryToAdd = $this->db->escape($itemCategoryToAdd);
+        $itemSizeToAdd = $this->db->escape($itemSizeToAdd);
+        $colorToAdd = $this->db->escape($colorToAdd);
+        $itemPriceToAdd = $this->db->escape($itemPriceToAdd);
+        if( $quantityArr != [] || $sizeArr !=[] || $colorArr !=[] ){
+            $quantityArr=explode(",",$quantityArr);
+            $sizeArr=explode(",",$sizeArr);
+            $colorArr=explode(",",$colorArr);
+        }
+        $sqlQuery = "INSERT INTO item (itemName, itemDescription, quantity, barCode, categoryItems, size, price, isDeleted, color, `weight`,initialQuantity, exported)
+                     VALUES ($itemNameToAdd , $itemDescriptionToAdd, $itemQuantityToAdd , $itemBarCodeToAdd, $itemCategoryToAdd , $itemSizeToAdd, $itemPriceToAdd, 0, $colorToAdd, $itemWeightToAdd,$itemQuantityToAdd, 1)"; 
+        $query = $this->db->query($sqlQuery);
+        $lastInsertedId = $this->db->insert_id();
+        // $beforeAfter= "Quantity > " . $itemQuantityToAdd . " Size > " . $itemSizeToAdd ;
+        // $this->addToLog($userId, $lastInsertedId, 5, 1, $lastInsertedId, $beforeAfter);
+        // $lastInsertedIdToPrint = str_pad($lastInsertedId, 12,'0',STR_PAD_LEFT);
+        // $lastInsertedIdToPrint = $this->db->escape($lastInsertedIdToPrint);
+
+        // $sql2 = "UPDATE item
+        //          SET `barCodeToPrint` = $lastInsertedIdToPrint
+        //          WHERE `id` = $lastInsertedId";
+        // $query2 = $this->db->query($sql2);
+        if($quantityArr != "" || $quantityArr != [] || count($quantityArr) > 0 ){
+            for ($i=0; $i < count($quantityArr) ; $i++) { 
+                $sizeee = $sizeArr[$i];
+                $colorr = $colorArr[$i];
+                $quantityyy = $quantityArr[$i];
+                $sizeee = $this->db->escape($sizeee);
+                $colorr = $this->db->escape($colorr);
+    
+                $sqlQuery1 = "INSERT INTO item (itemName, itemDescription, quantity, barCode, categoryItems, size, price, isDeleted, color, `weight`, initialQuantity, exported)
+                              VALUES ($itemNameToAdd , $itemDescriptionToAdd, $quantityyy , $itemBarCodeToAdd, $itemCategoryToAdd , $sizeee, $itemPriceToAdd, 0, $colorr, $itemWeightToAdd, $quantityyy, 1)"; 
+                $query1 = $this->db->query($sqlQuery1);
+                $lastInsertedId = $this->db->insert_id();
+                // $beforeAfter= "Quantity > " . $quantityyy . " Size > " . $sizeee ;
+                // $this->addToLog($userId, $lastInsertedId, 5, 1, $lastInsertedId, $beforeAfter);
+                // $lastInsertedIdToPrint = str_pad($lastInsertedId, 12,'0',STR_PAD_LEFT);
+                // $lastInsertedIdToPrint = $this->db->escape($lastInsertedIdToPrint);
+
+                // $sql2 = "UPDATE item
+                //         SET `barCodeToPrint` = $lastInsertedIdToPrint
+                //         WHERE `id` = $lastInsertedId";
+                // $query2 = $this->db->query($sql2);
+            }
+        }
+        if ($query) {
+            $result = 1;
+        } else {
+            $result = -1;
+        }
+        return array($result, $itemBarCodeToAdd);
+    }
+
+    public function getItemsData($archivedOrNot, $category, $gender){
+        if($category == -1 && $gender == -1){
+            if($archivedOrNot == 1){
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barCode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 2){
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and archive =1 and storage < 1 
+                            GROUP BY id
+                            
+                            ";
+            }elseif($archivedOrNot == 4){
+                // ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and sale > 0 and storage < 1 
+                            GROUP BY id
+                            
+                            ";
+            
+            }elseif($archivedOrNot == 5){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and sale < 0.1 and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 6){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and exported = 1 and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 7){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and newCollection = 1 and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 8){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and summerCollection = 1 and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 9){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and winterCollection = 1 and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 10){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and storage = 1 
+                            GROUP BY id
+                            ";
+            }else{
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                                
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and archive != 1 and  exported != 1 and summerCollection != 1 and winterCollection != 1 and storage < 1 
+                            GROUP BY id
+                            ";
+            }
+        }elseif ($category != -1 && $gender != -1) {
+            if($archivedOrNot == 1){
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barCode, id, attachmentExt 
+                                FROM itemimage 
+                                Where item.isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode
+                            Where isDeleted = 0  and item.categoryItems = $category and item.gender = $gender  and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 2){
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and archive =1 and item.categoryItems = $category and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            
+                            ";
+            }elseif($archivedOrNot == 4){
+                // ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and sale > 0 and item.categoryItems = $category and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            
+                            ";
+            
+            }elseif($archivedOrNot == 5){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and sale < 0.1 and item.categoryItems = $category and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 6){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and exported = 1 and item.categoryItems = $category and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 7){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and newCollection = 1 and item.categoryItems = $category and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 8){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and summerCollection = 1 and item.categoryItems = $category and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 9){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0 
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and winterCollection = 1 and item.categoryItems = $category and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }else{
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                                
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and archive != 1 and  exported != 1 and summerCollection != 1 and winterCollection != 1  and item.categoryItems = $category and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }
+        }elseif ($category != -1 && $gender == -1) {
+            if($archivedOrNot == 1){
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barCode, id, attachmentExt 
+                                FROM itemimage 
+                                Where item.isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode
+                            Where isDeleted = 0  and item.categoryItems = $category  and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 2){
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and archive =1 and item.categoryItems = $category and storage < 1 
+                            GROUP BY id
+                            
+                            ";
+            }elseif($archivedOrNot == 4){
+                // ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and sale > 0 and item.categoryItems = $category and storage < 1 
+                            GROUP BY id
+                            
+                            ";
+            
+            }elseif($archivedOrNot == 5){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and sale < 0.1 and item.categoryItems = $category and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 6){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and exported = 1 and item.categoryItems = $category and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 7){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and newCollection = 1 and item.categoryItems = $category and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 8){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and summerCollection = 1 and item.categoryItems = $category and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 9){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0 
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and winterCollection = 1 and item.categoryItems = $category and storage < 1 
+                            GROUP BY id
+                            ";
+            }else{
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                                
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and archive != 1 and  exported != 1 and summerCollection != 1 and winterCollection != 1  and item.categoryItems = $category and storage < 1 
+                            GROUP BY id
+                            ";
+            }
+        }elseif ($category == -1 && $gender != -1) {
+            if($archivedOrNot == 1){
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barCode, id, attachmentExt 
+                                FROM itemimage 
+                                Where item.isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode
+                            Where isDeleted = 0  and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 2){
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and archive =1 and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            
+                            ";
+            }elseif($archivedOrNot == 4){
+                // ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and sale > 0 and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            
+                            ";
+            
+            }elseif($archivedOrNot == 5){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and sale < 0.1 and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 6){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and exported = 1 and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 7){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and newCollection = 1 and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 8){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and summerCollection = 1 and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }elseif($archivedOrNot == 9){
+                // NOT ON SALE 
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0 
+                                ORDER BY  id DESC
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0  and winterCollection = 1 and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }else{
+                $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
+                            LEFT JOIN(
+                                SELECT barcode, id, attachmentExt 
+                                FROM itemimage 
+                                Where isDeleted = 0
+                                ORDER BY  id DESC
+                                
+                            ) AS images ON item.barCode = images.barCode  
+                            Where isDeleted = 0 and archive != 1 and  exported != 1 and summerCollection != 1 and winterCollection != 1  and item.gender = $gender and storage < 1 
+                            GROUP BY id
+                            ";
+            }
+        }
+        $query = $this->db->query($sqlQuery);
+        if ($query) {
+            $result = $query->result();
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
+
     // ----------------------------------------------------------- //
     public function submitPropertyAdd($userId, $propertyAddress, $propertyTitle, $propertyDescription, $propertyPrice, $propertyListingStatus, $propertyZipcode, $propertyLotSize, $propertySaleOrRent, $propertyYearBuilt, $propertyNumberOfBedrooms, $longitude, $latitude)
     {   

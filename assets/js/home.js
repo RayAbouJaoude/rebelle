@@ -1,5 +1,5 @@
 $(document).ready(function (){ 
-
+    getItemsData();
     $("#attachIconAdd").click(function(){
         if($("#propertyIdHidden").val() == ""){
             $("#saveFirstModal").modal("show");
@@ -65,16 +65,30 @@ $(document).ready(function (){
             $("#manageItemsHeaderButton").parent().addClass("greenBackground");
             $("#manageItemsHeaderButton").addClass("whiteColor");
             $("#manageItemsHeaderButton").children().addClass("whiteColor");
-            $("#profileInfo").removeClass("displayNone");
+            $("#manageItemSection").removeClass("displayNone");
         },20)
     })
 
     $("#manageCartsHeaderButton").click(function(){
         hideAll();
-        $("#manageCartsHeaderButton").parent().addClass("greenBackground");
-        $("#manageCartsHeaderButton").addClass("whiteColor");
-        $("#manageCartsHeaderButton").children().addClass("whiteColor");
-        $("#manageProperty").removeClass("displayNone");
+        setTimeout(function(){
+            $("#manageCartsHeaderButton").parent().addClass("greenBackground");
+            $("#manageCartsHeaderButton").addClass("whiteColor");
+            $("#manageCartsHeaderButton").children().addClass("whiteColor");
+            $("#manageCart").removeClass("displayNone");
+        },20)
+
+    })
+
+    $("#manageProfileHeaderButton").click(function(){
+        hideAll();
+        setTimeout(function(){
+            $("#manageProfileHeaderButton").parent().addClass("greenBackground");
+            $("#manageProfileHeaderButton").addClass("whiteColor");
+            $("#manageProfileHeaderButton").children().addClass("whiteColor");
+            $("#profileInfo").removeClass("displayNone");
+        },20)
+
     })
 
     $("#adminSectionHeaderButton").click(function(){
@@ -92,54 +106,6 @@ $(document).ready(function (){
     $(".cancelButton").click(function(){
         $("#managePropertyForm").slideUp();
         $("#displayAdminSectionPropertyInfo").slideUp();
-    })
-
-    $("#addPropertyButton").click(function(){
-        if ($("#map").length > 0 ){
-            mapboxgl.accessToken = 'pk.eyJ1Ijoic2NvcmF5IiwiYSI6ImNrdWNxcmJmNjBlb3kzMHBoMTBlanRncnAifQ.nUzt6aDopRt2STolFgt9FQ';
-            var map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/scoray/ckv6lh29a0h8215t54qb8g5au',
-                center: [  35.7 , 33.9], // starting position [lng, lat]
-                zoom: 9.5 // starting zoom
-            });
-            map.addControl(new mapboxgl.FullscreenControl());
-     
-            // Add geolocate control to the map.
-            map.addControl(
-                new mapboxgl.GeolocateControl({
-                    positionOptions: {
-                    enableHighAccuracy: true
-                    },
-                    // When active the map will receive updates to the device's location as it changes.
-                    trackUserLocation: true,
-                    // Draw an arrow next to the location dot to indicate which direction the device is heading.
-                    showUserHeading: true
-                })
-            );
-            map.on('idle',function(){
-                map.resize();
-            })
-            //------- Marker Draggable --------// 
-            const coordinates = document.getElementById('coordinates');
-            const marker = new mapboxgl.Marker({
-                draggable: true
-            });
-            marker.setLngLat([35.7 , 33.9]);
-            marker.addTo(map);
-                
-            function onDragEnd() {
-                const lngLat = marker.getLngLat();
-                coordinates.style.display = 'block';
-                coordinates.innerHTML = `Longitude: <span id="longitudeOfProperty">${lngLat.lng} </span><br />Latitude: <span id="latitudeOfProperty">${lngLat.lat}</span>`;
-            }
-                
-            marker.on('dragend', onDragEnd);
-        }
-        $("#propertyCounterAddOrEdit").val(1);
-        $("#managePropertyForm")[0].reset();
-        $(".selectpicker").selectpicker("refresh");
-        $("#managePropertyForm").slideDown();
     })
 
 
@@ -309,44 +275,6 @@ $(document).ready(function (){
     })
 
 
-    $("body").on("click", ".displayAdminPropertyInfoToEdit", function(){
-        id = $(this).attr("dataId");
-        $.ajax({
-            url: baseURL + "/Rebelle/displayPropertyToEdit",
-            method: "POST",
-            data: "id=" + id,
-            dataType: "json",
-            beforeSend:function(){
-                $(".loader").fadeIn(500);
-            },
-            success: function (data) {
-                $("#propertyTitleInAdmin").val(data["title"]);
-                $("#propertyDescriptionInAdmin").val(data["description"]);
-                $("#propertyPriceInAdmin").val(data["price"]);
-                $("#propertyLotSizeInAdmin").val(data["lotSize"]);
-                $("#propertyNumberOfBedroomsInAdmin").val(data["numberOfBedrooms"]);
-                $("#propertyAddressInAdmin").val(data["address"]);
-                $("#propertyZipcodeInAdmin").val(data["zipCode"]);
-                $("#propertyYearBuiltInAdmin").val(data["yearBuilt"]);
-                $("#propertySaleOrRentInAdmin").val(data["saleOrRent"]);
-                $("#displayAdminSectionPropertyInfo").slideDown();
-            },
-            error: function (error) {
-                alert("Network Error Please Refresh The Page.");
-            },
-            complete: function(){
-                $(".loader").fadeOut();
-                $(".selectpicker").selectpicker("refresh");
-                $("html").animate({
-                    scrollTop:$(".container").offset().top 
-                }, 500);
-            }
-        });  
-        return false;
-    })
-
-    
-
     $("body").on("click", ".deletePropertyIcon",function(){
         $("#deleteModal").modal('show');
         $("#yesDeleteModalToChange").attr("id","yesDeletePropertyButton");
@@ -391,6 +319,103 @@ $(document).ready(function (){
     })
 
 
+
+    //..........ADD ITEM......./
+    $("#submitAddItemButton").click(function () {
+            var postData = $("#addItemsForm").serialize();
+            quantityArr = [];
+            sizeArr = [];
+            colorArr = [];
+            $(".itemQuantityToAddForNewItem").each( async function(){
+                var quantity = $(this).val();
+                var size = $(this).parent().next().children("input").val();
+                var color = $(this).parent().next().next().children("input").val();
+                if(quantity != ""  && size != "" && color !=""){
+                    quantityArr.push(quantity);
+                    sizeArr.push(size);
+                    colorArr.push(color);
+                }
+            })
+            $.ajax({
+                url: baseURL + "/Rebelle/addItem",
+                dataType: "JSON",
+                data: postData + "&quantityArr="+ quantityArr + "&sizeArr="+ sizeArr + "&colorArr=" + colorArr,
+                method: "POST",
+                beforeSend:function(){
+                    $(".loader").fadeIn(500);
+                },
+                success: function (data) { 
+                        if(data[0]==0){
+                            $("#itemBarCodeToAdd").val(data[1]);
+                            if($("#attachItemImage").val() ==""){
+                                $("#attachItemImage").val("");
+                                $("#addItemsForm").trigger('reset'); 
+                                $("#labelForattachItemImage").html("Browse...");
+                                $(".errorMessageChangeHtml").html('<i class="fas fa-check"  style="margin-right:10px; color:blue"></i>Item Added Successfully !');
+                            }else{
+                                // uploadItemImage();
+                            }
+                        }else{
+                            $("#pleaseFillAllFields").modal('show');
+                        }
+                        
+                },complete: function(){
+                        // $("#uploadItemImageButton").click();
+                        getItemsData();
+                        
+                    
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+
+        // }
+        return false;
+    }); 
+
+    $("body").on("click", ".insertNewRowInAddItem",function(){
+        $(this).hide();
+        $(".deleteRowInAddItem").show();
+        append = `
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                <label for="itemQuantityToAddForNewItem">Quantity:</label>
+                <input type="text" name="itemQuantityToAddForNewItem" class="form-control  itemQuantityToAddForNewItem  form-control-sm"  />
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                <label for="itemSizeToAddForNewItem">Size:</label>
+                <input type="text" name="itemSizeToAddForNewItem" class="form-control sizeAndQuantityToAdd form-control-sm"  />
+
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-2">
+                <label for="colorToAddForNewItem">Color:</label>
+                <input type="text" name="colorToAddForNewItem" class="form-control colorToAddForNewItem form-control-sm"  />
+
+            </div>
+            <div class="col-xl-1">
+                <a class="insertNewRowInAddItem" href="javascript:void(0);">       
+                    <i class="fas fa-plus-circle" style="font-size:22px; color:#3498db; margin-top:43px;"></i>
+                </a>
+                <a class="deleteRowInAddItem" style="display:none;" href="javascript:void(0);">       
+                    <i class="fas fa-minus-circle" style="font-size:22px; color:#dc3545; margin-top:43px;"></i>
+                </a>
+            </div>
+        `;
+        $(".toAppendNewSizeQ").append(append);
+        fillColor();
+        fillSize();
+    })
+
+    $("body").on("click", ".deleteRowInAddItem",function(){
+        $(this).parent().prev().prev().prev().remove();   
+        $(this).parent().prev().prev().remove();   
+        $(this).parent().prev().remove();
+        $(this).parent().remove();
+    })
+
+
+    
+
 // last bracket 
 })
 
@@ -405,11 +430,15 @@ function hideAll(){
     $("#manageCartsHeaderButton").removeClass("whiteColor");
     $("#manageCartsHeaderButton").children().removeClass("whiteColor");
     
+    $("#manageProfileHeaderButton").parent().removeClass("greenBackground");
+    $("#manageProfileHeaderButton").removeClass("whiteColor");
+    $("#manageProfileHeaderButton").children().removeClass("whiteColor");
     
     $("#profileInfo").addClass("displayNone");
-    $("#manageProperty").addClass("displayNone");
-    $("#managePropertyForm").hide();
-    $("#displayAdminSectionPropertyInfo").hide();
+    $("#manageItemSection").addClass("displayNone");
+    $("#manageCart").addClass("displayNone");
+    // $("#managePropertyForm").hide();
+    // $("#displayAdminSectionPropertyInfo").hide();
 }
 
 
@@ -456,52 +485,84 @@ function getAllPropertiesInBackEnd() {
     });   
 }
 
-// ----------------------------------------------------------- //
-function getAllPropertiesForAdmin() {
+function getItemsData() {
+    archivedOrNot = $("#archiveOrNotSelect").val();
+    category = $("#itemCategoryInMainPage").val();
+    gender = $("#itemGenderInMainPage").val();
+    showImage = $("#showImage").val();
+    checkBoxForDescription = $("#checkBoxForDescription").val();
+    if($("#checkBoxForDescription").prop("checked")){
+        checkBoxForDescription = "on";
+    }else{
+        checkBoxForDescription = "";
+    }
     $.ajax({
-        url: baseURL + "/Rebelle/getAllPropertiesForAdmin",
+        url: baseURL + "/Rebelle/getItemsData",
         method: "POST",
         dataType: "json",
+        data: "archivedOrNot=" + archivedOrNot + "&showImage=" + showImage + "&category=" + category + "&gender=" + gender + "&checkBoxForDescription=" + checkBoxForDescription,
         beforeSend:function(){
-            $(".loader").fadeIn(200);
+            $(".loader").fadeIn(500);
         },
         success: function (data) {
-            $("#propertyTableContainerForAdmin").html(data); 
-            var propertySectionTableForAdmin = $('#propertySectionTableForAdmin').DataTable({
-                "order": [[ 1, "desc" ]],
-                "lengthMenu": [[100, 200, -1],[100, 200, "All"]]
+            $("#itemTableInLogin").html(data); 
+            // "order": [[ 1, "asc" ]],
+            var itemsTable = $('#itemsTable').DataTable({
+                "dom": 'lBfrtip',
+                "buttons": [
+                    {
+                        "extend": 'excel', 
+                        "footer": true ,
+                        "exportOptions": {
+                        "columns": ':gt(0)' 
+                        }
+                    }
+                ],
+                "lengthMenu": [[50, 100, 200, -1],[50, 100, 200, "All"]],
+                "language" : {
+                    "sLengthMenu": "Show _MENU_"
+                },
+                "stateSave": true,
+                "columnDefs": [ {
+                    "targets": 0,
+                    "orderable": false
+                    } ]
             }); 
-            
-            $(".dataTables_filter").prepend(`<div class='clearSearchContainer'><i class="fas fa-times"></i></div>`);
-            $("#propertyTableContainerForAdmin").on("click", ".clearSearchContainer", function () {
-                $(this).siblings("label").children("input").val("").keyup();
-                $(this).removeClass("moveClearSearchContainerLeft");
-            });  
-            $(".dataTables_filter input").attr('type', 'text');
-            // $(".dataTables_filter input").val("");
-            $("#propertyTableContainerForAdmin").on("keyup", ".dataTables_filter input", function () {
-                var thisValue = $(this).val();
-                if (thisValue == "") {
-                    $(".clearSearchContainer").removeClass("moveClearSearchContainerLeft");
-                }else {
-                    $(".clearSearchContainer").addClass("moveClearSearchContainerLeft");
-                }
-            });
-            $("#propertySectionTableForAdmin_length label").css("text-transform","capitalize");
-            $(".dt-button span").html(`<i class="far fa-file-excel" style="font-size: 15px;margin-right: 5px;color: green; vertical-align: text-bottom;"></i> Excel`);
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip({
-                    delay: { "show": 700, "hide": 0 }
-                });
+
+            if($("#itemsTable_filter label input").val()==""){
+                $("#itemsTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;" id="itemsTableSearch"></i> <i class="fas fa-times" style="color:red; display:none; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearitemsTableSearch"></i>');
+                $("#itemsTable_filter label input").removeAttr("type").attr("type","text");
+                $("#clearitemsTableSearch").hide();
+                $("#itemsTableSearch").show();
+            }else{
+                $("#itemsTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;  display:none;" id="itemsTableSearch"></i> <i class="fas fa-times" style="color:red; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearitemsTableSearch"></i>');
+                $("#itemsTable_filter label input").removeAttr("type").attr("type","text");
+                $("#clearitemsTableSearch").show();
+                $("#itemsTableSearch").hide();
+            }
+
+            $("#clearitemsTableSearch").click(function(){
+                itemsTable.search("").draw();
+                $("#clearitemsTableSearch").hide();
+                $("#itemsTableSearch").show();
             })
+            $("#itemsTable_filter label input").on("keyup change",function(){
+                searchInput = $("#itemsTable_filter label input").val();
+                if (itemsTable.search() != ""){
+                    $("#clearitemsTableSearch").show();
+                    $("#itemsTableSearch").hide();
+                }else{
+                    $("#clearitemsTableSearch").hide();
+                    $("#itemsTableSearch").show();
+                }
+            })
+            
         },
         error: function (error) {
-            alert("Network Error Please Refresh The Page.");
+            console.log("Network Error Please Refresh The Page.");
         },
         complete: function(){
             $(".loader").fadeOut();
         }
     });   
 }
-
-

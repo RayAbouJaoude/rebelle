@@ -386,5 +386,141 @@ class Rebelle extends CI_Controller {
         }
     }
 
+
+
+	//........................ADD ITEMS..........................//
+	public function addItem()
+	{
+		$error = 0;
+		if(isset($_POST["itemNameToAdd"]) && !empty($_POST["itemNameToAdd"])){
+            $itemNameToAdd = $_POST["itemNameToAdd"];
+        }else{
+            $error = 1;
+		}
+		if(isset($_POST["itemDescriptionToAdd"]) && !empty($_POST["itemDescriptionToAdd"])){
+            $itemDescriptionToAdd = $_POST["itemDescriptionToAdd"];
+        }else{
+            $error = 2;
+		}
+		if(isset($_POST["itemQuantityToAdd"]) && !empty($_POST["itemQuantityToAdd"])){
+            $itemQuantityToAdd = $_POST["itemQuantityToAdd"];
+        }else{
+            $itemQuantityToAdd = 0;
+		}
+		if(isset($_POST["itemBarCodeToAdd"]) && !empty($_POST["itemBarCodeToAdd"])){
+            $itemBarCodeToAdd = $_POST["itemBarCodeToAdd"];
+        }else{
+            $error = 3;
+		}
+		if(isset($_POST["itemCategoryToAdd"]) && !empty($_POST["itemCategoryToAdd"])){
+            $itemCategoryToAdd = $_POST["itemCategoryToAdd"];
+        }else{
+            $error = 4;
+		}
+		// if(isset($_POST["itemGenderToAdd"]) && !empty($_POST["itemGenderToAdd"])){
+        //     $itemGenderToAdd = $_POST["itemGenderToAdd"];
+        // }else{
+        //     $error = 5;
+		// }
+		if(isset($_POST["itemSizeToAdd"]) && !empty($_POST["itemSizeToAdd"])){
+            $itemSizeToAdd = $_POST["itemSizeToAdd"];
+        }else{
+            $error = 6;
+		}
+		if(isset($_POST["itemWeightToAdd"]) && !empty($_POST["itemWeightToAdd"])){
+            $itemWeightToAdd = $_POST["itemWeightToAdd"];
+        }else{
+            $error = 11;
+		}
+		// if(isset($_POST["itemCostToAdd"]) && !empty($_POST["itemCostToAdd"])){
+        //     $itemCostToAdd = $_POST["itemCostToAdd"];
+        // }else{
+        //     $error = 12;
+		// }
+		if(isset($_POST["itemPriceToAdd"]) && !empty($_POST["itemPriceToAdd"])){
+            $itemPriceToAdd = $_POST["itemPriceToAdd"];
+        }else{
+            $error = 13;
+		}
+		if(isset($_POST["colorToAdd"]) && !empty($_POST["colorToAdd"])){
+            $colorToAdd = $_POST["colorToAdd"];
+        }else{
+            $error = 14;
+		}
+		if(isset($_POST["quantityArr"]) && !empty($_POST["quantityArr"])){
+			$quantityArr = $_POST["quantityArr"];
+        }else{
+            $quantityArr = [];
+		}
+		if(isset($_POST["sizeArr"]) && !empty($_POST["sizeArr"])){
+			$sizeArr = $_POST["sizeArr"];
+        }else{
+            $sizeArr = [];
+		}
+		if(isset($_POST["colorArr"]) && !empty($_POST["colorArr"])){
+			$colorArr = $_POST["colorArr"];
+        }else{
+            $colorArr = [];
+		}
+	
+		$itemId="";
+		$lastId="";
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$addItem = $this->Home_Model->addItem($itemNameToAdd, $itemDescriptionToAdd, $itemQuantityToAdd, $itemBarCodeToAdd, $itemCategoryToAdd, $itemSizeToAdd, $itemPriceToAdd, $quantityArr, $sizeArr, $colorArr, $colorToAdd, $itemWeightToAdd);
+			if ($addItem[0] == 1){
+				$itemId = $addItem[1];
+			}else{
+				$error =2;
+				$addItem = 0;
+			}
+		}else{
+			$msg = "Please insert all required fields.";
+		}
+		echo json_encode(array($error, $itemId));
+	}
+
+
+	//..........................GET DATA SECTION....................................//
+	public function getItemsData()
+	{
+		if(isset($_POST["archivedOrNot"]) && !empty($_POST["archivedOrNot"])){
+			$archivedOrNot = $_POST["archivedOrNot"];
+		}else{
+			$archivedOrNot = 1;
+		}
+		if(isset($_POST["category"]) && !empty($_POST["category"])){
+			$category = $_POST["category"];
+		}else{
+			$category = 1;
+		}
+		if(isset($_POST["gender"]) && !empty($_POST["gender"])){
+			$gender = $_POST["gender"];
+		}else{
+			$gender = 1;
+		}
+		if(isset($_POST["showImage"]) && !empty($_POST["showImage"])){
+			$showImage = $_POST["showImage"];
+		}else{
+			$showImage = 0;
+		}
+		if(isset($_POST["checkBoxForDescription"]) && !empty($_POST["checkBoxForDescription"])){
+			$checkBoxForDescription = $_POST["checkBoxForDescription"];
+		}else{
+			$checkBoxForDescription = "";
+		}
+		
+		$this->load->model("Home_Model");
+
+		$itemsData = $this->Home_Model->getItemsData($archivedOrNot, $category, $gender);
+		
+		$data["itemsData"] = $itemsData;
+		$data["showImage"] = $showImage;
+		$data["checkBoxForDescription"] = $checkBoxForDescription;
+		$itemsTable = $this->load->view("itemsMainTable", $data, TRUE);
+
+		echo json_encode($itemsTable);
+	}
+
 //........................Last One............................................//
 }

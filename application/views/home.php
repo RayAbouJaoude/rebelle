@@ -4,7 +4,6 @@
 
 <div class="image-container">
     <img class="w-100"  style="margin-top:40px; transform: translateZ(0); image-rendering: -webkit-optimize-contrast; height: 600px;" src="<?php echo base_url(); ?>assets/images/backgroundOne.png" >
-
 </div>
 
 <div class="container"> 
@@ -13,8 +12,6 @@
             <h5 style="text-transform: uppercase; color:#333; text-align:center; ">Put on some red lipstick and live a little.</h5>
         </div>
     </div>
-    
-
 <!-- end of container  -->
 </div>
 

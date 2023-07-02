@@ -37,10 +37,16 @@
 ?>
 
 
-<div class="container" style="margin-top:10px;"> 
+<div class="container" style="margin-top:50px;"> 
     <!-- main header start  -->
     <div id= "mainHeader" name="mainHeader" class="mt-2">
         <div class="row ml-0 mr-0">
+            <div class="col-xl-2 col-6 ">
+                <button type ="button" id="manageProfileHeaderButton" name="manageProfileHeaderButton" class ="mainHeaderButtons btn btn-sm">
+                    <i class="mainHeaderIcons fas fa-id-badge "></i>
+                    Profile
+                </button>
+            </div>
             <div class="col-xl-2 col-6 greenBackground">
                 <button type ="button" id="manageItemsHeaderButton" name="manageItemsHeaderButton" class =" whiteColor mainHeaderButtons btn btn-sm">
                     <i class="mainHeaderIcons fas fa-id-badge whiteColor"></i>
@@ -60,6 +66,13 @@
 
     <!-- profile section start  -->
     <div id="profileInfo" >
+        <div class="row mt-3">
+            <div class="col-lg-2 pr-0">
+                <button type ="button" id="addItemButton"  name="addItemButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>Manage Profile </button>
+            </div>
+            <div class="col-lg-10 lineClass">
+            </div>
+        </div>    
         <form method="POST" id="profileForm">
             <div class="row  mt-1" >
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
@@ -104,182 +117,163 @@
                 </div>
             </div>
         </form>
-
-
-
-        <div class="row mt-3">
-        <div class="col-lg-2 pr-0">
-            <button type ="button" id="addItemButton"  name="addItemButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>Add Item </button>
-        </div>
-        <div class="col-lg-10 lineClass">
-        </div>
     </div>       
-    <form method="POST" id="addItemsForm" name="addItemsForm">
-        <div class="row toAppendNewSizeQ form-group mt-2">  
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                <label for="itemNameToAdd"> Item Name:</label>
-                <input type="text" name="itemNameToAdd" id="itemNameToAdd" class="form-control form-control-sm"  />
-                <input type="hidden" name="barcodeToPrintHidden" id="barcodeToPrintHidden" class="form-control form-control-sm"  />
-            </div>
+    <!-- profile section end  -->
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                <label for="itemDescriptionToAdd">Description:</label>
-                <input type="text" name="itemDescriptionToAdd" id="itemDescriptionToAdd" class="form-control form-control-sm"  />
-            </div>
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                <label for="itemSupplierToAdd">Supplier:</label>
-                <select class="form-control form-control-sm" id="itemSupplierToAdd" name="itemSupplierToAdd">
-                    <option value="-1">--Select--</option>
-                    <option value="Marwan">Marwan</option>
-                    <option value="Myriam">Myriam</option>
-                    <option value="Yara">Yara</option>
-                    <option value="Charbel">Charbel</option>
-                </select>
+    <!-- manage item section  -->
+    <div id="manageItemSection" >
+        <div class="row mt-3">
+            <div class="col-lg-2 pr-0">
+                <button type ="button" id="addItemButton"  name="addItemButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>Add Item </button>
             </div>
+            <div class="col-lg-10 lineClass">
+            </div>
+        </div>       
+        <form method="POST" id="addItemsForm" name="addItemsForm">
+            <div class="row toAppendNewSizeQ form-group mt-2">  
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <label for="itemNameToAdd"> Item Name:</label>
+                    <input type="text" name="itemNameToAdd" id="itemNameToAdd" class="form-control form-control-sm"  />
+                    <input type="hidden" name="barcodeToPrintHidden" id="barcodeToPrintHidden" class="form-control form-control-sm"  />
+                </div>
 
-            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
-                <label for="itemBarCodeToAdd">Product Code:</label>
-                <input type="text" name="itemBarCodeToAdd" id="itemBarCodeToAdd" class="form-control form-control-sm"  />
-            </div>
-            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
-                <label for="itemBarCodeToAdd">Weight:</label>
-                <input type="text" name="itemWeightToAdd" id="itemWeightToAdd" class="form-control form-control-sm"  />
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="itemCategoryToAdd">Item Category:</label>
-                <select class="form-control form-control-sm" id="itemCategoryToAdd" name="itemCategoryToAdd">
-              
-                    <option value="-1">Category</option>
-                    <option value="30">Attire</option>
-                    <option value="41">Bags</option>
-                    <option value="39">Blazer</option>
-                    <option value="33">Belts</option>
-                    <option value="38">Cardigan</option>
-                    <option value="2">Dresses</option>
-                    <option value="43">Headwear</option>
-                    <!-- <option value="34">FootWear</option> -->
-                    <option value="1">Jackets</option>
-                    <option value="35">Jewelry</option>
-                    <option value="21">Jumpsuits / Sets</option>
-                    <option value="12">Matching Clothes</option>
-                    <option value="31">Shoes</option>
-                    <option value="45">Swimsuit / Bikini</option>
-                    <option value="17">New Born</option>
-                    <option value="23">Pants / Skirts</option>
-                    <option value="37">Pants / Shorts</option>
-                    <option value="40">Pull</option>
-                    <option value="11">Pyjamas</option>
-                    <option value="32">Scarves</option>
-                    <option value="44">Socks</option>
-                    <option value="36">Tshirts</option>
-                    <option value="42">Shirts</option>
-                    <option value="22">Tops</option>
-                    
-                </select>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                    <label for="itemDescriptionToAdd">Description:</label>
+                    <input type="text" name="itemDescriptionToAdd" id="itemDescriptionToAdd" class="form-control form-control-sm"  />
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
+                    <label for="itemBarCodeToAdd">Product Code:</label>
+                    <input type="text" name="itemBarCodeToAdd" id="itemBarCodeToAdd" class="form-control form-control-sm"  />
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
+                    <label for="itemBarCodeToAdd">Weight:</label>
+                    <input type="text" name="itemWeightToAdd" id="itemWeightToAdd" class="form-control form-control-sm"  />
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                    <label for="itemCategoryToAdd">Item Category:</label>
+                    <select class="form-control form-control-sm" id="itemCategoryToAdd" name="itemCategoryToAdd">
+                
+                        <option value="-1">Category</option>
+                        <option value="30">Attire</option>
+                        <option value="41">Bags</option>
+                        <option value="39">Blazer</option>
+                        <option value="33">Belts</option>
+                        <option value="38">Cardigan</option>
+                        <option value="2">Dresses</option>
+                        <option value="43">Headwear</option>
+                        <!-- <option value="34">FootWear</option> -->
+                        <option value="1">Jackets</option>
+                        <option value="35">Jewelry</option>
+                        <option value="21">Jumpsuits / Sets</option>
+                        <option value="12">Matching Clothes</option>
+                        <option value="31">Shoes</option>
+                        <option value="45">Swimsuit / Bikini</option>
+                        <option value="17">New Born</option>
+                        <option value="23">Pants / Skirts</option>
+                        <option value="37">Pants / Shorts</option>
+                        <option value="40">Pull</option>
+                        <option value="11">Pyjamas</option>
+                        <option value="32">Scarves</option>
+                        <option value="44">Socks</option>
+                        <option value="36">Tshirts</option>
+                        <option value="42">Shirts</option>
+                        <option value="22">Tops</option>
                         
-            </div>   
+                    </select>
+                            
+                </div>   
 
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="itemGenderToAdd">Gender:</label>
-                <select class="form-control form-control-sm" id="itemGenderToAdd" name="itemGenderToAdd">
-                    <option value="-1">Gender</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
-                    <option value="3">Kids</option>
-                    <option value="4">Accessory</option>
-                </select>
-            </div> 
+                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                    <label for="itemGenderToAdd">Gender:</label>
+                    <select class="form-control form-control-sm" id="itemGenderToAdd" name="itemGenderToAdd">
+                        <option value="-1">Gender</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Kids</option>
+                        <option value="4">Accessory</option>
+                    </select>
+                </div>  -->
 
             
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="itemCostToAdd">Cost:</label>    
-                <div class="input-group input-group-sm">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                    <label for="itemPriceToAdd">Price:</label>    
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input class="form-control form-control-sm" type="text" name="itemPriceToAdd" id="itemPriceToAdd"/>
                     </div>
-                    <input class="form-control form-control-sm" type="text" name="itemCostToAdd" id="itemCostToAdd"/>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                    <label for="attachItemImage">Attach Item Image:</label>
+                    <Label class="form-control form-control-sm" id="labelForattachItemImage" name="labelForattachItemImage" for ="attachItemImage">Browse... </label>
+                    <input type="file" multiple style="display:none;" name="attachItemImage" id="attachItemImage"  />
+                    <button type="button" name="uploadItemImageButton" id="uploadItemImageButton" class="displayNone">Upload item image </button>
+                    <input type="hidden" name="imageIdHidden" id="imageIdHidden" value="" />
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                    <label for="itemQuantityToAdd">Quantity:</label>
+                    <input type="text" name="itemQuantityToAdd" id="itemQuantityToAdd" class="form-control form-control-sm"  />
+                </div>
+            
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                    <label for="itemSizeToAdd" >Size: <i class="fas fa-plus-circle" id="openSizeModal" style="font-size:17px; color:#3498db; margin-left:5px;"></i></label>
+                    <!-- <select class="form-control form-control-sm "  id="itemSizeToAdd" name="itemSizeToAdd">
+                    </select> -->
+                    <input type="text" name="itemSizeToAdd" id="itemSizeToAdd" class="form-control form-control-sm"  />
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                    <label for="colorToAdd">Color: <i class="fas fa-plus-circle" id="openColorModal" style="font-size:17px; color:#3498db; margin-left:5px;"></i></label>
+                    <!-- <select class="form-control form-control-sm "  id="colorToAdd" name="colorToAdd">
+                    </select> -->
+                    <input type="text" name="colorToAdd" id="colorToAdd" class="form-control form-control-sm"  />
+                </div>
+                
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                    <label for="itemQuantityToAddForNewItem">Quantity:</label>
+                    <input type="text" name="itemQuantityToAddForNewItem"  class="form-control form-control-sm itemQuantityToAddForNewItem"  />
+                </div>
+            
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                    <label for="itemSizeToAddForNewItem">Size:</label>
+                    <!-- <select class="form-control form-control-sm itemSizeToAddForNewItem"   name="itemSizeToAddForNewItem">
+                    </select> -->
+                    <input type="text" name="itemSizeToAddForNewItem"  class="form-control form-control-sm itemSizeToAddForNewItem"   />
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-2">
+                    <label for="colorToAddForNewItem">Color:</label>
+                    <!-- <select class="form-control form-control-sm colorToAddForNewItem"  name="colorToAddForNewItem">
+                    </select> -->
+                    <input type="text" name="colorToAddForNewItem"  class="form-control form-control-sm colorToAddForNewItem"   />
+
+                </div>
+                <div class="col-xl-1 ">
+                    <a class="insertNewRowInAddItem" href="javascript:void(0);">       
+                        <i class="fas fa-plus-circle" style="font-size:22px; color:#3498db; margin-top:43px;"></i>
+                    </a>
+                    <a class="deleteRowInAddItem" style="display:none;" href="javascript:void(0);">       
+                        <i class="fas fa-minus-circle" style="font-size:22px; color:#dc3545; margin-top:43px;"></i>
+                    </a>
                 </div>
             </div>
-            
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="itemPriceToAdd">Price:</label>    
-                <div class="input-group input-group-sm">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
-                    </div>
-                    <input class="form-control form-control-sm" type="text" name="itemPriceToAdd" id="itemPriceToAdd"/>
+            <div class="row">
+                <div class="col-xl-12 mt-3 ">
+                    <button type ="submit" id="submitAddItemButton" name="submitAddItemButton" style="float:right;" class ="btn btn-md blueButtonsCss">
+                        <i class="fas fa-plus" style="margin-right:5px; color:white;"> </i>
+                        Add Item 
+                    </button>
+                    <button type ="button" id="cancelAddItemButton" name="cancelAddItemButton" style="float:right;" class ="btn btn-md redButtonsCss">
+                        <i class="fas fa-times" style="color:white; margin-right:5px;"> </i> 
+                        Cancel 
+                    </button>
                 </div>
             </div>
-
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="attachItemImage">Attach Item Image:</label>
-                <Label class="form-control form-control-sm" id="labelForattachItemImage" name="labelForattachItemImage" for ="attachItemImage">Browse... </label>
-                <input type="file" multiple style="display:none;" name="attachItemImage" id="attachItemImage"  />
-                <button type="button" name="uploadItemImageButton" id="uploadItemImageButton" class="displayNone">Upload item image </button>
-                <input type="hidden" name="imageIdHidden" id="imageIdHidden" value="" />
-            </div>
-
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="itemQuantityToAdd">Quantity:</label>
-                <input type="text" name="itemQuantityToAdd" id="itemQuantityToAdd" class="form-control form-control-sm"  />
-            </div>
-         
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="itemSizeToAdd" >Size: <i class="fas fa-plus-circle" id="openSizeModal" style="font-size:17px; color:#3498db; margin-left:5px;"></i></label>
-                <!-- <select class="form-control form-control-sm "  id="itemSizeToAdd" name="itemSizeToAdd">
-                </select> -->
-                <input type="text" name="itemSizeToAdd" id="itemSizeToAdd" class="form-control form-control-sm"  />
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="colorToAdd">Color: <i class="fas fa-plus-circle" id="openColorModal" style="font-size:17px; color:#3498db; margin-left:5px;"></i></label>
-                <!-- <select class="form-control form-control-sm "  id="colorToAdd" name="colorToAdd">
-                </select> -->
-                <input type="text" name="colorToAdd" id="colorToAdd" class="form-control form-control-sm"  />
-            </div>
-            
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="itemQuantityToAddForNewItem">Quantity:</label>
-                <input type="text" name="itemQuantityToAddForNewItem"  class="form-control form-control-sm itemQuantityToAddForNewItem"  />
-            </div>
-           
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                <label for="itemSizeToAddForNewItem">Size:</label>
-                <!-- <select class="form-control form-control-sm itemSizeToAddForNewItem"   name="itemSizeToAddForNewItem">
-                </select> -->
-                <input type="text" name="itemSizeToAddForNewItem"  class="form-control form-control-sm itemSizeToAddForNewItem"   />
-
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-2">
-                <label for="colorToAddForNewItem">Color:</label>
-                <!-- <select class="form-control form-control-sm colorToAddForNewItem"  name="colorToAddForNewItem">
-                </select> -->
-                <input type="text" name="colorToAddForNewItem"  class="form-control form-control-sm colorToAddForNewItem"   />
-
-            </div>
-            <div class="col-xl-1 ">
-                <a class="insertNewRowInAddItem" href="javascript:void(0);">       
-                    <i class="fas fa-plus-circle" style="font-size:22px; color:#3498db; margin-top:43px;"></i>
-                </a>
-                <a class="deleteRowInAddItem" style="display:none;" href="javascript:void(0);">       
-                    <i class="fas fa-minus-circle" style="font-size:22px; color:#dc3545; margin-top:43px;"></i>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-        <div class="col-xl-12 mt-3 ">
-                <button type ="submit" id="submitAddItemButton" name="submitAddItemButton" style="float:right;" class ="btn btn-md blueButtonsCss">
-                    <i class="fas fa-plus" style="margin-right:5px; color:white;"> </i>
-                    Add Item 
-                </button>
-                <button type ="button" id="cancelAddItemButton" name="cancelAddItemButton" style="float:right;" class ="btn btn-md redButtonsCss">
-                    <i class="fas fa-times" style="color:white; margin-right:5px;"> </i> 
-                    Cancel 
-                </button>
-        </div>
-    </div>
-            
-    </form>
+        </form>
+    
 
     <div class="row mt-3">
         <div class="col-lg-2 pr-0">
@@ -311,7 +305,6 @@
         </div>
         <div class="col-xl-6">
             <i class="fas fa-sync-alt" id="refreshItems" style="color:green; font-size:15px; margin-top: 11px; cursor:pointer;"></i>
-           
             <button class="btn greenButtonsCss btn-md ml-2" id ="archiveAllInItems" title="Archive all with quantity 0">Archive All</button>
             <button class="btn greenButtonsCss btn-md ml-2" id ="unArchiveAllInItems" title="UnArchive all with quantity > 0">UnArchive All</button>
             <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce9018 !important" id ="removeFromNewCollectionAllInItems" title="Remove from new collection all">Remove New Collection</button>
@@ -319,12 +312,9 @@
             <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="removeToStorageManyItems" title="Remove Checked Items To Storage">Remove Storage</button>
             <span class="ml-2">Description:</span>
             <input type="checkbox" id="checkBoxForDescription" name="checkBoxForDescription" >
-           
             <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="deleteMainPageManyItems" title="Delete Checked Items">Delete</button>
-           
         </div>
         <div class="col-xl-1">
-            
             <label for="itemCategoryInMainPage">Item Category:</label>
             <select class="form-control form-control-sm" id="itemCategoryInMainPage" name="itemCategoryInMainPage">
                 <option value="-1">ALL</option>
@@ -362,10 +352,8 @@
                 <option value="2">Female</option>
                 <option value="3">Kids</option>
                 <option value="4">Accessory</option>
-            </select>
-                        
+            </select>     
         </div>
-        
     </div>
     <div  id="itemToEdit" name="itemToEdit" class="mt-2 displayNone">
         <form method="POST" id="editItemForm" name="editItemForm">
@@ -380,17 +368,6 @@
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                     <label for="itemDescriptionToAddToEdit">Description:</label>
                     <input type="text" name="itemDescriptionToAddToEdit" id="itemDescriptionToAddToEdit" labelToAudit="Description" oldValue="" class="changesToAudit form-control form-control-sm"  />
-                </div>
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                    <label for="itemSupplierToAddToEdit">Supplier:</label>
-                    <select class="form-control form-control-sm" id="itemSupplierToAddToEdit" name="itemSupplierToAddToEdit">
-                        <option value="-1">--Select--</option>
-                        <option value="Marwan">Marwan</option>
-                        <option value="Myriam">Myriam</option>
-                        <option value="Yara">Yara</option>
-                        <option value="Charbel">Charbel</option>
-                    </select>
                 </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
@@ -413,7 +390,7 @@
                         <option value="38">Cardigan</option>
                         <option value="2">Dresses</option>
                         <option value="43">Headwear</option>
-                        <!-- <option value="34">FootWear</option> -->
+                        <option value="34">FootWear</option>
                         <option value="1">Jackets</option>
                         <option value="35">Jewelry</option>
                         <option value="21">Jumpsuits / Sets</option>
@@ -627,221 +604,219 @@
     </div>
     <div  id="itemTableInLogin" name="itemTableInLogin" class="mt-2 displayNone">
     </div>
-    
-    <div class="row mt-3">
-        <div class="col-lg-2 pr-0">
-            <button type ="button" id="listOfLocalCartsButton"  name="listOfLocalCartsButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>List Of Local Carts </button>
-        </div>
-        <div class="col-lg-10 lineClass">
-        </div>
-    </div>      
-    <div class="row">
-        <div class="col-xl-2 col-md-2 mt-1 pr-0">
-            <select class="form-control form-control-sm selectpicker" multiple  name="selectToSortLocalCarts" id="selectToSortLocalCarts">
-                <option selected value="1">All</option>
-                <option value="5">Not Shipped</option>
-                <option value="9">Pending</option>
-                <!-- <option value="2">Shipped</option> -->
-                <!-- <option value="3">Submitted</option>
-                <option value="6">Not Submitted</option> -->
-                <option value="8">Restocked</option>
-            </select>
-        </div>
-        <div class="col-xl-1">
-            <i class="fas fa-sync-alt" id="refreshCart" style="color:green; font-size:15px; margin-top: 11px; cursor:pointer;"></i>
-        </div>
-        <div class="col-xl-2">
-            <span class="" style="">From:</span>
-            <div  class='input-group date' id='datetimepicker1' style="width:200px;">
-                <input type='text'  name="dateFrom" style="background-color:white;" id="dateFrom" class="form-control form-control-sm"  readonly="readonly"/>
-                <div class="input-group-append input-group-addon">
-                    <span class="input-group-text far fa-calendar-alt dueDateBtn"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2">
-            <span class="" style="">To:</span>
-            <div  class='input-group date ' id='datetimepicker2' style="width:200px;">
-                <input type='text'  name="dateTo" style="background-color:white;" id="dateTo" class="form-control form-control-sm"  readonly="readonly"/>
-                <div class="input-group-append input-group-addon">
-                    <span class="input-group-text far fa-calendar-alt dueDateBtn"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-1 pl-0 mt-3">
-            <p>Pending (<span id="numberOfPendingCarts" style="color:red;"></span>) </p>
 
-        </div>
-    </div>
-    <div id="drawCartInLogin">
-    </div>
-    <form method="POST" id="editCartInLoginForm" name="editCartInLoginForm" class="displayNone">
-        <div class="row form-group mt-2">  
-            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                <label for="topSpeedTrackingNumberInForm">TopSpeed tracking Numb:</label>
-                <input type="hidden" name="cartIdHiddenInForm" id="cartIdHiddenInForm">
-            </div>
-            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                <input type="text" name="topSpeedTrackingNumberInForm" id="topSpeedTrackingNumberInForm" class="form-control form-control-sm"  />
-            </div>
-            <div class="col-xl-1" >
-                <label for="extraLbpInDisplay">Extra LBP:</label>
-            </div>
-            <div class="col-xl-1" >
-                <input type="text" id="extraLbpInDisplay" name="extraLbpInDisplay"  class="form-control form-control-sm">
-            </div>
-            <div class="col-xl-1" >
-                <label for="checkBoxForFreeDelivery">Free Delivery:</label>
-            </div>
-            <div class="col-xl-1" >
-                <input type="checkbox" id="checkBoxForFreeDelivery" name="checkBoxForFreeDelivery"  class="form-control form-control-sm">
-            </div>
-            <div class="col-xl-4 "> 
-                <button type ="submit" id="addEditTopSpeedForm" name="addEditTopSpeedForm" style="float:right;" class ="btn btn-md blueButtonsCss">
-                    <i class="fas fa-paper-plane" style="margin-right:5px; color:white;"> </i>
-                    Save
-                </button>
-                <button type ="button" id="cancelEditItemButtonInTopSpeedForm" name="cancelEditItemButton" style="float:right;" class ="btn btn-md redButtonsCss">
-                    <i class="fas fa-times" style="color:white; margin-right:5px;"> </i> 
-                    Cancel 
-                </button>
-            </div>
-        </div>
-    </form>
+</div>
+<!-- manage item section end  -->
 
-    <form name="cartToEditForm" id="cartToEditForm" style="margin-bottom:20px;" class="displayNone">
-        <div class="row mt-2"> 
-            <div class="col-xl-4">
-                <div class="form-group">
-                    <label for="fullNameInManageCarts">Full Name: *</label>
-                    <input id="fullNameInManageCarts" name="fullNameInManageCarts" class="form-control form-control-sm" type="text">
-                    <input id="cartToEditHiddenUserId" name="cartToEditHiddenUserId" class="form-control form-control-sm" type="hidden">
-                </div>
-            </div>    
 
-            <div class="col-xl-4">
-                <div class="form-group">
-                    <label for="phoneNumberInManageCarts">Phone Number: *</label>
-                    <input id="phoneNumberInManageCarts" name="phoneNumberInManageCarts" class="form-control form-control-sm" type="text">
-                </div>
-            </div>
 
-            <div class="col-xl-4">
-                <div class="form-group">
-                    <label for="emailInManageCarts">Email: *</label>
-                    <input id="emailInManageCarts" name="emailInManageCarts" class="form-control form-control-sm" type="text">
-                </div>
-            </div>    
-            <div class="col-xl-12">
-                <div class="form-group">
-                    <label for="addressInManageCarts">Address: *</label>
-                    <textarea name="addressInManageCarts" id="addressInManageCarts" class="form-control form-control-sm" rows="2"></textarea>
-                </div>
+    <!-- manage cart section start  -->
+    <div id="manageCart">
+        <div class="row mt-3">
+            <div class="col-lg-2 pr-0">
+                <button type ="button" id="listOfLocalCartsButton"  name="listOfLocalCartsButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>List Of Local Carts </button>
             </div>
-            <div class="col-xl-12">
-                <div class="form-group">
-                    <label for="noteInManageCarts">Note: </label>
-                    <textarea name="noteInManageCarts" id="noteInManageCarts" class="form-control form-control-sm" rows="2"></textarea>
-                </div>
+            <div class="col-lg-10 lineClass">
             </div>
-        </div>
+        </div>      
         <div class="row">
-            <div class="col-xl-2" style="text-align:center;">
-                <p>BarCode</p>
+            <div class="col-xl-2 col-md-2 mt-1 pr-0">
+                <select class="form-control form-control-sm selectpicker" multiple  name="selectToSortLocalCarts" id="selectToSortLocalCarts">
+                    <option selected value="1">All</option>
+                    <option value="5">Not Shipped</option>
+                    <option value="9">Pending</option>
+                    <!-- <option value="2">Shipped</option> -->
+                    <!-- <option value="3">Submitted</option>
+                    <option value="6">Not Submitted</option> -->
+                    <option value="8">Restocked</option>
+                </select>
             </div>
-            <div class="col-xl-2" style="text-align:center;">
-                <p>Quantity</p>
+            <div class="col-xl-1">
+                <i class="fas fa-sync-alt" id="refreshCart" style="color:green; font-size:15px; margin-top: 11px; cursor:pointer;"></i>
             </div>
-            <div class="col-xl-2" style="text-align:center;">
-                <p>Product Code</p>
+            <div class="col-xl-2">
+                <span class="" style="">From:</span>
+                <div  class='input-group date' id='datetimepicker1' style="width:200px;">
+                    <input type='text'  name="dateFrom" style="background-color:white;" id="dateFrom" class="form-control form-control-sm"  readonly="readonly"/>
+                    <div class="input-group-append input-group-addon">
+                        <span class="input-group-text far fa-calendar-alt dueDateBtn"></span>
+                    </div>
+                </div>
             </div>
-            <div class="col-xl-3" style="text-align:center;">
-                <p>Color</p>
+            <div class="col-xl-2">
+                <span class="" style="">To:</span>
+                <div  class='input-group date ' id='datetimepicker2' style="width:200px;">
+                    <input type='text'  name="dateTo" style="background-color:white;" id="dateTo" class="form-control form-control-sm"  readonly="readonly"/>
+                    <div class="input-group-append input-group-addon">
+                        <span class="input-group-text far fa-calendar-alt dueDateBtn"></span>
+                    </div>
+                </div>
             </div>
-            <div class="col-xl-2" style="text-align:center;">
-                <p>Size</p>
-            </div>
-            <div class="col-xl-1" style="text-align:center;">
-               
+            <div class="col-xl-1 pl-0 mt-3">
+                <p>Pending (<span id="numberOfPendingCarts" style="color:red;"></span>) </p>
+
             </div>
         </div>
-        <div id="cartItemsToEdit">
+        <div id="drawCartInLogin">
         </div>
-        
-        <div class="row mt-2">
-            <div class="col-xl-1" style="text-align:center;">
-                Discount:
+        <form method="POST" id="editCartInLoginForm" name="editCartInLoginForm" class="displayNone">
+            <div class="row form-group mt-2">  
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                    <label for="topSpeedTrackingNumberInForm">TopSpeed tracking Numb:</label>
+                    <input type="hidden" name="cartIdHiddenInForm" id="cartIdHiddenInForm">
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                    <input type="text" name="topSpeedTrackingNumberInForm" id="topSpeedTrackingNumberInForm" class="form-control form-control-sm"  />
+                </div>
+                <div class="col-xl-1" >
+                    <label for="extraLbpInDisplay">Extra LBP:</label>
+                </div>
+                <div class="col-xl-1" >
+                    <input type="text" id="extraLbpInDisplay" name="extraLbpInDisplay"  class="form-control form-control-sm">
+                </div>
+                <div class="col-xl-1" >
+                    <label for="checkBoxForFreeDelivery">Free Delivery:</label>
+                </div>
+                <div class="col-xl-1" >
+                    <input type="checkbox" id="checkBoxForFreeDelivery" name="checkBoxForFreeDelivery"  class="form-control form-control-sm">
+                </div>
+                <div class="col-xl-4 "> 
+                    <button type ="submit" id="addEditTopSpeedForm" name="addEditTopSpeedForm" style="float:right;" class ="btn btn-md blueButtonsCss">
+                        <i class="fas fa-paper-plane" style="margin-right:5px; color:white;"> </i>
+                        Save
+                    </button>
+                    <button type ="button" id="cancelEditItemButtonInTopSpeedForm" name="cancelEditItemButton" style="float:right;" class ="btn btn-md redButtonsCss">
+                        <i class="fas fa-times" style="color:white; margin-right:5px;"> </i> 
+                        Cancel 
+                    </button>
+                </div>
             </div>
-            <div class="col-xl-1" style="text-align:center;">
-                <input type="text" name="discountPercentage" id="discountPercentage" class="form-control form-control-sm"> %
+        </form>
+
+        <form name="cartToEditForm" id="cartToEditForm" style="margin-bottom:20px;" class="displayNone">
+            <div class="row mt-2"> 
+                <div class="col-xl-4">
+                    <div class="form-group">
+                        <label for="fullNameInManageCarts">Full Name: *</label>
+                        <input id="fullNameInManageCarts" name="fullNameInManageCarts" class="form-control form-control-sm" type="text">
+                        <input id="cartToEditHiddenUserId" name="cartToEditHiddenUserId" class="form-control form-control-sm" type="hidden">
+                    </div>
+                </div>    
+
+                <div class="col-xl-4">
+                    <div class="form-group">
+                        <label for="phoneNumberInManageCarts">Phone Number: *</label>
+                        <input id="phoneNumberInManageCarts" name="phoneNumberInManageCarts" class="form-control form-control-sm" type="text">
+                    </div>
+                </div>
+
+                <div class="col-xl-4">
+                    <div class="form-group">
+                        <label for="emailInManageCarts">Email: *</label>
+                        <input id="emailInManageCarts" name="emailInManageCarts" class="form-control form-control-sm" type="text">
+                    </div>
+                </div>    
+                <div class="col-xl-12">
+                    <div class="form-group">
+                        <label for="addressInManageCarts">Address: *</label>
+                        <textarea name="addressInManageCarts" id="addressInManageCarts" class="form-control form-control-sm" rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="form-group">
+                        <label for="noteInManageCarts">Note: </label>
+                        <textarea name="noteInManageCarts" id="noteInManageCarts" class="form-control form-control-sm" rows="2"></textarea>
+                    </div>
+                </div>
             </div>
-            <div class="col-xl-2" style="text-align:center;">
-                <input type="text" name="discountAmount" id="discountAmount" class="form-control form-control-sm">
+            <div class="row">
+                <div class="col-xl-2" style="text-align:center;">
+                    <p>BarCode</p>
+                </div>
+                <div class="col-xl-2" style="text-align:center;">
+                    <p>Quantity</p>
+                </div>
+                <div class="col-xl-2" style="text-align:center;">
+                    <p>Product Code</p>
+                </div>
+                <div class="col-xl-3" style="text-align:center;">
+                    <p>Color</p>
+                </div>
+                <div class="col-xl-2" style="text-align:center;">
+                    <p>Size</p>
+                </div>
+                <div class="col-xl-1" style="text-align:center;">
+                
+                </div>
             </div>
-            <div class="col-xl-1" style="text-align:center;">
-                USD/LBP
+            <div id="cartItemsToEdit">
             </div>
-            <div class="col-xl-1" style="text-align:center;">
-                <input type="checkBox" name="currencyCheckboxInManageCarts" id="currencyCheckboxInManageCarts" title="CHECKED for USD UNCHECKED for LBP" style="float:left; margin-top:4px;">
-            </div>
-            <div class="col-xl-1" title="total quantity" style="text-align:center;">
-                Total Qty:
-            </div>
-            <div class="col-xl-1" style="text-align:center;">
-                <input type="text" name="totalQuantityInManageCart" disabled id="totalQuantityInManageCart" class="form-control form-control-sm">
-            </div>
-            <div class="col-xl-1" style="text-align:center;">
-                Total:
-            </div>
-            <div class="col-xl-2" style="text-align:center;">
-                <input type="text" name="totalToChangeInCarts" id="totalToChangeInCarts" readonly="readonly"  class="form-control form-control-sm">
-            </div>
-        </div> 
-        <div class="row mt-2">
             
-            <div class="col-xl-2 " style="margin-top:10px;" >
-                Are you sure you want to submit cart?
-                <input type="checkbox" style="margin-left:5px;" id="areYouSureYouWantToSubmitInEdit" name="areYouSureYouWantToSubmitInEdit" >
-            </div>
-            <div class="col-xl-1" >
-                <label for="employeeCodeInEdit">Employee Code:</label>
-            </div>
-            <div class="col-xl-1" >
-                <input type="text" id="employeeCodeInEdit" name="employeeCodeInEdit"  class="form-control form-control-sm">
-            </div>
-            <div class="col-xl-1" >
-                <label for="promoCodeInEdit">PromoCode:</label>
-            </div>
-            <div class="col-xl-1" >
-                <input type="text" id="promoCodeInEdit" name="promoCodeInEdit"  class="form-control form-control-sm">
-            </div>
-            <div class="col-xl-1" >
-                <label for="extraLbpInEdit">Extra LBP:</label>
-            </div>
-            <div class="col-xl-1" >
-                <input type="text" id="extraLbpInEdit" name="extraLbpInEdit"  class="form-control form-control-sm">
-            </div>
-            <!-- <div class="col-xl-2" >
-                <button class="pinkButtonsCss btn-md btn " id="editCartButtonInManageCarts" data-dismiss="modal" style="float:right;">Edit Cart</button>
-            </div> -->
-            <div class="col-xl-2" >
-                <button class="redButtonsCss btn-md btn" type="button" id="cancelCartToEditForm" data-dismiss="modal" style="float:right;">Cancel</button>
-            </div>
-            
-        </div> 
+            <div class="row mt-2">
+                <div class="col-xl-1" style="text-align:center;">
+                    Discount:
+                </div>
+                <div class="col-xl-1" style="text-align:center;">
+                    <input type="text" name="discountPercentage" id="discountPercentage" class="form-control form-control-sm"> %
+                </div>
+                <div class="col-xl-2" style="text-align:center;">
+                    <input type="text" name="discountAmount" id="discountAmount" class="form-control form-control-sm">
+                </div>
+                <div class="col-xl-1" style="text-align:center;">
+                    USD/LBP
+                </div>
+                <div class="col-xl-1" style="text-align:center;">
+                    <input type="checkBox" name="currencyCheckboxInManageCarts" id="currencyCheckboxInManageCarts" title="CHECKED for USD UNCHECKED for LBP" style="float:left; margin-top:4px;">
+                </div>
+                <div class="col-xl-1" title="total quantity" style="text-align:center;">
+                    Total Qty:
+                </div>
+                <div class="col-xl-1" style="text-align:center;">
+                    <input type="text" name="totalQuantityInManageCart" disabled id="totalQuantityInManageCart" class="form-control form-control-sm">
+                </div>
+                <div class="col-xl-1" style="text-align:center;">
+                    Total:
+                </div>
+                <div class="col-xl-2" style="text-align:center;">
+                    <input type="text" name="totalToChangeInCarts" id="totalToChangeInCarts" readonly="readonly"  class="form-control form-control-sm">
+                </div>
+            </div> 
+            <div class="row mt-2">
+                <div class="col-xl-2 " style="margin-top:10px;" >
+                    Are you sure you want to submit cart?
+                    <input type="checkbox" style="margin-left:5px;" id="areYouSureYouWantToSubmitInEdit" name="areYouSureYouWantToSubmitInEdit" >
+                </div>
+                <div class="col-xl-1" >
+                    <label for="employeeCodeInEdit">Employee Code:</label>
+                </div>
+                <div class="col-xl-1" >
+                    <input type="text" id="employeeCodeInEdit" name="employeeCodeInEdit"  class="form-control form-control-sm">
+                </div>
+                <div class="col-xl-1" >
+                    <label for="promoCodeInEdit">PromoCode:</label>
+                </div>
+                <div class="col-xl-1" >
+                    <input type="text" id="promoCodeInEdit" name="promoCodeInEdit"  class="form-control form-control-sm">
+                </div>
+                <div class="col-xl-1" >
+                    <label for="extraLbpInEdit">Extra LBP:</label>
+                </div>
+                <div class="col-xl-1" >
+                    <input type="text" id="extraLbpInEdit" name="extraLbpInEdit"  class="form-control form-control-sm">
+                </div>
+                <!-- <div class="col-xl-2" >
+                    <button class="pinkButtonsCss btn-md btn " id="editCartButtonInManageCarts" data-dismiss="modal" style="float:right;">Edit Cart</button>
+                </div> -->
+                <div class="col-xl-2" >
+                    <button class="redButtonsCss btn-md btn" type="button" id="cancelCartToEditForm" data-dismiss="modal" style="float:right;">Cancel</button>
+                </div>
+            </div> 
+        </form>
         
-
-    </form>
-     
-
-    <div  id="cartsInLogin" name="cartsInLogin" class="mt-2">
+        <div  id="cartsInLogin" name="cartsInLogin" class="mt-2">
+        </div>
     </div>
-
-
-    </div>
-    <!-- profile section finish  -->
-
-
+    <!-- manage cart section  -->
 
 
 
@@ -1020,165 +995,6 @@
         </div>
     </div>
     <!-- end manage property section  -->
-
-
-
-     
-    <!-- admin section  -->
-    <div id="adminSection" class="displayNone" style="margin-top:10px;">       
-        <div class="row" style="margin-right:0px !important; margin-left:0px !important;">
-            <div class="col-xl-12" style="text-align:center; margin-top:20px; border: 1px solid #055E20; padding-top:10px; padding-bottom:3px;">
-                <h6>Manage Properties</h6>
-            </div>
-        </div>  
-
-        <div id="displayAdminSectionPropertyInfo">
-            <div class="row mt-2">  
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="propertyTitleInAdmin"> Title:</label>
-                    <input type="text" name="propertyTitleInAdmin" id="propertyTitleInAdmin" class="form-control form-control-sm"  />
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="propertyDescriptionInAdmin">Description:</label>
-                    <input type="text" name="propertyDescriptionInAdmin" id="propertyDescriptionInAdmin" class="form-control form-control-sm"  />
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                    <label for="propertyPriceInAdmin">Price:</label>
-                    <input type="text" name="propertyPriceInAdmin" id="propertyPriceInAdmin" class="form-control form-control-sm"  />
-                </div>
-            </div>
-            <div class="row mt-2">  
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="propertyAddressInAdmin">Address:</label>
-                    <input type="text" name="propertyAddressInAdmin" id="propertyAddressInAdmin" class="form-control form-control-sm"  />
-                </div>
-                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="propertyListingStatus">Listing Status:</label>
-                    <select class="form-control form-control-sm selectpicker"  data-live-search="true" id="propertyListingStatus" name="propertyListingStatus">
-                        <option value="-1">-- Select --</option>
-                        <option value="2">For Sale</option>
-                        <option value="3">Under Contract - Option Pending (OP)</option>
-                        <option value="4">Under Contract - Option Continue To Show (PS)</option>
-                        <option value="5">Under Contract - Pending (P)</option>
-                    </select>   
-                </div>   -->
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                    <label for="propertyZipcodeInAdmin">Zip Code:</label>
-                    <input type="text" name="propertyZipcodeInAdmin" id="propertyZipcodeInAdmin" class="form-control form-control-sm"  />
-                </div> 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                    <label for="propertyYearBuiltInAdmin">Year Built:</label>
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' id="propertyYearBuiltInAdmin" name="propertyYearBuiltInAdmin" style="background-color:white; padding-left:13px;"  class="form-control form-control-sm"  readonly="readonly"/>
-                        <div class="input-group-append input-group-addon">
-                            <span class="input-group-text far fa-calendar-alt dueDateBtn"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-            <div class="row mt-2">  
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                    <label for="propertyLotSizeInAdmin">Lot Size:</label>
-                    <input type="text" name="propertyLotSizeInAdmin" id="propertyLotSizeInAdmin" class="form-control form-control-sm"  />
-                </div> 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                    <label for="propertySaleOrRentInAdmin">Sale Or Rent:</label>
-                    <select class="form-control form-control-sm selectpicker"  data-live-search="true" id="propertySaleOrRentInAdmin" name="propertySaleOrRentInAdmin">
-                        <option value="-1">-- Select --</option>
-                        <option value="sale">Sale</option>
-                        <option value="rent">Rent</option>
-                    </select>  
-                </div> 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
-                    <label for="propertyNumberOfBedroomsInAdmin">Number Of Bedrooms:</label>
-                    <input type="text" name="propertyNumberOfBedroomsInAdmin" id="propertyNumberOfBedroomsInAdmin" class="form-control form-control-sm"  />
-                </div>
-            </div> 
-            <div class="row mt-2">
-                <div class="col-xl-12">
-                    <h6>Amenities</h6>
-                </div>
-            </div>
-            <div class="row boxCss ml-0 mr-0">
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="areaPoolCheckboxInAdmin">
-                        <input style="vertical-align:middle;" class="categoryTypeCheckBoxes " type="checkbox" name="areaPoolCheckboxInAdmin" id="areaPoolCheckboxInAdmin">
-                        <span style="vertical-align:middle; margin-left:5px;">Area Pool</span>
-                    </label>
-                </div>
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="areaTennisCheckbox">
-                        <input style="vertical-align:middle;" class="categoryTypeCheckBoxes " type="checkbox" name="areaTennisCheckbox" id="areaTennisCheckbox">
-                        <span style="vertical-align:middle; margin-left:5px;">Area Tennis</span>
-                    </label>
-                </div>
-                
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="elevatorCheckbox">
-                        <input style="vertical-align:middle;" class="categoryTypeCheckBoxes " type="checkbox" name="elevatorCheckbox" id="elevatorCheckbox">
-                        <span style="vertical-align:middle; margin-left:5px;">Elevator / Elevator Shaft</span>
-                    </label>
-                </div>
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="energyFeatureCheckbox">
-                        <input style="vertical-align:middle;" class="categoryTypeCheckBoxes " type="checkbox" name="energyFeatureCheckbox" id="energyFeatureCheckbox">
-                        <span style="vertical-align:middle; margin-left:5px;">Energy Features</span>
-                    </label>
-                </div>
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="garageAptCheckbox">
-                        <input style="vertical-align:middle;" class="categoryTypeCheckBoxes " type="checkbox" name="garageAptCheckbox" id="garageAptCheckbox">
-                        <span style="vertical-align:middle; margin-left:5px;">Garage Apt / Guest House</span>
-                    </label>
-                </div>
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="lakeCheckbox">
-                        <input style="vertical-align:middle;" class="categoryTypeCheckBoxes " type="checkbox" name="lakeCheckbox" id="lakeCheckbox">
-                        <span style="vertical-align:middle; margin-left:5px;">Lake</span>
-                    </label>
-                </div>
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="privatePoolCheckbox">
-                        <input style="vertical-align:middle;" class="categoryTypeCheckBoxes " type="checkbox" name="privatePoolCheckbox" id="privatePoolCheckbox">
-                        <span style="vertical-align:middle; margin-left:5px;">Private Pool</span>
-                    </label>
-                </div>
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="spaCheckbox">
-                        <input style="vertical-align:middle;" class="categoryTypeCheckBoxes " type="checkbox" name="spaCheckbox" id="spaCheckbox">
-                        <span style="vertical-align:middle; margin-left:5px;">Spa</span>
-                    </label>
-                </div>
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="wheelChairCheckbox">
-                        <input style="vertical-align:middle;" class="" type="checkbox" name="wheelChairCheckbox" id="wheelChairCheckbox">
-                        <span style="vertical-align:middle; margin-left:5px;">Wheelchair Access</span>
-                    </label>
-                </div>
-                <div class="col-xl-3" >
-                    <label style="cursor:pointer;"  for="yardCheckbox">
-                        <input style="vertical-align:middle;" class="categoryTypeCheckBoxes " type="checkbox" name="yardCheckbox" id="yardCheckbox">
-                        <span style="vertical-align:middle; margin-left:5px;">Yard</span>
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-12 mt-3">
-                    <button type ="button" style="float:right;" class ="btn btn-sm redButtonsCss cancelButton">
-                        <i class="fas fa-times" style="color:white; margin-right:5px;"></i> 
-                        Cancel 
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div id="propertyTableContainerForAdmin" class="mt-2 ">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end admin section  -->
 
 
     <!-- end container  -->
