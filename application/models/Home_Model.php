@@ -64,6 +64,8 @@ class Home_Model extends CI_Model {
     }
 
     public function getItemsData($archivedOrNot, $category, $gender){
+        $gender = -1;
+        $category = -1;
         if($category == -1 && $gender == -1){
             if($archivedOrNot == 1){
                 $sqlQuery = "SELECT item.*, images.id as imageId, images.attachmentExt as imageExt FROM item
@@ -818,6 +820,71 @@ class Home_Model extends CI_Model {
     }
    //--------------------------------------------------------//
 
+
+   public function getItemDataInItemsToEdit($itemId, $barCode){
+        $barCode = $this->db->escape($barCode);
+        $sqlQuery = "SELECT * FROM item
+                    Where isDeleted = 0 and id = $itemId";
+
+        $query = $this->db->query($sqlQuery);
+        if ($query) {
+            $result = $query->result();
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
+   //--------------------------------------------------------//
+
+
+public function newCollectionItem($itemId){
+    $barCode = $this->db->escape($itemId);
+    $sqlQuery1 = "SELECT * FROM item
+                 Where isDeleted = 0 and barCode = $barCode
+                 ORDER BY `id` ASC";
+
+    $query1 = $this->db->query($sqlQuery1);
+    $newCollectionInfo = $query1->row();
+    $newCollection = $newCollectionInfo->newCollection;
+    if($newCollection == 1){
+        $newCollection = 0;
+    }else{
+        $newCollection = 1;
+    }
+    $sqlQuery = "UPDATE item
+                    SET newCollection = $newCollection
+                    WHERE  isDeleted =0  and barCode = $barCode";
+    $query=$this->db->query($sqlQuery); 
+    if($query){
+        $result =$newCollection;
+    }else{
+        $result = -1;
+    }
+    return $result;
+}
+//--------------------------------------------------------//
+
+
+public function deleteMainPageItems($arrayToAddStorage) {
+    $arrayToAddStorage=explode(",",$arrayToAddStorage);
+
+    for ($i=0; $i <count($arrayToAddStorage) ; $i++) { 
+        $sqlQuery= "UPDATE item
+                    SET isDeleted = 1
+                    WHERE id = $arrayToAddStorage[$i]";
+    
+        $query = $this->db->query($sqlQuery);
+        
+    }
+
+    if ($query) {
+        $result = 1;
+    } else {
+        $result = -1;
+    }
+    return $result;
+}
+//--------------------------------------------------------//
 
 
 //........................LAST ONE..............................//

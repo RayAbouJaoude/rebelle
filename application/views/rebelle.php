@@ -105,7 +105,7 @@
             </div>
             <div class="row mt-1">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    <label for="description" class=" ">Description</label>
+                    <label for="description" class=" ">Address</label>
                     <textarea class="form-control form-control-sm " name="description" id="description"  rows="3"><?php echo $description; ?></textarea>
                 </div>
             </div>
@@ -297,25 +297,25 @@
                 <option value="10">Storage</option>
             </select>
         </div>
-        <div class="col-xl-2 col-md-2 mt-1 pr-0">
+        <!-- <div class="col-xl-2 col-md-2 mt-1 pr-0">
             <select class="form-control form-control-sm" name="showImage" id="showImage">
                 <option value="2" selected >Hide Image</option>
                 <option value="1">Show Image</option>
             </select>
-        </div>
-        <div class="col-xl-6">
+        </div> -->
+        <div class="col-xl-8">
             <i class="fas fa-sync-alt" id="refreshItems" style="color:green; font-size:15px; margin-top: 11px; cursor:pointer;"></i>
             <button class="btn greenButtonsCss btn-md ml-2" id ="archiveAllInItems" title="Archive all with quantity 0">Archive All</button>
             <button class="btn greenButtonsCss btn-md ml-2" id ="unArchiveAllInItems" title="UnArchive all with quantity > 0">UnArchive All</button>
             <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce9018 !important" id ="removeFromNewCollectionAllInItems" title="Remove from new collection all">Remove New Collection</button>
-            <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="addToStorageManyItems" title="Add Checked Items To Storage">Add Storage</button>
-            <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="removeToStorageManyItems" title="Remove Checked Items To Storage">Remove Storage</button>
+            <!-- <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="addToStorageManyItems" title="Add Checked Items To Storage">Add Storage</button> -->
+            <!-- <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="removeToStorageManyItems" title="Remove Checked Items To Storage">Remove Storage</button> -->
             <span class="ml-2">Description:</span>
             <input type="checkbox" id="checkBoxForDescription" name="checkBoxForDescription" >
             <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="deleteMainPageManyItems" title="Delete Checked Items">Delete</button>
         </div>
         <div class="col-xl-1">
-            <label for="itemCategoryInMainPage">Item Category:</label>
+            <!-- <label for="itemCategoryInMainPage">Item Category:</label>
             <select class="form-control form-control-sm" id="itemCategoryInMainPage" name="itemCategoryInMainPage">
                 <option value="-1">ALL</option>
                 <option value="30">Attire</option>
@@ -325,7 +325,6 @@
                 <option value="38">Cardigan</option>
                 <option value="2">Dresses</option>
                 <option value="43">Headwear</option>
-                <!-- <option value="34">FootWear</option> -->
                 <option value="1">Jackets</option>
                 <option value="35">Jewelry</option>
                 <option value="21">Jumpsuits / Sets</option>
@@ -342,9 +341,9 @@
                 <option value="36">Tshirts</option>
                 <option value="42">Shirts</option>
                 <option value="22">Tops</option>
-            </select>
+            </select> -->
         </div>
-        <div class="col-xl-1">
+        <!-- <div class="col-xl-1">
             <label for="itemGenderInMainPage">Gender:</label>
             <select class="form-control form-control-sm" id="itemGenderInMainPage" name="itemGenderInMainPage">
                 <option value="-1">ALL</option>
@@ -353,7 +352,7 @@
                 <option value="3">Kids</option>
                 <option value="4">Accessory</option>
             </select>     
-        </div>
+        </div> -->
     </div>
     <div  id="itemToEdit" name="itemToEdit" class="mt-2 displayNone">
         <form method="POST" id="editItemForm" name="editItemForm">
@@ -411,7 +410,7 @@
                 </div>   
 
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                     <label for="itemGenderToAddToEdit">Gender:</label>
                     <select class="form-control form-control-sm changesToAudit" labelToAudit="Gender" oldValue="" id="itemGenderToAddToEdit" name="itemGenderToAddToEdit">
                         <option value="-1">Gender</option>
@@ -420,10 +419,10 @@
                         <option value="3">Kids</option>
                         <option value="1">Male</option>
                     </select>
-                </div> 
+                </div>  -->
 
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                     <label for="itemCostToAddToEdit">Cost:</label>    
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend">
@@ -431,7 +430,7 @@
                         </div>
                         <input class="form-control form-control-sm changesToAudit" labelToAudit="Cost" oldValue="" type="text" name="itemCostToAddToEdit" id="itemCostToAddToEdit"/>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                     <label for="itemPriceToAddToEdit">Price:</label>    
@@ -510,7 +509,7 @@
                 </div>   
 
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
                     <label for="itemGenderToAddToEdit">Gender:</label>
                     <select class="form-control form-control-sm changesToAudit" labelToAudit="Gender" oldValue="" id="itemGenderToAddToEdit" name="itemGenderToAddToEdit">
                         <option value="-1">Gender</option>
@@ -519,18 +518,7 @@
                         <option value="3">Kids</option>
                         <option value="1">Male</option>
                     </select>
-                </div> 
-
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="itemCostToAddToEdit">Cost:</label>    
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
-                        <input class="form-control form-control-sm changesToAudit" labelToAudit="Cost" oldValue="" type="text" name="itemCostToAddToEdit" id="itemCostToAddToEdit"/>
-                    </div>
-                </div>
+                </div>  -->
 
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
                     <label for="itemPriceToAddToEdit">Price:</label>    
@@ -602,7 +590,7 @@
             </div>
         </form>
     </div>
-    <div  id="itemTableInLogin" name="itemTableInLogin" class="mt-2 displayNone">
+    <div  id="itemTableInLogin" name="itemTableInLogin" class="mt-2 ">
     </div>
 
 </div>
@@ -998,4 +986,27 @@
 
 
     <!-- end container  -->
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="deleteMainPageModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content "  >
+            <div class="modal-header">
+                <h5 style="font-size:14px;"><i class="fas fa-exclamation-triangle" style="margin-right:10px; font-size:16px; color:rgb(38, 140, 228) ;"></i>Attention</h5>
+                <button type="button" class="close closeModal" data-dismiss="modal" id="closeModal" title="Close">×</button>
+            </div>
+            <div class="modal-body"  style="height:56px;"  >
+                <p style="font-size:14px;">Are you sure you want to Delete All Checked ITEMS?  <span style="color:white;"> </span></p>
+            </div>  
+            <div class="modal-footer"  style="height:52px;" >
+                <button class="btn btn-sm  redButtonsCssModal"  data-dismiss="modal" id="yesdeleteMainPageButton" style="float:right;">YES</button>
+                <button class="btn btn-sm blueButtonsCssModal "  data-dismiss="modal" style="float:right;"> NO</button>
+            </div>  
+        </div>  
+    </div>
 </div>

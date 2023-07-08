@@ -522,5 +522,61 @@ class Rebelle extends CI_Controller {
 		echo json_encode($itemsTable);
 	}
 
+	public function getItemDataInItemsToEdit()
+	{
+		$error = 0;
+		if(isset($_POST["itemId"]) && !empty($_POST["itemId"])){
+			$itemId = $_POST["itemId"];
+		}else{
+			$error = 1;
+		}		
+		if(isset($_POST["barCode"]) && !empty($_POST["barCode"])){
+			$barCode = $_POST["barCode"];
+		}else{
+			$error = 1;
+		}	
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$getItemDataInItemsToEdit = $this->Home_Model->getItemDataInItemsToEdit($itemId, $barCode);
+		}
+		
+		echo json_encode($getItemDataInItemsToEdit);
+	}
+
+	public function newCollectionItem()
+	{
+		$error = 0;
+		if(isset($_POST["itemId"]) && !empty($_POST["itemId"])){
+			$itemId = $_POST["itemId"];
+		}else{
+			$error = 1;
+		}	
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$newCollectionItem = $this->Home_Model->newCollectionItem($itemId);
+			$sectionId = 3;
+			$auditActionId = $newCollectionItem;
+			$title = "New Collection";
+			$beforeAfter = "";
+		}
+		
+		echo json_encode($newCollectionItem);
+	}
+
+	public function deleteMainPageItems()
+	{
+		$error = 0;
+		if(isset($_POST["arrayToAddStorage"]) && !empty($_POST["arrayToAddStorage"])){
+            $arrayToAddStorage = $_POST["arrayToAddStorage"];
+        }else{
+            $error = 1;
+		}
+		$this->load->model("Home_Model");
+		if($error == 0){
+			$deleteMainPageItems = $this->Home_Model->deleteMainPageItems($arrayToAddStorage);
+		}
+		echo json_encode($error);
+	}
+
 //........................Last One............................................//
 }

@@ -1,5 +1,7 @@
 $(document).ready(function (){ 
     getItemsData();
+
+
     $("#attachIconAdd").click(function(){
         if($("#propertyIdHidden").val() == ""){
             $("#saveFirstModal").modal("show");
@@ -90,6 +92,8 @@ $(document).ready(function (){
         },20)
 
     })
+
+    $("#manageItemsHeaderButton").click();
 
     $("#adminSectionHeaderButton").click(function(){
         hideAll();
@@ -413,7 +417,118 @@ $(document).ready(function (){
         $(this).parent().remove();
     })
 
+    
+    $("body").on("click", ".displayItemsToEdit",function(){
+        itemId = $(this).attr("itemId");
+        barCode = $(this).attr("barCode");
+        $("#itemIdHidden").val(itemId);
+        $("#barCodeHidden").val(barCode);
+        $.ajax({
+            url: baseURL + "/Rebelle/getItemDataInItemsToEdit",
+            method: "POST",
+            data :"itemId=" + itemId + "&barCode=" + barCode,
+            dataType: "json",
+            beforeSend:function(){
+                $(".loader").fadeIn(500);
+            },
+            success: function (data) {
+                $("#itemNameToAddToEdit").val(data[0]["itemName"]);
+                $("#itemNameToAddToEdit").attr("oldvalue",data[0]["itemName"]);
+                $("#itemDescriptionToAddToEdit").val(data[0]["itemDescription"]);
+                $("#itemDescriptionToAddToEdit").attr("oldvalue",data[0]["itemDescription"]);
+                $("#itemSupplierToAddToEdit").val(data[0]["supplier"]);
+                $("#itemSupplierToAddToEdit").attr("oldvalue",data[0]["supplier"]);
+                $("#itemBarCodeToAddToEdit").val(data[0]["barCode"]);
+                $("#itemBarCodeToAddToEdit").attr("oldvalue",data[0]["barCode"]);
+                $("#itemCategoryToAddToEdit").val(data[0]["categoryItems"]);
+                $("#itemCategoryToAddToEdit").attr("oldvalue",data[0]["categoryItems"]);
+                $("#itemGenderToAddToEdit").val(data[0]["gender"]);
+                $("#itemGenderToAddToEdit").attr("oldvalue",data[0]["gender"]);
+                cost = parseFloat(data[0]["cost"]);
+                price = parseFloat(data[0]["price"]);
+                cost = cost.toFixed(2).replace(/\.0+$/,'');;
+                price = price.toFixed(2).replace(/\.0+$/,'');;
+                $("#itemCostToAddToEdit").val(cost);
+                $("#itemCostToAddToEdit").attr("oldvalue",cost);
+                $("#itemPriceToAddToEdit").val(price);
+                $("#itemPriceToAddToEdit").attr("oldvalue",price);
+                $("#itemQuantityToAddToEdit").val(data[0]["quantity"]);
+                $("#itemQuantityToAddToEdit").attr("oldvalue",data[0]["quantity"]);
+                $("#itemSizeToAddToEdit").val(data[0]["size"]);
+                $("#itemSizeToAddToEdit").attr("oldvalue", data[0]["size"]);
+                $("#colorToAddToEdit").val(data[0]["color"]);
+                $("#colorToAddToEdit").attr("oldvalue", data[0]["color"]);
+                $("#itemWeightToAddToEdit").val(data[0]["weight"]);
+                $("#itemWeightToAddToEdit").attr("oldvalue", data[0]["weight"]);
+                $("#saleToAddToEdit").val(data[0]["sale"]);
+                $("#saleToAddToEdit").attr("oldvalue", data[0]["sale"]);
+                $("#matchingWithToEdit").val(data[0]["matchingWith"]);
+                $("#matchingWithToEdit").attr("oldvalue", data[0]["matchingWith"]);
+                $("#initialQuantityToEdit").val(data[0]["initialQuantity"]);
+                $("#initialQuantityToEdit").attr("oldvalue", data[0]["initialQuantity"]);
+                $("#saleToAddAmount").val("");
+                
+            },
+            error: function (error) {
+                console.log("Network Error Please Refresh The Page.");
+            },
+            complete: function(){
+                $("#itemToEdit").slideDown();
+                $(".loader").fadeOut();
+                getItemImages();
+                $("html").animate({
+                    scrollTop:$("#listOfItemsButton").offset().top 
+                }, 500);
+            }
+        });   
+    })
 
+
+    $("body").on("click", ".newCollectionItem",function(){
+        itemId = $(this).attr("data-itemId");
+        $.ajax({
+            url: baseURL + "/Rebelle/newCollectionItem",
+            dataType: "JSON",
+            data: "itemId=" + itemId,
+            method: "POST",
+            success: function (data) { 
+                getItemsData();
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
+
+
+    $("#deleteMainPageManyItems").click(function(){
+        arrayToAddStorage=[];
+        $(".itemCheckBox").each(function(){
+            if($(this).prop("checked")){
+                itemId = $(this).attr("dataId");
+                arrayToAddStorage.push(itemId);
+            }
+        })
+        if(arrayToAddStorage.length >0){
+            $("#deleteMainPageModal").modal('show');
+        }
+    })
+    $("#yesdeleteMainPageButton").click(function(){
+       
+        $.ajax({
+            method:"POST",
+            data: "arrayToAddStorage=" + arrayToAddStorage ,
+            url: baseURL + "Rebelle/deleteMainPageItems",
+            dataType:"JSON",
+            success: function(data){
+                getItemsData();
+            },
+            error: function(){
+                alert("Network Error Please Refresh The Page.");
+            }
+        })
+    })
     
 
 // last bracket 

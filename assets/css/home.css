@@ -669,3 +669,36 @@ table tr:hover > td {
     color:white !important;
     font-size:13px;
 }
+
+.purple{
+	color:#7b00f5 !important;
+}
+
+.grey{
+	color:#CCC!important;
+}
+.limegreen{
+	color:limegreen !important ;
+}
+.red{
+	color:red !important;
+}
+.darkGreen{
+	color:darkgreen !important ;
+}
+.blueColorForPlane{
+	color: #4CCCC0 !important ;
+}
+.orangeColorForBeach{
+	color: #FF8300 !important ;
+}
+ 
+.yellowForStar{
+	color:#f9d202 !important;
+}
+
+.makeEllipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
