@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rebelle</title>
-    <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/images/favicon.png" />
+    <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/images/faviconOne.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
@@ -30,10 +30,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
     <header>
         <div class="headerMain">
-            <nav class="navbar navbar-expand-sm" style="height:45px;">
+            <nav class="navbar navbar-expand-sm" style="height:107px; background-color: black;">
                 <div class="container">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>/Home">
-                        <img class="headerLogo"  src="<?php echo base_url(); ?>assets/images/rebelleLogo.jpg" >
+                        <img class="headerLogo"  src="<?php echo base_url(); ?>assets/images/rebelleLogoOne.jpg" >
                     </a>
                     <button class="navbar-toggler menuBtn" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <i class="fa fa-bars menuBtnIcon"></i>                      

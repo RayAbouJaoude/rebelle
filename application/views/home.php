@@ -2,14 +2,15 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<div class="image-container">
-    <img class="w-100"  style="margin-top:40px; transform: translateZ(0); image-rendering: -webkit-optimize-contrast; height: 600px;" src="<?php echo base_url(); ?>assets/images/backgroundOne.png" >
-</div>
+<!-- <div class="image-container"> -->
+    <!-- <img class="w-100"  style="margin-top:107px; transform: translateZ(0); image-rendering: -webkit-optimize-contrast; height: 600px;" src="<?php echo base_url(); ?>assets/images/backgroundOne.png" > -->
+<!-- </div> -->
 
 <div class="container"> 
     <div class="row">
-        <div class="col-xl-12" style="margin-top:25px; margin-bottom:20px;">
-            <h5 style="text-transform: uppercase; color:#333; text-align:center; ">Put on some red lipstick and live a little.</h5>
+        <div class="col-xl-12" style="margin-top:130px; margin-bottom:20px;">
+            <!-- <h5 style="text-transform: uppercase; color:#333; text-align:center; ">Put on some red lipstick and live a little.</h5> -->
+            <h5 style="text-transform: uppercase; color:#333; text-align:center; ">We Are Coming Soon!</h5>
         </div>
     </div>
 <!-- end of container  -->
@@ -19,7 +20,7 @@
 <style>
 .parallax {
   /* The image used */
-  background-image: url("assets/images/lipPic.jpg");
+  background-image: url("assets/images/mainImageWebsite.jpg");
 
   /* Set a specific height */
   min-height: 500px;
@@ -139,18 +140,18 @@
         </div>
     </div>
     <div class="row" style="margin-top:20px; margin-top: 20px; border: solid 1px #333; padding: 5px; margin-left:0px; margin-right:0px;">  
-        <div class="col-xl-4" >
+        <div class="col-xl-4 col-12" >
         </div>
-        <div class="col-xl-1" >
+        <div class="col-xl-1 col-3" >
             <i class="fab fa-facebook-f facebookIcon" style="color:#333;"></i>
         </div>
         
-        <div class="col-xl-1" >
+        <div class="col-xl-1 col-3" >
             <i class="fab fa-instagram instaIcon"></i>
         </div>
-        <div class="col-xl-3">
+        <div class="col-xl-3 col-6">
             <i class="fab fa-whatsapp instaIcon"></i>
-            <span style="vertical-align:super; margin-left:5px; color:#333; font-weight:700;">+961 71 80 80 80</span>
+            <span style="vertical-align:super; margin-left:5px; color:#333; font-weight:700;">+961 71 61 86 82</span>
         </div>
     </div>
     

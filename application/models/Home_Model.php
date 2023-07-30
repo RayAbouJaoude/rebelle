@@ -19,8 +19,8 @@ class Home_Model extends CI_Model {
             $sizeArr=explode(",",$sizeArr);
             $colorArr=explode(",",$colorArr);
         }
-        $sqlQuery = "INSERT INTO item (itemName, itemDescription, quantity, barCode, categoryItems, size, price, isDeleted, color, `weight`,initialQuantity, exported)
-                     VALUES ($itemNameToAdd , $itemDescriptionToAdd, $itemQuantityToAdd , $itemBarCodeToAdd, $itemCategoryToAdd , $itemSizeToAdd, $itemPriceToAdd, 0, $colorToAdd, $itemWeightToAdd,$itemQuantityToAdd, 1)"; 
+        $sqlQuery = "INSERT INTO item (itemName, itemDescription, quantity, barCode, categoryItems, size, price, isDeleted, color, `weight`, exported)
+                     VALUES ($itemNameToAdd , $itemDescriptionToAdd, $itemQuantityToAdd , $itemBarCodeToAdd, $itemCategoryToAdd , $itemSizeToAdd, $itemPriceToAdd, 0, $colorToAdd, $itemWeightToAdd, 1)"; 
         $query = $this->db->query($sqlQuery);
         $lastInsertedId = $this->db->insert_id();
         // $beforeAfter= "Quantity > " . $itemQuantityToAdd . " Size > " . $itemSizeToAdd ;
@@ -40,8 +40,8 @@ class Home_Model extends CI_Model {
                 $sizeee = $this->db->escape($sizeee);
                 $colorr = $this->db->escape($colorr);
     
-                $sqlQuery1 = "INSERT INTO item (itemName, itemDescription, quantity, barCode, categoryItems, size, price, isDeleted, color, `weight`, initialQuantity, exported)
-                              VALUES ($itemNameToAdd , $itemDescriptionToAdd, $quantityyy , $itemBarCodeToAdd, $itemCategoryToAdd , $sizeee, $itemPriceToAdd, 0, $colorr, $itemWeightToAdd, $quantityyy, 1)"; 
+                $sqlQuery1 = "INSERT INTO item (itemName, itemDescription, quantity, barCode, categoryItems, size, price, isDeleted, color, `weight`, exported)
+                              VALUES ($itemNameToAdd , $itemDescriptionToAdd, $quantityyy , $itemBarCodeToAdd, $itemCategoryToAdd , $sizeee, $itemPriceToAdd, 0, $colorr, $itemWeightToAdd, 1)"; 
                 $query1 = $this->db->query($sqlQuery1);
                 $lastInsertedId = $this->db->insert_id();
                 // $beforeAfter= "Quantity > " . $quantityyy . " Size > " . $sizeee ;
@@ -837,55 +837,333 @@ class Home_Model extends CI_Model {
    //--------------------------------------------------------//
 
 
-public function newCollectionItem($itemId){
-    $barCode = $this->db->escape($itemId);
-    $sqlQuery1 = "SELECT * FROM item
-                 Where isDeleted = 0 and barCode = $barCode
-                 ORDER BY `id` ASC";
+    public function newCollectionItem($itemId){
+        $barCode = $this->db->escape($itemId);
+        $sqlQuery1 = "SELECT * FROM item
+                    Where isDeleted = 0 and barCode = $barCode
+                    ORDER BY `id` ASC";
 
-    $query1 = $this->db->query($sqlQuery1);
-    $newCollectionInfo = $query1->row();
-    $newCollection = $newCollectionInfo->newCollection;
-    if($newCollection == 1){
-        $newCollection = 0;
-    }else{
-        $newCollection = 1;
+        $query1 = $this->db->query($sqlQuery1);
+        $newCollectionInfo = $query1->row();
+        $newCollection = $newCollectionInfo->newCollection;
+        if($newCollection == 1){
+            $newCollection = 0;
+        }else{
+            $newCollection = 1;
+        }
+        $sqlQuery = "UPDATE item
+                        SET newCollection = $newCollection
+                        WHERE  isDeleted =0  and barCode = $barCode";
+        $query=$this->db->query($sqlQuery); 
+        if($query){
+            $result =$newCollection;
+        }else{
+            $result = -1;
+        }
+        return $result;
     }
-    $sqlQuery = "UPDATE item
-                    SET newCollection = $newCollection
-                    WHERE  isDeleted =0  and barCode = $barCode";
-    $query=$this->db->query($sqlQuery); 
-    if($query){
-        $result =$newCollection;
-    }else{
-        $result = -1;
+    //--------------------------------------------------------//
+
+
+    public function deleteMainPageItems($arrayToAddStorage) {
+        $arrayToAddStorage=explode(",",$arrayToAddStorage);
+
+        for ($i=0; $i <count($arrayToAddStorage) ; $i++) { 
+            $sqlQuery= "UPDATE item
+                        SET isDeleted = 1
+                        WHERE id = $arrayToAddStorage[$i]";
+        
+            $query = $this->db->query($sqlQuery);
+            
+        }
+
+        if ($query) {
+            $result = 1;
+        } else {
+            $result = -1;
+        }
+        return $result;
     }
-    return $result;
-}
-//--------------------------------------------------------//
+    //--------------------------------------------------------//
+
+    public function archiveItem($itemId){
+
+        
+        $sqlQuery = "UPDATE item
+                        SET archive = CASE 
+                                            WHEN archive = 0 then 1
+                                            WHEN archive = 1 then 0
+                                        END
+                        WHERE  isDeleted =0  and id = $itemId";
+            $query=$this->db->query($sqlQuery);  
+            if($query){
+                $result =1;
+            }else{
+                $result = -1;
+            }
+            return $result;
+    }
+    //--------------------------------------------------------//
 
 
-public function deleteMainPageItems($arrayToAddStorage) {
-    $arrayToAddStorage=explode(",",$arrayToAddStorage);
+    public function exportedItem($itemId){
+        $sqlQuery = "UPDATE item
+                        SET exported = CASE 
+                                            WHEN exported = 0 then 1
+                                            WHEN exported = 1 then 0
+                                        END
+                        WHERE  isDeleted =0  and id = $itemId";
+        $query=$this->db->query($sqlQuery);
 
-    for ($i=0; $i <count($arrayToAddStorage) ; $i++) { 
-        $sqlQuery= "UPDATE item
+
+        $sqlQuery1 = "SELECT * FROM item
+                    Where isDeleted = 0 and id = $itemId
+                    ";
+
+        $query1 = $this->db->query($sqlQuery1);
+        $exportedInfo = $query1->row();
+        $exported = $exportedInfo->exported;  
+        if($query){
+            $result = $exported;
+        }else{
+            $result = -1;
+        }
+        return $result;
+    }
+    //--------------------------------------------------------//
+
+
+
+    public function getItemSizeInModal(){
+        $sqlQuery = "SELECT * FROM sizes
+                    Where isDeleted = 0
+                    ORDER BY `id` DESC";
+
+        $query = $this->db->query($sqlQuery);
+        if ($query) {
+            $result = $query->result();
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
+    public function getItemColorInModal(){
+
+        $sqlQuery = "SELECT * FROM colors
+                    Where isDeleted = 0
+                    ORDER BY `id` DESC";
+
+        $query = $this->db->query($sqlQuery);
+        if ($query) {
+            $result = $query->result();
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
+
+    public function fillSize()
+    {
+        $sqlQuery = "SELECT * 
+                     FROM `sizes`
+                     Where isDeleted = 0
+                     ORDER BY `sizeName` ASC";
+
+        $query = $this->db->query($sqlQuery);
+
+        if ($query) {
+            $result = $query->result();
+        } else {
+            $result = -1;
+        }
+
+        return $result;
+    }
+
+
+    // -- -- -- -- -- # # -- -- -- -- -- //
+    public function fillColor()
+    {
+        $sqlQuery = "SELECT * 
+                     FROM `colors`
+                     Where isDeleted = 0
+                     ORDER BY `colorName` ASC";
+
+        $query = $this->db->query($sqlQuery);
+
+        if ($query) {
+            $result = $query->result();
+        } else {
+            $result = -1;
+        }
+
+        return $result;
+    }
+
+
+    
+
+    // -- -- -- -- -- # # -- -- -- -- -- //
+    public function submitSizeAdd($colorNameToAddInModal)
+    {
+        $colorNameToAddInModal = $this->db->escape($colorNameToAddInModal);
+
+        $sqlQuery ="INSERT INTO `sizes`(`sizeName`)
+                    VALUES ($colorNameToAddInModal)";
+        $query = $this->db->query($sqlQuery);
+        $lastId = $this->db->insert_id();
+
+        if ($query) {
+            $result = $lastId;
+        } else {
+            $result = -1;
+        }
+
+        return $result;
+    }
+
+
+    // -- -- -- -- -- # # -- -- -- -- -- //
+	// -- -- -- -- -- # # -- -- -- -- -- //
+    public function submitSizeEdit($colorIdHidden, $colorNameToAddInModal)
+    {
+
+        $colorNameToAddInModal = $this->db->escape($colorNameToAddInModal);
+
+        $sqlQuery = "UPDATE `sizes` 
+                     SET `sizeName`= $colorNameToAddInModal
+                     WHERE `id` = $colorIdHidden";
+        $query = $this->db->query($sqlQuery);
+
+        if ($query) {
+            $result = -2;
+        } else {
+            $result = -1;
+        }
+
+        return $result;
+    }
+
+    public function deleteSizeInModal($dataId) {
+        
+        $sqlQuery= "UPDATE sizes
                     SET isDeleted = 1
-                    WHERE id = $arrayToAddStorage[$i]";
+                    WHERE id = $dataId";
     
         $query = $this->db->query($sqlQuery);
+
+        if ($query) {
+            $result = 1;
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
+
+
+    public function deleteColorInModal($dataId) {
         
+        $sqlQuery= "UPDATE colors
+                    SET isDeleted = 1
+                    WHERE id = $dataId";
+    
+        $query = $this->db->query($sqlQuery);
+
+        if ($query) {
+            $result = 1;
+        } else {
+            $result = -1;
+        }
+        return $result;
     }
 
-    if ($query) {
-        $result = 1;
-    } else {
-        $result = -1;
-    }
-    return $result;
-}
-//--------------------------------------------------------//
 
+    public function displaySizeToEdit($dataId){
+        
+        $sqlQuery = "SELECT * FROM sizes
+                     Where isDeleted = 0 and id = $dataId";
+
+        $query = $this->db->query($sqlQuery);
+        if ($query) {
+            $result = $query->result();
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
+
+    public function displayColorToEdit($dataId){
+        
+        $sqlQuery = "SELECT * FROM colors
+                     Where isDeleted = 0 and id = $dataId";
+
+        $query = $this->db->query($sqlQuery);
+        if ($query) {
+            $result = $query->result();
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
+
+    
+    // -- -- -- -- -- # # -- -- -- -- -- //
+    public function submitColorAdd($colorNameToAddInModal)
+    {
+        $colorNameToAddInModal = $this->db->escape($colorNameToAddInModal);
+
+        $sqlQuery ="INSERT INTO `colors`(`colorName`)
+                    VALUES ($colorNameToAddInModal)";
+        $query = $this->db->query($sqlQuery);
+        $lastId = $this->db->insert_id();
+
+        if ($query) {
+            $result = $lastId;
+        } else {
+            $result = -1;
+        }
+
+        return $result;
+    }
+
+
+    // -- -- -- -- -- # # -- -- -- -- -- //
+	// -- -- -- -- -- # # -- -- -- -- -- //
+    public function submitColorEdit($colorIdHidden, $colorNameToAddInModal)
+    {
+    
+        $colorNameToAddInModal = $this->db->escape($colorNameToAddInModal);
+
+        $sqlQuery = "UPDATE `colors` 
+                    SET `colorName`= $colorNameToAddInModal
+                    WHERE `id` = $colorIdHidden";
+        $query = $this->db->query($sqlQuery);
+
+        if ($query) {
+            $result = -2;
+        } else {
+            $result = -1;
+        }
+
+        return $result;
+    }
+
+	// -- -- -- -- -- # # -- -- -- -- -- //
+    public function uploadImagesInEdit($name, $barCode, $extension)
+    {
+        $name = $this->db->escape($name);
+        $extension = $this->db->escape($extension);
+        $barCode = $this->db->escape($barCode);
+
+        $sql = "INSERT INTO itemimage (`attachmentName`, `barCode` ,`attachmentExt`)
+                VALUES ($name, $barCode, $extension)";
+        $query = $this->db->query($sql);
+        if ($query) {
+            return $this->db->insert_id();
+        } else {
+          return 0;
+        }
+    }
 
 //........................LAST ONE..............................//
 }

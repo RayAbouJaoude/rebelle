@@ -578,5 +578,261 @@ class Rebelle extends CI_Controller {
 		echo json_encode($error);
 	}
 
+	public function archiveItem()
+	{
+		$error = 0;
+		if(isset($_POST["itemId"]) && !empty($_POST["itemId"])){
+			$itemId = $_POST["itemId"];
+		}else{
+			$error = 1;
+		}		
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$archiveItem = $this->Home_Model->archiveItem($itemId);
+			
+		}
+		
+		echo json_encode($archiveItem);
+	}
+
+	public function exportedItem()
+	{
+		$error = 0;
+		if(isset($_POST["itemId"]) && !empty($_POST["itemId"])){
+			$itemId = $_POST["itemId"];
+		}else{
+			$error = 1;
+		}	
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$exportedItem = $this->Home_Model->exportedItem($itemId);
+			$sectionId = 4;
+			$auditActionId = $exportedItem;
+			$title = "Exported";
+			$beforeAfter = "";
+		}
+		
+		echo json_encode($exportedItem);
+	}
+
+
+	public function getItemSizeInModal(){
+		
+		$this->load->model("Home_Model");
+		$imagesData = $this->Home_Model->getItemSizeInModal();
+		$data["imagesData"] = $imagesData;
+		$drawImagesTable = $this->load->view("drawSizeTable", $data, TRUE);
+		echo json_encode($drawImagesTable);
+	}
+
+	public function getItemColorInModal(){
+		
+		$this->load->model("Home_Model");
+		$imagesData = $this->Home_Model->getItemColorInModal();
+		$data["imagesData"] = $imagesData;
+		$drawImagesTable = $this->load->view("drawColorTable", $data, TRUE);
+		echo json_encode($drawImagesTable);
+	}
+
+	// -- -- -- -- -- -- -- -- -- -- -- //
+	public function fillColor()
+	{
+		$this->load->model("Home_Model");
+		$data = $this->Home_Model->fillColor();
+
+		echo json_encode($data);
+		exit();
+	}
+	// -- -- -- -- -- -- -- -- -- -- -- //
+	public function fillSize()
+	{
+		$this->load->model("Home_Model");
+		$data = $this->Home_Model->fillSize();
+
+		echo json_encode($data);
+		exit();
+	}
+
+
+	public function submitSize()
+	{	
+		if(isset($_POST["addOrEditCounterInModal"]) && !empty($_POST["addOrEditCounterInModal"])){
+			$addOrEditCounterInModal = $_POST["addOrEditCounterInModal"];
+		}else{
+			$addOrEditCounterInModal = "";
+		}	
+		if(isset($_POST["sizeIdHidden"]) && !empty($_POST["sizeIdHidden"])){
+			$sizeIdHidden = $_POST["sizeIdHidden"];
+		}else{
+			$sizeIdHidden = "";
+		}	
+		
+		if(isset($_POST["sizeNameToAddInModal"]) && !empty($_POST["sizeNameToAddInModal"])){
+			$sizeNameToAddInModal = $_POST["sizeNameToAddInModal"];
+		}else{
+			$sizeNameToAddInModal = "";
+		}	
+		
+		$this->load->model("Home_Model");
+		if($addOrEditCounterInModal == 1){
+			$data = $this->Home_Model->submitSizeAdd($sizeNameToAddInModal);
+			echo json_encode($data);
+		}else{
+			if($sizeIdHidden > 0){
+				$data = $this->Home_Model->submitSizeEdit($sizeIdHidden, $sizeNameToAddInModal);
+				echo json_encode($data);
+			}else{
+				echo json_encode(-1);
+			}
+		}
+	}
+
+	public function deleteSizeInModal()
+	{
+		$error = 0;
+		if(isset($_POST["dataId"]) && !empty($_POST["dataId"])){
+            $dataId = $_POST["dataId"];
+        }else{
+            $error = 1;
+		}
+		
+		$this->load->model("Home_Model");
+		if($error == 0){
+			$transactionType = $this->Home_Model->deleteSizeInModal($dataId);
+		}
+
+		echo json_encode($error);
+	}
+
+
+	public function deleteColorInModal()
+	{
+		$error = 0;
+		if(isset($_POST["dataId"]) && !empty($_POST["dataId"])){
+            $dataId = $_POST["dataId"];
+        }else{
+            $error = 1;
+		}
+		
+		$this->load->model("Home_Model");
+		if($error == 0){
+			$transactionType = $this->Home_Model->deleteColorInModal($dataId);
+		}
+
+		echo json_encode($error);
+	}
+
+	public function displaySizeToEdit()
+	{
+		$error = 0;
+		if(isset($_POST["dataId"]) && !empty($_POST["dataId"])){
+			$dataId = $_POST["dataId"];
+		}else{
+			$error = 1;
+		}		
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$displaySizeToEdit = $this->Home_Model->displaySizeToEdit($dataId);
+		}
+		
+		echo json_encode($displaySizeToEdit);
+	}
+
+
+	public function displayColorToEdit()
+	{
+		$error = 0;
+		if(isset($_POST["dataId"]) && !empty($_POST["dataId"])){
+			$dataId = $_POST["dataId"];
+		}else{
+			$error = 1;
+		}		
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$displayColorToEdit = $this->Home_Model->displayColorToEdit($dataId);
+		}
+		
+		echo json_encode($displayColorToEdit);
+	}
+
+
+	public function submitColor()
+	{	
+		if(isset($_POST["addOrEditCounterInModalColor"]) && !empty($_POST["addOrEditCounterInModalColor"])){
+			$addOrEditCounterInModalColor = $_POST["addOrEditCounterInModalColor"];
+		}else{
+			$addOrEditCounterInModalColor = "";
+		}	
+		if(isset($_POST["colorIdHidden"]) && !empty($_POST["colorIdHidden"])){
+			$colorIdHidden = $_POST["colorIdHidden"];
+		}else{
+			$colorIdHidden = "";
+		}	
+		
+		if(isset($_POST["colorNameToAddInModal"]) && !empty($_POST["colorNameToAddInModal"])){
+			$colorNameToAddInModal = $_POST["colorNameToAddInModal"];
+		}else{
+			$colorNameToAddInModal = "";
+		}	
+		
+		$this->load->model("Home_Model");
+		if($addOrEditCounterInModalColor == 1){
+			$data = $this->Home_Model->submitColorAdd($colorNameToAddInModal);
+			echo json_encode($data);
+		}else{
+			if($colorIdHidden > 0){
+				$data = $this->Home_Model->submitColorEdit($colorIdHidden, $colorNameToAddInModal);
+				echo json_encode($data);
+			}else{
+				echo json_encode(-1);
+			}
+		}
+	}
+
+
+
+	public function uploadImagesInEdit(){
+		$succ = 0;
+		$itemId = $_POST['itemId'];
+		$this->load->model("Home_Model");
+        $curr_attached_files_count = count($_FILES);
+            foreach ($_FILES as $fileindex => $files) {
+                $filename = str_replace(' ', '_', $files['name']);
+				$parts = explode('.', $files['name']);
+                $last = array_pop($parts);
+                $parts = array(implode('.', $parts), $last);
+                $name = $parts[0];
+                $extension = end($parts);
+                $result = $this->Home_Model->uploadImagesInEdit($name,$itemId ,$extension);
+                $files['name'] = $result . '.' . $extension;
+				$config['upload_path'] = FCPATH . "/assets/images/itemImages/";
+                $config['allowed_types'] = 'gif|jpg|jpeg|png|xlsx|docx|pdf|txt|xls';
+                $config['file_name'] = $result . '.' . $extension;
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                $data = array('upload_data' => $this->upload->data());
+                if (!$this->upload->do_upload($fileindex)) {
+                    $delete_attachment = $this->Home_Model->deleteAttachment($result);
+                    // $error = array('error' => $this->upload->display_errors());
+                    // echo($result);
+                }else{
+                    $succ++;
+                    // echo(-1);
+                }
+            }
+        if($succ == $curr_attached_files_count){
+            $flag = 1;
+            $msg = "File(s) successfully uploaded.";
+            echo json_encode([$flag, $msg]);
+            return false;
+        }else{
+            $flag = -1;
+            $msg = $this->upload->display_errors('', '');
+            echo json_encode([$flag, $msg]);
+            return false;
+        }
+	}
+
+
 //........................Last One............................................//
 }

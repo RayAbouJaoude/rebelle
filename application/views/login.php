@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Rebelle | Login</title>
         <!-- HEAD ICON LOGIN TO CHANGE  -->
-        <!-- <link rel="icon" href="<?= base_url(); ?>assets/images/74ranch-logo-head.png" /> -->
+        <link rel="icon" href="<?= base_url(); ?>assets/images/faviconOne.png" />
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css " />
         <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
@@ -26,7 +26,7 @@
         <div id="mainContainer">
             <div id="loginFormContainer" style="display:none;">
                 <div class="logoContainer">
-                    <img src="<?php echo base_url(); ?>assets/images/favicon.png"  class="loginLogo" />
+                    <img src="<?php echo base_url(); ?>assets/images/faviconOne.png"  class="loginLogo" />
                 </div>
                 
                 <form name="loginForm" id="loginForm">
@@ -63,7 +63,7 @@
 
             <div id="forgotPasswordContainer" style="display:none;">
                 <div class="logoContainer">
-                    <img src="<?= base_url(); ?>assets/images/favicon.png" alt="c5rx321q`   *-  " class="loginLogo" />
+                    <img src="<?= base_url(); ?>assets/images/faviconOne.png" alt="c5rx321q`   *-  " class="loginLogo" />
     
     
     64Q <IO P="></IO>           </div>

@@ -3,7 +3,7 @@
 }
 .container {
   
-    max-width: 1300px;
+    max-width: 1350px;
 }
 
 /* loader css  */
@@ -45,8 +45,6 @@
 
 .headerMain {
     width: 100%;
-    background-color: #fefffe !important;
-    border-bottom: solid 1px #ffffff;
     position: fixed;
     z-index: 99;
     top: 0;       
@@ -62,18 +60,18 @@
 }
 
 .navbar li a {
-    font-size: 13px;
-    color: #333;
+    font-size: 14px;
+    color: #c4c4c4;;
 }
 
 .navbar li a:hover .dropdown-menu,
 .navbar li a:focus .dropdown-menu {
     background-color: white !important;
-    color: #333 !important;
+    color: #1a4345 !important;
 }
 
 .dropdown-item:hover {
-    background-color: #333 !important;
+    background-color: #1a4345 !important;
     color: white;
 }
 #collapsibleNavbar {
@@ -91,7 +89,7 @@
 
     .menuBtnIcon {
         font-size: 24px;
-        color: #333;
+        color: #1a4345;
     }
 
     .navbar-nav {
@@ -102,6 +100,15 @@
         margin-top: 10px;
         margin-left: 0;
     }
+
+    #collapsibleNavbar{
+        width: 100%;
+        left: 0px;
+        position: absolute;
+        background: black;
+        top: 95px;
+        padding-left: 20px;
+    }
 }
 
 /********************/
@@ -110,7 +117,7 @@
 .page-footer {
     font-size: 14px;
     color: #FFFFFF;
-    background-color: #333  !important;
+    background-color: #1a4345  !important;
     width: 100%;
     padding: 5px;
     text-align: center;
@@ -224,7 +231,7 @@ th {
   }
 
 .facebookIcon{
-    color: #333;
+    color: #1a4345;
     font-size: 20px;
     width: 30px;
     height: 30px;
@@ -236,13 +243,13 @@ th {
 }
 
 .instaIcon{
-    color: #333;
+    color: #1a4345;
     font-size: 27px;
     cursor:pointer;
     margin-top:2px;
 }
 .linkedIcon {
-    color: #333;
+    color: #1a4345;
     font-size: 18px;
     width: 30px;
     height: 30px;
@@ -254,15 +261,15 @@ th {
 }
 
 a{
-    color:#333;
+    color:#1a4345;
 }
 a:hover{
-    color:#333;
+    color:#1a4345;
 }
 
 /* .................BLUE BUTTON SUBMIT OR SEND................  */
 .greenButtonsCss{
-    background-color: #333;
+    background-color: #1a4345;
     color:white !important;
 }
 .redButtonsCss{
@@ -273,7 +280,7 @@ a:hover{
 
 /* ................MAIN HEADER CSS ................. */
 .mainHeaderIcons{
-    color: #333;
+    color: #1a4345;
     font-size:15px;
     margin-right:6px;
     margin-left:5px;
@@ -284,7 +291,7 @@ a:hover{
     font-size:14px;
 }
 .greenBackground{
-    background-color: #333;
+    background-color: #1a4345;
 }
 .whiteColor{
     color:white !important;
@@ -306,7 +313,7 @@ a:hover{
 .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #333 !important;
+    background-color: #1a4345 !important;
 }
 
 /* Selectpicker */
@@ -334,7 +341,7 @@ a:hover{
 /* END OF Selectpicker */
 
 .greenButtonsCssModal {
-    color: #333 !important;
+    color: #1a4345 !important;
     border: solid 1px;
 }
 .redButtonsCssModal {
@@ -385,7 +392,7 @@ a:hover{
 
 
 table tr:hover > td {
-    background: #d1ffd570 !important
+    background: #f3fff470 !important
 } 
 
 .tooltip-inner{
@@ -433,7 +440,7 @@ table tr:hover > td {
 
 
 .greenColor{
-    color: #333;
+    color: #1a4345;
 }
 
 .blueButtonsCssModal {
@@ -453,7 +460,7 @@ table tr:hover > td {
 }
 .card-button{
     border-radius: 20px !important;
-    background-color: #333 !important;
+    background-color: #1a4345 !important;
     color: white;
 
 }
@@ -498,11 +505,9 @@ table tr:hover > td {
 
 
 .headerLogo{
-    width: 120px;
+    width: 250px;
     position: absolute;
-    left: 60px;
-    background: white;
-    top: 9px;
+    top: 4px;
     z-index: 10;
     transform: translateZ(0);
     image-rendering: -webkit-optimize-contrast;
@@ -621,12 +626,12 @@ table tr:hover > td {
 
 
 .propertyOnHover:hover{
-    border: solid 1px #333; 
+    border: solid 1px #1a4345; 
     background: antiquewhite;
 }
 
 .addClassHover{
-    border: solid 1px #333; 
+    border: solid 1px #1a4345; 
     background: antiquewhite;
 }
 

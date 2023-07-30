@@ -37,7 +37,7 @@
 ?>
 
 
-<div class="container" style="margin-top:50px;"> 
+<div class="container" style="margin-top:110px;"> 
     <!-- main header start  -->
     <div id= "mainHeader" name="mainHeader" class="mt-2">
         <div class="row ml-0 mr-0">
@@ -65,7 +65,7 @@
         
 
     <!-- profile section start  -->
-    <div id="profileInfo" >
+    <div id="profileInfo" class="displayNone">
         <div class="row mt-3">
             <div class="col-lg-2 pr-0">
                 <button type ="button" id="addItemButton"  name="addItemButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>Manage Profile </button>
@@ -143,11 +143,11 @@
                     <input type="text" name="itemDescriptionToAdd" id="itemDescriptionToAdd" class="form-control form-control-sm"  />
                 </div>
 
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
                     <label for="itemBarCodeToAdd">Product Code:</label>
                     <input type="text" name="itemBarCodeToAdd" id="itemBarCodeToAdd" class="form-control form-control-sm"  />
                 </div>
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 ">
                     <label for="itemBarCodeToAdd">Weight:</label>
                     <input type="text" name="itemWeightToAdd" id="itemWeightToAdd" class="form-control form-control-sm"  />
                 </div>
@@ -207,13 +207,13 @@
                     </div>
                 </div>
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                     <label for="attachItemImage">Attach Item Image:</label>
                     <Label class="form-control form-control-sm" id="labelForattachItemImage" name="labelForattachItemImage" for ="attachItemImage">Browse... </label>
                     <input type="file" multiple style="display:none;" name="attachItemImage" id="attachItemImage"  />
                     <button type="button" name="uploadItemImageButton" id="uploadItemImageButton" class="displayNone">Upload item image </button>
                     <input type="hidden" name="imageIdHidden" id="imageIdHidden" value="" />
-                </div>
+                </div> -->
 
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                     <label for="itemQuantityToAdd">Quantity:</label>
@@ -222,15 +222,15 @@
             
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                     <label for="itemSizeToAdd" >Size: <i class="fas fa-plus-circle" id="openSizeModal" style="font-size:17px; color:#3498db; margin-left:5px;"></i></label>
-                    <!-- <select class="form-control form-control-sm "  id="itemSizeToAdd" name="itemSizeToAdd">
-                    </select> -->
-                    <input type="text" name="itemSizeToAdd" id="itemSizeToAdd" class="form-control form-control-sm"  />
+                    <select class="form-control form-control-sm "  id="itemSizeToAdd" name="itemSizeToAdd">
+                    </select>
+                    <!-- <input type="text" name="itemSizeToAdd" id="itemSizeToAdd" class="form-control form-control-sm"  /> -->
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                     <label for="colorToAdd">Color: <i class="fas fa-plus-circle" id="openColorModal" style="font-size:17px; color:#3498db; margin-left:5px;"></i></label>
-                    <!-- <select class="form-control form-control-sm "  id="colorToAdd" name="colorToAdd">
-                    </select> -->
-                    <input type="text" name="colorToAdd" id="colorToAdd" class="form-control form-control-sm"  />
+                    <select class="form-control form-control-sm "  id="colorToAdd" name="colorToAdd">
+                    </select>
+                    <!-- <input type="text" name="colorToAdd" id="colorToAdd" class="form-control form-control-sm"  /> -->
                 </div>
                 
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
@@ -240,15 +240,15 @@
             
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                     <label for="itemSizeToAddForNewItem">Size:</label>
-                    <!-- <select class="form-control form-control-sm itemSizeToAddForNewItem"   name="itemSizeToAddForNewItem">
-                    </select> -->
-                    <input type="text" name="itemSizeToAddForNewItem"  class="form-control form-control-sm itemSizeToAddForNewItem"   />
+                    <select class="form-control form-control-sm itemSizeToAddForNewItem"   name="itemSizeToAddForNewItem">
+                    </select>
+                    <!-- <input type="text" name="itemSizeToAddForNewItem"  class="form-control form-control-sm itemSizeToAddForNewItem"   /> -->
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-2">
                     <label for="colorToAddForNewItem">Color:</label>
-                    <!-- <select class="form-control form-control-sm colorToAddForNewItem"  name="colorToAddForNewItem">
-                    </select> -->
-                    <input type="text" name="colorToAddForNewItem"  class="form-control form-control-sm colorToAddForNewItem"   />
+                    <select class="form-control form-control-sm colorToAddForNewItem"  name="colorToAddForNewItem">
+                    </select>
+                    <!-- <input type="text" name="colorToAddForNewItem"  class="form-control form-control-sm colorToAddForNewItem"   /> -->
 
                 </div>
                 <div class="col-xl-1 ">
@@ -275,326 +275,326 @@
         </form>
     
 
-    <div class="row mt-3">
-        <div class="col-lg-2 pr-0">
-            <button type ="button" id="listOfItemsButton"  name="listOfItemsButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>List Of Items </button>
+        <div class="row mt-3">
+            <div class="col-lg-2 pr-0">
+                <button type ="button" id="listOfItemsButton"  name="listOfItemsButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>List Of Items </button>
+            </div>
+            <div class="col-lg-10 lineClass">
+            </div>
+        </div>      
+        <div class="row">
+            <div class="col-xl-2 col-md-2 mt-1 pr-0">
+                <select class="form-control form-control-sm" name="archiveOrNotSelect" id="archiveOrNotSelect">
+                    <option value="1">All</option>
+                    <option value="2">Archived</option>
+                    <option value="3">Not Archived</option>
+                    <option value="4">On Sale</option>
+                    <option value="5">Not On Sale</option>
+                    <option value="6">Exported</option>
+                    <option value="7">New Collection</option>
+                    <option value="8">Summer Collection</option>
+                    <option value="9">Winter Collection</option>
+                    <option value="10">Storage</option>
+                </select>
+            </div>
+            <!-- <div class="col-xl-2 col-md-2 mt-1 pr-0">
+                <select class="form-control form-control-sm" name="showImage" id="showImage">
+                    <option value="2" selected >Hide Image</option>
+                    <option value="1">Show Image</option>
+                </select>
+            </div> -->
+            <div class="col-xl-8">
+                <i class="fas fa-sync-alt" id="refreshItems" style="color:green; font-size:15px; margin-top: 11px; cursor:pointer;"></i>
+                <button class="btn greenButtonsCss btn-md ml-2" id ="archiveAllInItems" title="Archive all with quantity 0">Archive All</button>
+                <button class="btn greenButtonsCss btn-md ml-2" id ="unArchiveAllInItems" title="UnArchive all with quantity > 0">UnArchive All</button>
+                <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce9018 !important" id ="removeFromNewCollectionAllInItems" title="Remove from new collection all">Remove New Collection</button>
+                <!-- <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="addToStorageManyItems" title="Add Checked Items To Storage">Add Storage</button> -->
+                <!-- <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="removeToStorageManyItems" title="Remove Checked Items To Storage">Remove Storage</button> -->
+                <span class="ml-2">Description:</span>
+                <input type="checkbox" id="checkBoxForDescription" name="checkBoxForDescription" >
+                <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="deleteMainPageManyItems" title="Delete Checked Items">Delete</button>
+            </div>
+            <div class="col-xl-1">
+                <!-- <label for="itemCategoryInMainPage">Item Category:</label>
+                <select class="form-control form-control-sm" id="itemCategoryInMainPage" name="itemCategoryInMainPage">
+                    <option value="-1">ALL</option>
+                    <option value="30">Attire</option>
+                    <option value="41">Bags</option>
+                    <option value="39">Blazer</option>
+                    <option value="33">Belts</option>
+                    <option value="38">Cardigan</option>
+                    <option value="2">Dresses</option>
+                    <option value="43">Headwear</option>
+                    <option value="1">Jackets</option>
+                    <option value="35">Jewelry</option>
+                    <option value="21">Jumpsuits / Sets</option>
+                    <option value="12">Matching Clothes</option>
+                    <option value="31">Shoes</option>
+                    <option value="45">Swimsuit / Bikini</option>
+                    <option value="17">New Born</option>
+                    <option value="23">Pants / Skirts</option>
+                    <option value="37">Pants / Shorts</option>
+                    <option value="40">Pull</option>
+                    <option value="11">Pyjamas</option>
+                    <option value="32">Scarves</option>
+                    <option value="44">Socks</option>
+                    <option value="36">Tshirts</option>
+                    <option value="42">Shirts</option>
+                    <option value="22">Tops</option>
+                </select> -->
+            </div>
+            <!-- <div class="col-xl-1">
+                <label for="itemGenderInMainPage">Gender:</label>
+                <select class="form-control form-control-sm" id="itemGenderInMainPage" name="itemGenderInMainPage">
+                    <option value="-1">ALL</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                    <option value="3">Kids</option>
+                    <option value="4">Accessory</option>
+                </select>     
+            </div> -->
         </div>
-        <div class="col-lg-10 lineClass">
-        </div>
-    </div>      
-    <div class="row">
-        <div class="col-xl-2 col-md-2 mt-1 pr-0">
-            <select class="form-control form-control-sm" name="archiveOrNotSelect" id="archiveOrNotSelect">
-                <option value="1">All</option>
-                <option value="2">Archived</option>
-                <option value="3">Not Archived</option>
-                <option value="4">On Sale</option>
-                <option value="5">Not On Sale</option>
-                <option value="6">Exported</option>
-                <option value="7">New Collection</option>
-                <option value="8">Summer Collection</option>
-                <option value="9">Winter Collection</option>
-                <option value="10">Storage</option>
-            </select>
-        </div>
-        <!-- <div class="col-xl-2 col-md-2 mt-1 pr-0">
-            <select class="form-control form-control-sm" name="showImage" id="showImage">
-                <option value="2" selected >Hide Image</option>
-                <option value="1">Show Image</option>
-            </select>
-        </div> -->
-        <div class="col-xl-8">
-            <i class="fas fa-sync-alt" id="refreshItems" style="color:green; font-size:15px; margin-top: 11px; cursor:pointer;"></i>
-            <button class="btn greenButtonsCss btn-md ml-2" id ="archiveAllInItems" title="Archive all with quantity 0">Archive All</button>
-            <button class="btn greenButtonsCss btn-md ml-2" id ="unArchiveAllInItems" title="UnArchive all with quantity > 0">UnArchive All</button>
-            <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce9018 !important" id ="removeFromNewCollectionAllInItems" title="Remove from new collection all">Remove New Collection</button>
-            <!-- <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="addToStorageManyItems" title="Add Checked Items To Storage">Add Storage</button> -->
-            <!-- <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="removeToStorageManyItems" title="Remove Checked Items To Storage">Remove Storage</button> -->
-            <span class="ml-2">Description:</span>
-            <input type="checkbox" id="checkBoxForDescription" name="checkBoxForDescription" >
-            <button class="btn greenButtonsCss btn-md ml-2" style="background-color:#ce0c30 !important" id ="deleteMainPageManyItems" title="Delete Checked Items">Delete</button>
-        </div>
-        <div class="col-xl-1">
-            <!-- <label for="itemCategoryInMainPage">Item Category:</label>
-            <select class="form-control form-control-sm" id="itemCategoryInMainPage" name="itemCategoryInMainPage">
-                <option value="-1">ALL</option>
-                <option value="30">Attire</option>
-                <option value="41">Bags</option>
-                <option value="39">Blazer</option>
-                <option value="33">Belts</option>
-                <option value="38">Cardigan</option>
-                <option value="2">Dresses</option>
-                <option value="43">Headwear</option>
-                <option value="1">Jackets</option>
-                <option value="35">Jewelry</option>
-                <option value="21">Jumpsuits / Sets</option>
-                <option value="12">Matching Clothes</option>
-                <option value="31">Shoes</option>
-                <option value="45">Swimsuit / Bikini</option>
-                <option value="17">New Born</option>
-                <option value="23">Pants / Skirts</option>
-                <option value="37">Pants / Shorts</option>
-                <option value="40">Pull</option>
-                <option value="11">Pyjamas</option>
-                <option value="32">Scarves</option>
-                <option value="44">Socks</option>
-                <option value="36">Tshirts</option>
-                <option value="42">Shirts</option>
-                <option value="22">Tops</option>
-            </select> -->
-        </div>
-        <!-- <div class="col-xl-1">
-            <label for="itemGenderInMainPage">Gender:</label>
-            <select class="form-control form-control-sm" id="itemGenderInMainPage" name="itemGenderInMainPage">
-                <option value="-1">ALL</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-                <option value="3">Kids</option>
-                <option value="4">Accessory</option>
-            </select>     
-        </div> -->
-    </div>
-    <div  id="itemToEdit" name="itemToEdit" class="mt-2 displayNone">
-        <form method="POST" id="editItemForm" name="editItemForm">
-            <div class="row toAppendNewSizeQToEdit form-group mt-2">  
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="itemNameToAddToEdit"> Item Name:</label>
-                    <input type="text" name="itemNameToAddToEdit" id="itemNameToAddToEdit" labelToAudit="ItemName" oldValue="" class="changesToAudit form-control form-control-sm"  />
-                    <input type="hidden" name="itemIdHidden" id="itemIdHidden" >
-                    <input type="hidden" name="barCodeHidden" id="barCodeHidden" >
-                </div>
+        <div  id="itemToEdit" name="itemToEdit" class="mt-2 displayNone">
+            <form method="POST" id="editItemForm" name="editItemForm">
+                <div class="row toAppendNewSizeQToEdit form-group mt-2">  
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                        <label for="itemNameToAddToEdit"> Item Name:</label>
+                        <input type="text" name="itemNameToAddToEdit" id="itemNameToAddToEdit" labelToAudit="ItemName" oldValue="" class="changesToAudit form-control form-control-sm"  />
+                        <input type="hidden" name="itemIdHidden" id="itemIdHidden" >
+                        <input type="hidden" name="barCodeHidden" id="barCodeHidden" >
+                    </div>
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                    <label for="itemDescriptionToAddToEdit">Description:</label>
-                    <input type="text" name="itemDescriptionToAddToEdit" id="itemDescriptionToAddToEdit" labelToAudit="Description" oldValue="" class="changesToAudit form-control form-control-sm"  />
-                </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                        <label for="itemDescriptionToAddToEdit">Description:</label>
+                        <input type="text" name="itemDescriptionToAddToEdit" id="itemDescriptionToAddToEdit" labelToAudit="Description" oldValue="" class="changesToAudit form-control form-control-sm"  />
+                    </div>
 
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
-                    <label for="itemBarCodeToAddToEdit">Product:</label>
-                    <input type="text" name="itemBarCodeToAddToEdit" id="itemBarCodeToAddToEdit" labelToAudit="Product" oldValue="" class="changesToAudit form-control form-control-sm"  />
-                </div>
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
-                    <label for="itemBarCodeToAddToEdit">Weight:</label>
-                    <input type="text" name="itemWeightToAddToEdit" id="itemWeightToAddToEdit" labelToAudit="Weight" oldValue="" class="changesToAudit form-control form-control-sm"  />
-                </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
+                        <label for="itemBarCodeToAddToEdit">Product:</label>
+                        <input type="text" name="itemBarCodeToAddToEdit" id="itemBarCodeToAddToEdit" labelToAudit="Product" oldValue="" class="changesToAudit form-control form-control-sm"  />
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
+                        <label for="itemBarCodeToAddToEdit">Weight:</label>
+                        <input type="text" name="itemWeightToAddToEdit" id="itemWeightToAddToEdit" labelToAudit="Weight" oldValue="" class="changesToAudit form-control form-control-sm"  />
+                    </div>
+                    
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="itemCategoryToAddToEdit">Item Category:</label>
+                        <select class="form-control form-control-sm changesToAudit" id="itemCategoryToAddToEdit" labelToAudit="ItemCategory" oldValue="" name="itemCategoryToAddToEdit">
+                            <option value="-1">Category</option>
+                            <option value="30">Attire</option>
+                            <option value="41">Bags</option>
+                            <option value="39">Blazer</option>
+                            <option value="33">Belts</option>
+                            <option value="38">Cardigan</option>
+                            <option value="2">Dresses</option>
+                            <option value="43">Headwear</option>
+                            <option value="34">FootWear</option>
+                            <option value="1">Jackets</option>
+                            <option value="35">Jewelry</option>
+                            <option value="21">Jumpsuits / Sets</option>
+                            <option value="12">Matching Clothes</option>
+                            <option value="31">Shoes</option>
+                            <option value="45">Swimsuit / Bikini</option>
+                            <option value="17">New Born</option>
+                            <option value="37">Pants / Shorts</option>
+                            <option value="23">Pants / Skirts</option>
+                            <option value="40">Pull</option>
+                            <option value="11">Pyjamas</option>
+                            <option value="32">Scarves</option>
+                            <option value="44">Socks</option>
+                            <option value="36">Tshirts</option>
+                            <option value="42">Shirts</option>
+                            <option value="22">Tops</option>
+                        </select>
+                    </div>   
+
+
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="itemGenderToAddToEdit">Gender:</label>
+                        <select class="form-control form-control-sm changesToAudit" labelToAudit="Gender" oldValue="" id="itemGenderToAddToEdit" name="itemGenderToAddToEdit">
+                            <option value="-1">Gender</option>
+                            <option value="4">Accessory</option>
+                            <option value="2">Female</option>
+                            <option value="3">Kids</option>
+                            <option value="1">Male</option>
+                        </select>
+                    </div>  -->
+
+
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="itemCostToAddToEdit">Cost:</label>    
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control form-control-sm changesToAudit" labelToAudit="Cost" oldValue="" type="text" name="itemCostToAddToEdit" id="itemCostToAddToEdit"/>
+                        </div>
+                    </div> -->
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="itemPriceToAddToEdit">Price:</label>    
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control form-control-sm changesToAudit" labelToAudit="Price" oldValue="" type="text" name="itemPriceToAddToEdit" id="itemPriceToAddToEdit"/>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="itemQuantityToAddToEdit">Quantity:</label>
+                        <input type="text" name="itemQuantityToAddToEdit" labelToAudit="Quantity" oldValue="" id="itemQuantityToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+                    </div>
                 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="itemCategoryToAddToEdit">Item Category:</label>
-                    <select class="form-control form-control-sm changesToAudit" id="itemCategoryToAddToEdit" labelToAudit="ItemCategory" oldValue="" name="itemCategoryToAddToEdit">
-                        <option value="-1">Category</option>
-                        <option value="30">Attire</option>
-                        <option value="41">Bags</option>
-                        <option value="39">Blazer</option>
-                        <option value="33">Belts</option>
-                        <option value="38">Cardigan</option>
-                        <option value="2">Dresses</option>
-                        <option value="43">Headwear</option>
-                        <option value="34">FootWear</option>
-                        <option value="1">Jackets</option>
-                        <option value="35">Jewelry</option>
-                        <option value="21">Jumpsuits / Sets</option>
-                        <option value="12">Matching Clothes</option>
-                        <option value="31">Shoes</option>
-                        <option value="45">Swimsuit / Bikini</option>
-                        <option value="17">New Born</option>
-                        <option value="37">Pants / Shorts</option>
-                        <option value="23">Pants / Skirts</option>
-                        <option value="40">Pull</option>
-                        <option value="11">Pyjamas</option>
-                        <option value="32">Scarves</option>
-                        <option value="44">Socks</option>
-                        <option value="36">Tshirts</option>
-                        <option value="42">Shirts</option>
-                        <option value="22">Tops</option>
-                    </select>
-                </div>   
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="itemSizeToAddToEdit">Size:</label>
+                        <!-- <select class="form-control form-control-sm changesToAudit"  labelToAudit="Size" oldValue=""  id="itemSizeToAddToEdit" name="itemSizeToAddToEdit">
+                        </select> -->
+                        <input type="text" name="itemSizeToAddToEdit" labelToAudit="Size" oldValue="" id="itemSizeToAddToEdit" class="changesToAudit form-control form-control-sm"  />
 
-
-                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="itemGenderToAddToEdit">Gender:</label>
-                    <select class="form-control form-control-sm changesToAudit" labelToAudit="Gender" oldValue="" id="itemGenderToAddToEdit" name="itemGenderToAddToEdit">
-                        <option value="-1">Gender</option>
-                        <option value="4">Accessory</option>
-                        <option value="2">Female</option>
-                        <option value="3">Kids</option>
-                        <option value="1">Male</option>
-                    </select>
-                </div>  -->
-
-
-                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="itemCostToAddToEdit">Cost:</label>    
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
-                        <input class="form-control form-control-sm changesToAudit" labelToAudit="Cost" oldValue="" type="text" name="itemCostToAddToEdit" id="itemCostToAddToEdit"/>
                     </div>
-                </div> -->
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="colorToAddToEdit">Color:</label>
+                        <!-- <select class="form-control form-control-sm changesToAudit" labelToAudit="Color" oldValue=""  id="colorToAddToEdit" name="colorToAddToEdit">
+                        </select> -->
+                        <input type="text" name="colorToAddToEdit" labelToAudit="Color" oldValue="" id="colorToAddToEdit" class="changesToAudit form-control form-control-sm"  />
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="itemPriceToAddToEdit">Price:</label>    
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
-                        <input class="form-control form-control-sm changesToAudit" labelToAudit="Price" oldValue="" type="text" name="itemPriceToAddToEdit" id="itemPriceToAddToEdit"/>
                     </div>
-                </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="saleToAddToEdit">Sale:</label>
+                        <input type="text" placeholder="Percentage" labelToAudit="Sale" oldValue="" name="saleToAddToEdit" id="saleToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+                        <input type="text" placeholder="Amount"  name="saleToAddAmount" id="saleToAddAmount" class="form-control form-control-sm"  />
+                    </div>
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="matchingWithToEdit">Matching Group:</label>
+                        <input type="text" name="matchingWithToEdit" labelToAudit="MatchingGroup" oldValue="" id="matchingWithToEdit" class="changesToAudit form-control form-control-sm"  />
+                    </div> -->
+
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
+                        <label for="initialQuantityToEdit">initial Quantity:</label>
+                        <input type="text" name="initialQuantityToEdit" labelToAudit="InitialQuantity" oldValue="" id="initialQuantityToEdit" class="changesToAudit form-control form-control-sm"  />
+                    </div> -->
+            
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                        <label for="itemCategoryToAddToEdit">Item Category:</label>
+                        <select class="form-control form-control-sm changesToAudit" id="itemCategoryToAddToEdit" labelToAudit="ItemCategory" oldValue="" name="itemCategoryToAddToEdit">
+                            <option value="-1">Category</option>
+                            <option value="30">Attire</option>
+                            <option value="41">Bags</option>
+                            <option value="39">Blazer</option>
+                            <option value="33">Belts</option>
+                            <option value="38">Cardigan</option>
+                            <option value="2">Dresses</option>
+                            <option value="43">Headwear</option>
+                            <!-- <option value="34">FootWear</option> -->
+                            <option value="1">Jackets</option>
+                            <option value="35">Jewelry</option>
+                            <option value="21">Jumpsuits / Sets</option>
+                            <option value="12">Matching Clothes</option>
+                            <option value="31">Shoes</option>
+                            <option value="45">Swimsuit / Bikini</option>
+                            <option value="17">New Born</option>
+                            <option value="37">Pants / Shorts</option>
+                            <option value="23">Pants / Skirts</option>
+                            <option value="40">Pull</option>
+                            <option value="11">Pyjamas</option>
+                            <option value="32">Scarves</option>
+                            <option value="44">Socks</option>
+                            <option value="36">Tshirts</option>
+                            <option value="42">Shirts</option>
+                            <option value="22">Tops</option>
+                        </select>
+                    </div>   
 
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="itemQuantityToAddToEdit">Quantity:</label>
-                    <input type="text" name="itemQuantityToAddToEdit" labelToAudit="Quantity" oldValue="" id="itemQuantityToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                        <label for="itemGenderToAddToEdit">Gender:</label>
+                        <select class="form-control form-control-sm changesToAudit" labelToAudit="Gender" oldValue="" id="itemGenderToAddToEdit" name="itemGenderToAddToEdit">
+                            <option value="-1">Gender</option>
+                            <option value="4">Accessory</option>
+                            <option value="2">Female</option>
+                            <option value="3">Kids</option>
+                            <option value="1">Male</option>
+                        </select>
+                    </div>  -->
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                        <label for="itemPriceToAddToEdit">Price:</label>    
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control form-control-sm changesToAudit" labelToAudit="Price" oldValue="" type="text" name="itemPriceToAddToEdit" id="itemPriceToAddToEdit"/>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                        <label for="itemQuantityToAddToEdit">Quantity:</label>
+                        <input type="text" name="itemQuantityToAddToEdit" labelToAudit="Quantity" oldValue="" id="itemQuantityToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+                    </div>
+                
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                        <label for="itemSizeToAddToEdit">Size:</label>
+                        <!-- <select class="form-control form-control-sm changesToAudit"  labelToAudit="Size" oldValue=""  id="itemSizeToAddToEdit" name="itemSizeToAddToEdit">
+                        </select> -->
+                        <input type="text" name="itemSizeToAddToEdit" labelToAudit="Size" oldValue="" id="itemSizeToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                        <label for="colorToAddToEdit">Color:</label>
+                        <!-- <select class="form-control form-control-sm changesToAudit" labelToAudit="Color" oldValue=""  id="colorToAddToEdit" name="colorToAddToEdit">
+                        </select> -->
+                        <input type="text" name="colorToAddToEdit" labelToAudit="Color" oldValue="" id="colorToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                        <label for="saleToAddToEdit">Sale:</label>
+                        <input type="text" placeholder="Percentage" labelToAudit="Sale" oldValue="" name="saleToAddToEdit" id="saleToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+                        <input type="text" placeholder="Amount"  name="saleToAddAmount" id="saleToAddAmount" class="form-control form-control-sm"  />
+                    </div>
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                        <label for="matchingWithToEdit">Matching Group:</label>
+                        <input type="text" name="matchingWithToEdit" labelToAudit="MatchingGroup" oldValue="" id="matchingWithToEdit" class="changesToAudit form-control form-control-sm"  />
+                    </div> -->
+
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
+                        <label for="initialQuantityToEdit">initial Quantity:</label>
+                        <input type="text" name="initialQuantityToEdit" labelToAudit="InitialQuantity" oldValue="" id="initialQuantityToEdit" class="changesToAudit form-control form-control-sm"  />
+                    </div> -->
+
+
                 </div>
             
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="itemSizeToAddToEdit">Size:</label>
-                    <!-- <select class="form-control form-control-sm changesToAudit"  labelToAudit="Size" oldValue=""  id="itemSizeToAddToEdit" name="itemSizeToAddToEdit">
-                    </select> -->
-                    <input type="text" name="itemSizeToAddToEdit" labelToAudit="Size" oldValue="" id="itemSizeToAddToEdit" class="changesToAudit form-control form-control-sm"  />
-
+                <div style="display: flex">
+                    <h6>Images Table:</h6>
+                    <i id="imageAttachIconInEdit" name="imageAttachIconInEdit" class="fa fa-paperclip ml-1" style="color: #0193f5; cursor:pointer;" title="Add Attachment"> </i>
+                    <input type="file" multiple name="hiddenAttachmentButton" id="hiddenAttachmentButton" class="displayNone">
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="colorToAddToEdit">Color:</label>
-                    <!-- <select class="form-control form-control-sm changesToAudit" labelToAudit="Color" oldValue=""  id="colorToAddToEdit" name="colorToAddToEdit">
-                    </select> -->
-                    <input type="text" name="colorToAddToEdit" labelToAudit="Color" oldValue="" id="colorToAddToEdit" class="changesToAudit form-control form-control-sm"  />
-
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="saleToAddToEdit">Sale:</label>
-                    <input type="text" placeholder="Percentage" labelToAudit="Sale" oldValue="" name="saleToAddToEdit" id="saleToAddToEdit" class="changesToAudit form-control form-control-sm"  />
-                    <input type="text" placeholder="Amount"  name="saleToAddAmount" id="saleToAddAmount" class="form-control form-control-sm"  />
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="matchingWithToEdit">Matching Group:</label>
-                    <input type="text" name="matchingWithToEdit" labelToAudit="MatchingGroup" oldValue="" id="matchingWithToEdit" class="changesToAudit form-control form-control-sm"  />
-                </div>
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                    <label for="initialQuantityToEdit">initial Quantity:</label>
-                    <input type="text" name="initialQuantityToEdit" labelToAudit="InitialQuantity" oldValue="" id="initialQuantityToEdit" class="changesToAudit form-control form-control-sm"  />
-                </div>
-         
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="itemCategoryToAddToEdit">Item Category:</label>
-                    <select class="form-control form-control-sm changesToAudit" id="itemCategoryToAddToEdit" labelToAudit="ItemCategory" oldValue="" name="itemCategoryToAddToEdit">
-                        <option value="-1">Category</option>
-                        <option value="30">Attire</option>
-                        <option value="41">Bags</option>
-                        <option value="39">Blazer</option>
-                        <option value="33">Belts</option>
-                        <option value="38">Cardigan</option>
-                        <option value="2">Dresses</option>
-                        <option value="43">Headwear</option>
-                        <!-- <option value="34">FootWear</option> -->
-                        <option value="1">Jackets</option>
-                        <option value="35">Jewelry</option>
-                        <option value="21">Jumpsuits / Sets</option>
-                        <option value="12">Matching Clothes</option>
-                        <option value="31">Shoes</option>
-                        <option value="45">Swimsuit / Bikini</option>
-                        <option value="17">New Born</option>
-                        <option value="37">Pants / Shorts</option>
-                        <option value="23">Pants / Skirts</option>
-                        <option value="40">Pull</option>
-                        <option value="11">Pyjamas</option>
-                        <option value="32">Scarves</option>
-                        <option value="44">Socks</option>
-                        <option value="36">Tshirts</option>
-                        <option value="42">Shirts</option>
-                        <option value="22">Tops</option>
-                    </select>
-                </div>   
-
-
-                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="itemGenderToAddToEdit">Gender:</label>
-                    <select class="form-control form-control-sm changesToAudit" labelToAudit="Gender" oldValue="" id="itemGenderToAddToEdit" name="itemGenderToAddToEdit">
-                        <option value="-1">Gender</option>
-                        <option value="4">Accessory</option>
-                        <option value="2">Female</option>
-                        <option value="3">Kids</option>
-                        <option value="1">Male</option>
-                    </select>
-                </div>  -->
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="itemPriceToAddToEdit">Price:</label>    
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
-                        <input class="form-control form-control-sm changesToAudit" labelToAudit="Price" oldValue="" type="text" name="itemPriceToAddToEdit" id="itemPriceToAddToEdit"/>
-                    </div>
-                </div>
-
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="itemQuantityToAddToEdit">Quantity:</label>
-                    <input type="text" name="itemQuantityToAddToEdit" labelToAudit="Quantity" oldValue="" id="itemQuantityToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+                <div id="imagesContainer" >
                 </div>
             
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="itemSizeToAddToEdit">Size:</label>
-                    <!-- <select class="form-control form-control-sm changesToAudit"  labelToAudit="Size" oldValue=""  id="itemSizeToAddToEdit" name="itemSizeToAddToEdit">
-                    </select> -->
-                    <input type="text" name="itemSizeToAddToEdit" labelToAudit="Size" oldValue="" id="itemSizeToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+                <div class="row">
+                    <div class="col-xl-12 mt-3 ">
+                        <button type ="submit" id="submitEditItemButton" name="submitEditItemButton" style="float:right;" class ="btn btn-md blueButtonsCss">
+                            <i class="fas fa-paper-plane" style="margin-right:5px; color:white;"> </i>
+                            Edit Item 
+                        </button>
+                        <button type ="button" id="cancelEditItemButton" name="cancelEditItemButton" style="float:right;" class ="btn btn-md redButtonsCss">
+                            <i class="fas fa-times" style="color:white; margin-right:5px;"> </i> 
+                            Cancel 
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div  id="itemTableInLogin" name="itemTableInLogin" class="mt-2 ">
+        </div>
 
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="colorToAddToEdit">Color:</label>
-                    <!-- <select class="form-control form-control-sm changesToAudit" labelToAudit="Color" oldValue=""  id="colorToAddToEdit" name="colorToAddToEdit">
-                    </select> -->
-                    <input type="text" name="colorToAddToEdit" labelToAudit="Color" oldValue="" id="colorToAddToEdit" class="changesToAudit form-control form-control-sm"  />
-
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="saleToAddToEdit">Sale:</label>
-                    <input type="text" placeholder="Percentage" labelToAudit="Sale" oldValue="" name="saleToAddToEdit" id="saleToAddToEdit" class="changesToAudit form-control form-control-sm"  />
-                    <input type="text" placeholder="Amount"  name="saleToAddAmount" id="saleToAddAmount" class="form-control form-control-sm"  />
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="matchingWithToEdit">Matching Group:</label>
-                    <input type="text" name="matchingWithToEdit" labelToAudit="MatchingGroup" oldValue="" id="matchingWithToEdit" class="changesToAudit form-control form-control-sm"  />
-                </div>
-
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                    <label for="initialQuantityToEdit">initial Quantity:</label>
-                    <input type="text" name="initialQuantityToEdit" labelToAudit="InitialQuantity" oldValue="" id="initialQuantityToEdit" class="changesToAudit form-control form-control-sm"  />
-                </div>
-
-
-            </div>
-        
-            <div style="display: flex">
-                <h6>Images Table:</h6>
-                <i id="imageAttachIconInEdit" name="imageAttachIconInEdit" class="fa fa-paperclip ml-1" style="color: #0193f5; cursor:pointer;" title="Add Attachment"> </i>
-                <input type="file" multiple name="hiddenAttachmentButton" id="hiddenAttachmentButton" class="displayNone">
-            </div>
-            <div id="imagesContainer" >
-            </div>
-         
-            <div class="row">
-                <div class="col-xl-12 mt-3 ">
-                    <button type ="submit" id="submitEditItemButton" name="submitEditItemButton" style="float:right;" class ="btn btn-md blueButtonsCss">
-                        <i class="fas fa-paper-plane" style="margin-right:5px; color:white;"> </i>
-                        Edit Item 
-                    </button>
-                    <button type ="button" id="cancelEditItemButton" name="cancelEditItemButton" style="float:right;" class ="btn btn-md redButtonsCss">
-                        <i class="fas fa-times" style="color:white; margin-right:5px;"> </i> 
-                        Cancel 
-                    </button>
-                </div>
-            </div>
-        </form>
     </div>
-    <div  id="itemTableInLogin" name="itemTableInLogin" class="mt-2 ">
-    </div>
-
-</div>
-<!-- manage item section end  -->
+    <!-- manage item section end  -->
 
 
 
@@ -1006,6 +1006,114 @@
             <div class="modal-footer"  style="height:52px;" >
                 <button class="btn btn-sm  redButtonsCssModal"  data-dismiss="modal" id="yesdeleteMainPageButton" style="float:right;">YES</button>
                 <button class="btn btn-sm blueButtonsCssModal "  data-dismiss="modal" style="float:right;"> NO</button>
+            </div>  
+        </div>  
+    </div>
+</div>
+
+
+<div class="modal fade" id="pleaseFillAllFields" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm  modal-dialog-centered" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 style="font-size:16px;" class="errorMessageChangeHtml"><i class="fas fa-exclamation-triangle" style="margin-right:10px; color:red"></i>Please Fill All Required Fields.</h5>
+            </div>
+            
+        </div>  
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="sizeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content " >
+            <div class="modal-header">
+                <h5 style="font-size:14px;">
+                    <i class="fas fa-exclamation-triangle" style="margin-right:10px; font-size:16px; color:rgb(38, 140, 228) ;"></i>
+                    Manage Size
+                </h5>
+                <button type="button" class="close closeModal " data-dismiss="modal" id="closeModal" title="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="addSizeForm" name="addSizeForm">
+                    <div class="row mt-2"> 
+                        <div class="col-xl-12 mt-2 ">
+                            <button type ="button" id="addNewSize" name="addNewSize"  class ="btn btn-md blueButtonsCss">
+                                <i class="fas fa-plus" style="margin-right:5px; color:white;"> </i>
+                                Add New
+                            </button> 
+                        </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <label for="sizeNameToAddInModal"> Size Name:</label>
+                            <input type="text" name="sizeNameToAddInModal" id="sizeNameToAddInModal" class="form-control form-control-sm"  />
+                            <input type="hidden" name="sizeIdHidden" id="sizeIdHidden" class="form-control form-control-sm"  />
+                            <input type="hidden" name="addOrEditCounterInModal" id="addOrEditCounterInModal" class="form-control form-control-sm"  />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 mt-2 ">
+                            <button type ="submit" id="submitSize" name="submitSize" style="float:right;" class ="btn btn-md blueButtonsCss">
+                                <i class="fas fa-plus" style="margin-right:5px; color:white;"> </i>
+                                Save
+                            </button>
+                            <!-- <button type ="button" id="cancelAddSize" name="cancelAddSize" style="float:right;" class ="btn btn-md redButtonsCss">
+                                <i class="fas fa-times" style="color:white; margin-right:5px;"> </i> 
+                                Cancel 
+                            </button> -->
+                        </div>
+                    </div>
+                </form>
+                <div id="sizeTableContainer" class="mt-2">
+                </div>
+            </div>  
+        </div>  
+    </div>
+</div>
+
+<div class="modal fade" id="colorModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content " >
+            <div class="modal-header">
+                <h5 style="font-size:14px;">
+                    <i class="fas fa-exclamation-triangle" style="margin-right:10px; font-size:16px; color:rgb(38, 140, 228) ;"></i>
+                    Manage Size
+                </h5>
+                <button type="button" class="close closeModal " data-dismiss="modal" id="closeModal" title="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="addColorForm" name="addColorForm">
+                    <div class="row mt-2"> 
+                        <div class="col-xl-12 mt-2 ">
+                            <button type ="button" id="addNewColor" name="addNewColor"  class ="btn btn-md blueButtonsCss">
+                                <i class="fas fa-plus" style="margin-right:5px; color:white;"> </i>
+                                Add New
+                            </button> 
+                        </div> 
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <label for="colorNameToAddInModal"> Color Name:</label>
+                            <input type="text" name="colorNameToAddInModal" id="colorNameToAddInModal" class="form-control form-control-sm"  />
+                            <input type="hidden" name="colorIdHidden" id="colorIdHidden" class="form-control form-control-sm"  />
+                            <input type="hidden" name="addOrEditCounterInModalColor" id="addOrEditCounterInModalColor" class="form-control form-control-sm"  />
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 mt-2 ">
+                            <button type ="submit" id="submitColor" name="submitColor" style="float:right;" class ="btn btn-md blueButtonsCss">
+                                <i class="fas fa-plus" style="margin-right:5px; color:white;"> </i>
+                                Save
+                            </button>
+                            <button type ="button" id="cancelAddColor" name="cancelAddColor" style="float:right;" class ="btn btn-md redButtonsCss">
+                                <i class="fas fa-times" style="color:white; margin-right:5px;"> </i> 
+                                Cancel 
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div id="colorTableContainer" class="mt-2">
+                </div>
             </div>  
         </div>  
     </div>

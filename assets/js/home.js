@@ -1,6 +1,10 @@
 $(document).ready(function (){ 
     getItemsData();
-
+    
+    $("#cancelAddItemButton").click(function(){
+        $("#addItemsForm").slideUp();
+    })
+    
 
     $("#attachIconAdd").click(function(){
         if($("#propertyIdHidden").val() == ""){
@@ -47,7 +51,7 @@ $(document).ready(function (){
     $(".theCard").click(function(){
         $(this).addClass("transformClass");
     })
-    
+        
     $("body").on("click", ".theBack",function(){
         $(this).parent().removeClass("transformClass");
     })
@@ -61,8 +65,16 @@ $(document).ready(function (){
         forceParse: false
     }); 
 
+    $("body").on("click", "#addItemButton",function(){
+        $("#addItemsForm").slideDown();
+        $("#addItemsForm").trigger("reset");
+        $("#attachItemImage").val("");
+    })
+
     $("#manageItemsHeaderButton").click(function(){
         hideAll();
+        fillSize();
+        fillColor();
         setTimeout(function(){
             $("#manageItemsHeaderButton").parent().addClass("greenBackground");
             $("#manageItemsHeaderButton").addClass("whiteColor");
@@ -113,216 +125,6 @@ $(document).ready(function (){
     })
 
 
-    $("#submitPropertyButton").click(function(){
-        postData = $("#managePropertyForm").serialize();
-        longitude = $("#longitudeOfProperty").html();
-        latitude = $("#latitudeOfProperty").html();
-        
-        $.ajax({
-            url: baseURL + "/Rebelle/submitProperty",
-            method: "POST",
-            data: postData + "&longitude=" + longitude + "&latitude=" + latitude,
-            dataType: "json",
-            beforeSend:function(){
-                $(".loader").fadeIn(300);
-            },
-            success: function (data) {
-                if(data > 0){
-                    $("#propertyIdHidden").val(data);
-                    $("#propertyCounterAddOrEdit").val(2);
-                }
-            },
-            error: function (error) {
-                alert("Network Error Please Refresh The Page.");
-            },
-            complete: function(){
-                getAllPropertiesInBackEnd();
-                $(".loader").fadeOut();
-            }
-        });  
-        return false;
-    })
-
-
-    $("body").on("click", ".statusIcon",function(){
-        isChecked = $(this).attr("isChecked");
-        dataId = $(this).attr("dataId");
-        tochange = 0;
-        $("[findTooltipStatus='" + dataId +"']").tooltip('hide')
-       
-        if($(this).children().attr("dataIsChecked") == 1){
-            $(this).html('<img dataIsChecked="-1"  src="'+ baseURL +'assets/images/disabled2_small.png" />');
-            $(this).attr("isChecked",-1);
-
-        }else if ($(this).children().attr("dataIsChecked") == -1){
-            $(this).html(' <img dataIsChecked="0"  src="'+ baseURL +'assets/images/nothing_small.png">');
-            $(this).attr("isChecked",0);
-        }else{
-            $(this).html(' <img dataIsChecked="1"  src="'+ baseURL +'assets/images/enabled2_small.png">');
-            $(this).attr("isChecked",1);
-        }
-        $.ajax({
-            url: baseURL + "/Rebelle/statusIcon",
-            data: "isChecked=" + isChecked + "&dataId=" + dataId,
-            method: "POST",
-            dataType: "json",
-            async: false,
-            beforeSend: function(){
-                $("[findTooltipStatus='" + dataId +"']").tooltip('hide')
-
-            },
-            success: function (data) {  
-                // getMainTable();
-                $("[findTooltipStatus='" + dataId +"']").attr("data-original-title",data);
-
-            },
-            complete: function(){
-                // $("[findTooltipStatus='" + dataId +"']").tooltip('show');
-            },
-            error: function (error) {
-                alert("Network Error Please Refresh The Page.");
-            }
-        });
-    })
-
-
-    $("body").on("click", ".displayPropertyToEdit", function(){
-        id = $(this).attr("dataId");
-        $.ajax({
-            url: baseURL + "/Rebelle/displayPropertyToEdit",
-            method: "POST",
-            data: "id=" + id,
-            dataType: "json",
-            beforeSend:function(){
-                $(".loader").fadeIn(500);
-            },
-            success: function (data) {
-                longitude = data["longitude"];
-                latitude = data["latitude"];
-                $("#longitudeOfProperty").val(longitude);
-                $("#latitudeOfProperty").val(latitude);
-                
-                if(longitude == 0 || latitude == 0){
-                    longitude = 35.7;
-                    latitude = 33.9;
-                }
-                if ($("#map").length > 0 ){
-                    mapboxgl.accessToken = 'pk.eyJ1Ijoic2NvcmF5IiwiYSI6ImNrdWNxcmJmNjBlb3kzMHBoMTBlanRncnAifQ.nUzt6aDopRt2STolFgt9FQ';
-                    var map = new mapboxgl.Map({
-                        container: 'map',
-                        style: 'mapbox://styles/scoray/ckv6lh29a0h8215t54qb8g5au',
-                        center: [  35.7 , 33.9], // starting position [lng, lat]
-                        zoom: 9.5 // starting zoom
-                    });
-                    map.addControl(new mapboxgl.FullscreenControl());
-             
-                    // Add geolocate control to the map.
-                    map.addControl(
-                        new mapboxgl.GeolocateControl({
-                            positionOptions: {
-                            enableHighAccuracy: true
-                            },
-                            // When active the map will receive updates to the device's location as it changes.
-                            trackUserLocation: true,
-                            // Draw an arrow next to the location dot to indicate which direction the device is heading.
-                            showUserHeading: true
-                        })
-                    );
-                    map.on('idle',function(){
-                        map.resize();
-                    })
-                    //------- Marker Draggable --------// 
-                    const coordinates = document.getElementById('coordinates');
-                    const marker = new mapboxgl.Marker({
-                        draggable: true
-                    });
-                    marker.setLngLat([longitude , latitude]);
-                    marker.addTo(map);
-                        const lngLat = marker.getLngLat();
-                        coordinates.style.display = 'block';
-                        coordinates.innerHTML = `Longitude: <span id="longitudeOfProperty">${longitude} </span><br />Latitude: <span id="latitudeOfProperty">${latitude}</span>`; 
-                    function onDragEnd() {
-                        const lngLat = marker.getLngLat();
-                        coordinates.style.display = 'block';
-                        coordinates.innerHTML = `Longitude: <span id="longitudeOfProperty">${lngLat.lng} </span><br />Latitude: <span id="latitudeOfProperty">${lngLat.lat}</span>`;
-                    }
-                    marker.on('dragend', onDragEnd);
-                }
-
-                $("#propertyCounterAddOrEdit").val(2);
-                $("#propertyIdHidden").val(data["id"]);
-                $("#propertyTitle").val(data["title"]);
-                $("#propertyDescription").val(data["description"]);
-                $("#propertyPrice").val(data["price"]);
-                $("#propertyLotSize").val(data["lotSize"]);
-                $("#propertyNumberOfBedrooms").val(data["numberOfBedrooms"]);
-                $("#propertyAddress").val(data["address"]);
-                $("#propertyZipcode").val(data["zipCode"]);
-                $("#propertyYearBuilt").val(data["yearBuilt"]);
-                $("#propertySaleOrRent").val(data["saleOrRent"]);
-                
-                
-            },
-            error: function (error) {
-                alert("Network Error Please Refresh The Page.");
-            },
-            complete: function(){
-                $("#managePropertyForm").slideDown();
-                $(".loader").fadeOut();
-                $(".selectpicker").selectpicker("refresh");
-                $("html").animate({
-                    scrollTop:$(".container").offset().top 
-                }, 500);
-            }
-        });  
-        return false;
-    })
-
-
-    $("body").on("click", ".deletePropertyIcon",function(){
-        $("#deleteModal").modal('show');
-        $("#yesDeleteModalToChange").attr("id","yesDeletePropertyButton");
-        idToDeletePropertyButton = $(this).attr("dataId");
-    })
-    
-    $("body").on("click","#yesDeletePropertyButton",function(){
-        $.ajax({
-            method:"POST",
-            data: "idToDelete=" + idToDeletePropertyButton ,
-            url: baseURL + "Rebelle/deleteProperty",
-            dataType:"JSON",
-            success: function(data){
-                getAllPropertiesInBackEnd();
-            },
-            error: function(){
-                alert("Network Error Please Refresh The Page.");
-            }
-        })
-    })
-
-
-    $("body").on("click", ".deletePropertyIconForAdmin",function(){
-        $("#deleteModal").modal('show');
-        $("#yesDeleteModalToChange").attr("id","yesDeletePropertyButtonInAdmin");
-        idToDeletePropertyButtonInAdmin = $(this).attr("dataId");
-    })
-    
-    $("body").on("click","#yesDeletePropertyButtonInAdmin",function(){
-        $.ajax({
-            method:"POST",
-            data: "idToDelete=" + idToDeletePropertyButtonInAdmin ,
-            url: baseURL + "Rebelle/deletePropertyInAdmin",
-            dataType:"JSON",
-            success: function(data){
-                getAllPropertiesForAdmin();
-            },
-            error: function(){
-                alert("Network Error Please Refresh The Page.");
-            }
-        })
-    })
-
-
 
     //..........ADD ITEM......./
     $("#submitAddItemButton").click(function () {
@@ -351,14 +153,14 @@ $(document).ready(function (){
                 success: function (data) { 
                         if(data[0]==0){
                             $("#itemBarCodeToAdd").val(data[1]);
-                            if($("#attachItemImage").val() ==""){
-                                $("#attachItemImage").val("");
-                                $("#addItemsForm").trigger('reset'); 
-                                $("#labelForattachItemImage").html("Browse...");
-                                $(".errorMessageChangeHtml").html('<i class="fas fa-check"  style="margin-right:10px; color:blue"></i>Item Added Successfully !');
-                            }else{
+                            $("#addItemsForm").trigger('reset'); 
+                            // if($("#attachItemImage").val() ==""){
+                                // $("#attachItemImage").val("");
+                                // $("#labelForattachItemImage").html("Browse...");
+                                // $(".errorMessageChangeHtml").html('<i class="fas fa-check"  style="margin-right:10px; color:blue"></i>Item Added Successfully !');
+                            // }else{
                                 // uploadItemImage();
-                            }
+                            // }
                         }else{
                             $("#pleaseFillAllFields").modal('show');
                         }
@@ -373,8 +175,6 @@ $(document).ready(function (){
                     console.log("Error");
                 }
             });
-
-        // }
         return false;
     }); 
 
@@ -388,13 +188,13 @@ $(document).ready(function (){
             </div>
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                 <label for="itemSizeToAddForNewItem">Size:</label>
-                <input type="text" name="itemSizeToAddForNewItem" class="form-control sizeAndQuantityToAdd form-control-sm"  />
-
+                <select class="form-control form-control-sm itemSizeToAddForNewItem"   name="itemSizeToAddForNewItem">
+                </select>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-2">
                 <label for="colorToAddForNewItem">Color:</label>
-                <input type="text" name="colorToAddForNewItem" class="form-control colorToAddForNewItem form-control-sm"  />
-
+                <select class="form-control form-control-sm colorToAddForNewItem"  name="colorToAddForNewItem">
+                </select>
             </div>
             <div class="col-xl-1">
                 <a class="insertNewRowInAddItem" href="javascript:void(0);">       
@@ -484,6 +284,84 @@ $(document).ready(function (){
     })
 
 
+    $("body").on("click", "#openSizeModal", function () {
+        $("#addOrEditCounterInModal").val(1);
+        getItemSizeInModal();
+        $("#sizeModal").modal("show");
+        $("#sizeNameToAddInModal").val("");
+        $("#sizeIdHidden").val("");
+
+    })
+    $("body").on("click", "#openColorModal", function () {
+        $("#addOrEditCounterInModalColor").val(1);
+        getItemColorInModal();
+        $("#colorModal").modal("show");
+        $("#colorNameToAddInModal").val("");
+        $("#colorIdHidden").val("");
+
+    })
+
+    $("#submitSize").click(function(){
+        postData = $("#addSizeForm").serialize();
+        $.ajax({
+            url: baseURL + "/Rebelle/submitSize",
+            method: "POST",
+            data: postData,
+            dataType: "json",
+            beforeSend:function(){
+                $(".loader").fadeIn();
+            },
+            success: function (data) {
+                if(data >0 ){
+                    $("#addOrEditCounterInModal").val(2);
+                    $("#sizeIdHidden").val(data);
+                }
+                getItemSizeInModal();
+                fillColor();
+                fillSize();
+            },
+            error: function (error) {
+                console.log("Network Error Please Refresh The Page.");
+            },
+            complete: function(){
+                $(".loader").fadeOut();
+            }
+        });  
+        return false;
+
+    })
+    //................//
+
+    $("#submitColor").click(function(){
+        postData = $("#addColorForm").serialize();
+        $.ajax({
+            url: baseURL + "/Rebelle/submitColor",
+            method: "POST",
+            data: postData,
+            dataType: "json",
+            beforeSend:function(){
+                $(".loader").fadeIn();
+            },
+            success: function (data) {
+                if(data >0 ){
+                    $("#addOrEditCounterInModal").val(2);
+                    $("#colorIdHidden").val(data);
+                }
+                getItemColorInModal();
+                fillColor();
+                fillSize();
+            },
+            error: function (error) {
+                console.log("Network Error Please Refresh The Page.");
+            },
+            complete: function(){
+                $(".loader").fadeOut();
+            }
+        });  
+        return false;
+    })
+    //................//
+
     $("body").on("click", ".newCollectionItem",function(){
         itemId = $(this).attr("data-itemId");
         $.ajax({
@@ -529,7 +407,198 @@ $(document).ready(function (){
             }
         })
     })
+
+    $("body").on("click", ".archiveItem",function(){
+        itemId = $(this).attr("data-itemId");
+        if($(this).children().hasClass("darkGreen")){
+            $(this).children().removeClass("darkGreen");
+            $(this).children().addClass("grey");
+        }else{
+            $(this).children().addClass("darkGreen");
+            $(this).children().removeClass("grey");
+
+        }
+        $.ajax({
+            url: baseURL + "/Rebelle/archiveItem",
+            dataType: "JSON",
+            data: "itemId=" + itemId,
+            method: "POST",
+            success: function (data) { 
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
+
+    $("body").on("click", ".exportedItem",function(){
+        itemId = $(this).attr("data-itemId");
+        if($(this).children().hasClass("blueColorForPlane")){
+            $(this).children().removeClass("blueColorForPlane");
+            $(this).children().addClass("grey");
+        }else{
+            $(this).children().addClass("blueColorForPlane");
+            $(this).children().removeClass("grey");
+        }
+        $.ajax({
+            url: baseURL + "/Rebelle/exportedItem",
+            dataType: "JSON",
+            data: "itemId=" + itemId,
+            method: "POST",
+            success: function (data) { 
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
+
+    $("#refreshItems")  .click(function(){
+        getItemsData();  
+    })
+
+
+    $("body").on("click", ".deleteSizeInEdit",function(){
+        dataId = $(this).attr("dataId");
+        $.ajax({
+            method:"POST",
+            data: "dataId=" + dataId ,
+            url: baseURL + "Rebelle/deleteSizeInModal",
+            dataType:"JSON",
+            
+            success: function(){ 
+                getItemSizeInModal();
+            },
+            error: function(){
+                console.log("Network Error Please Refresh The Page.");
+            }
+        })
+    })
+    $("body").on("click", ".deleteColorInEdit",function(){
+        dataId = $(this).attr("dataId");
+        $.ajax({
+            method:"POST",
+            data: "dataId=" + dataId ,
+            url: baseURL + "Rebelle/deleteColorInModal",
+            dataType:"JSON",
+            
+            success: function(){ 
+                getItemColorInModal();
+            },
+            error: function(){
+                console.log("Network Error Please Refresh The Page.");
+            }
+        })
+    })
     
+
+    $("body").on("click", ".displaySizeToEdit",function(){
+        dataId = $(this).attr("dataId");
+        $("#sizeIdHidden").val(dataId);
+        $.ajax({
+            url: baseURL + "/Rebelle/displaySizeToEdit",
+            method: "POST",
+            data :"dataId=" + dataId,
+            dataType: "json",
+            beforeSend:function(){
+                $(".loader").fadeIn(500);
+            },
+            success: function (data) {
+                $("#sizeNameToAddInModal").val(data[0]["sizeName"]);
+                $("#addOrEditCounterInModal").val(2);
+                
+            },
+            error: function (error) {
+                console.log("Network Error Please Refresh The Page.");
+            },
+            complete: function(){
+                $(".loader").fadeOut();
+            }
+        });   
+    })
+
+    $("body").on("click", ".displayColorToEdit",function(){
+        dataId = $(this).attr("dataId");
+        $("#colorIdHidden").val(dataId);
+        $.ajax({
+            url: baseURL + "/Rebelle/displayColorToEdit",
+            method: "POST",
+            data :"dataId=" + dataId,
+            dataType: "json",
+            beforeSend:function(){
+                $(".loader").fadeIn(500);
+            },
+            success: function (data) {
+                    $("#addOrEditCounterInModalColor").val(2);
+                    $("#colorNameToAddInModal").val(data[0]["colorName"]);
+            },
+            error: function (error) {
+                console.log("Network Error Please Refresh The Page.");
+            },
+            complete: function(){
+   
+                $(".loader").fadeOut();
+             
+            }
+        });   
+    })
+
+
+    $("body").on("click", "#addNewSize",function(){
+        $("#sizeNameToAddInModal").val("");
+        $("#addOrEditCounterInModal").val(1);
+        $("#sizeIdHidden").val("");
+    })
+    $("body").on("click", "#addNewColor",function(){
+        $("#colorNameToAddInModal").val("");
+        $("#colorIdHidden").val("");
+        $("#addOrEditCounterInModal").val(1);
+    })
+
+    //................//
+
+
+    
+    $("#imageAttachIconInEdit").click(function(){
+        $("#hiddenAttachmentButton").click();
+    })
+    $(document).on("change","#hiddenAttachmentButton",function(){
+        var files = $(this)[0].files;
+        var fileslength = files.length;
+        var filesnames = [];
+        for (var i = 0; i < fileslength; i++) {
+            filesnames.push(this.files[i].name + '<br />');
+        }
+        var data = new FormData();
+        jQuery.each(jQuery('#hiddenAttachmentButton')[0].files, function (i, file) {
+            data.append('file-' + i, file);
+        });
+        data.append('itemId', $("#itemBarCodeToAddToEdit").val());        
+        $.ajax({
+            url: `${baseURL}/Rebelle/uploadImagesInEdit`,
+            method: 'POST',
+            data: data,
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                $(".loader").fadeIn(200);
+            },
+            success: function (data) {
+                getItemImages();
+            },
+            complete: function () {
+                $(".loader").fadeOut();   
+            }
+        }); 
+    })
+
+    $("#cancelEditItemButton").click(function(){
+        $("#itemToEdit").slideUp();
+    })
 
 // last bracket 
 })
@@ -680,4 +749,165 @@ function getItemsData() {
             $(".loader").fadeOut();
         }
     });   
+}
+
+
+
+
+function getItemSizeInModal() {
+    $.ajax({
+        url: baseURL + "/Rebelle/getItemSizeInModal",
+        method: "POST",
+        dataType: "json",
+        success: function (data) {
+            $("#sizeTableContainer").html(data); 
+            var sizeTable = $('#sizeTable').DataTable({
+                  
+                    "lengthMenu": [[50, 100, 200, -1],[50, 100, 200, "All"]],
+                    "language" : {
+                        "sLengthMenu": "Show _MENU_"
+                    },
+                    "stateSave": true,
+                    "columnDefs": [ {
+                        "targets": 0,
+                        "orderable": false
+                        } ]
+                }); 
+    
+                if($("#sizeTable_filter label input").val()==""){
+                    $("#sizeTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;" id="sizeTableSearch"></i> <i class="fas fa-times" style="color:red; display:none; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearsizeTableSearch"></i>');
+                    $("#sizeTable_filter label input").removeAttr("type").attr("type","text");
+                    $("#clearsizeTableSearch").hide();
+                    $("#sizeTableSearch").show();
+                }else{
+                    $("#sizeTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;  display:none;" id="sizeTableSearch"></i> <i class="fas fa-times" style="color:red; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearsizeTableSearch"></i>');
+                    $("#sizeTable_filter label input").removeAttr("type").attr("type","text");
+                    $("#clearsizeTableSearch").show();
+                    $("#sizeTableSearch").hide();
+                }
+    
+                $("#clearsizeTableSearch").click(function(){
+                    sizeTable.search("").draw();
+                    $("#clearsizeTableSearch").hide();
+                    $("#sizeTableSearch").show();
+                })
+                $("#sizeTable_filter label input").on("keyup change",function(){
+                    searchInput = $("#sizeTable_filter label input").val();
+                    if (sizeTable.search() != ""){
+                        $("#clearsizeTableSearch").show();
+                        $("#sizeTableSearch").hide();
+                    }else{
+                        $("#clearsizeTableSearch").hide();
+                        $("#sizeTableSearch").show();
+                    }
+                }) 
+        },
+        error: function (error) {
+            console.log("Network Error Please Refresh The Page.");
+        }
+    });   
+}
+
+
+function getItemColorInModal() {
+    $.ajax({
+        url: baseURL + "/Rebelle/getItemColorInModal",
+        method: "POST",
+        dataType: "json",
+        success: function (data) {
+            $("#colorTableContainer").html(data); 
+            var colorTable = $('#colorTable').DataTable({
+                  
+                    "lengthMenu": [[50, 100, 200, -1],[50, 100, 200, "All"]],
+                    "language" : {
+                        "sLengthMenu": "Show _MENU_"
+                    },
+                    "stateSave": true,
+                    "columnDefs": [ {
+                        "targets": 0,
+                        "orderable": false
+                        } ]
+                }); 
+    
+                if($("#colorTable_filter label input").val()==""){
+                    $("#colorTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;" id="colorTableSearch"></i> <i class="fas fa-times" style="color:red; display:none; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearcolorTableSearch"></i>');
+                    $("#colorTable_filter label input").removeAttr("type").attr("type","text");
+                    $("#clearcolorTableSearch").hide();
+                    $("#colorTableSearch").show();
+                }else{
+                    $("#colorTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;  display:none;" id="colorTableSearch"></i> <i class="fas fa-times" style="color:red; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearcolorTableSearch"></i>');
+                    $("#colorTable_filter label input").removeAttr("type").attr("type","text");
+                    $("#clearcolorTableSearch").show();
+                    $("#colorTableSearch").hide();
+                }
+    
+                $("#clearcolorTableSearch").click(function(){
+                    colorTable.search("").draw();
+                    $("#clearcolorTableSearch").hide();
+                    $("#colorTableSearch").show();
+                })
+                $("#colorTable_filter label input").on("keyup change",function(){
+                    searchInput = $("#colorTable_filter label input").val();
+                    if (colorTable.search() != ""){
+                        $("#clearcolorTableSearch").show();
+                        $("#colorTableSearch").hide();
+                    }else{
+                        $("#clearcolorTableSearch").hide();
+                        $("#colorTableSearch").show();
+                    }
+                }) 
+        },
+        error: function (error) {
+            console.log("Network Error Please Refresh The Page.");
+        }
+    });   
+}
+
+
+
+
+//................//
+function fillColor() {
+	$.ajax({
+		url: baseURL + "/Rebelle/fillColor",
+		method: "POST",
+		dataType: "JSON",
+		success: function (data) {
+			$("#colorToAdd").html(`<option value="-1">--Select-- </option`);
+			$("#colorToAddToEdit").html(`<option value="-1">--Select-- </option`);
+			$(".colorToAddForNewItem").html(`<option value="-1">--Select-- </option`);
+
+			for (var i = 0; i < data.length; i++) {
+				$("#colorToAdd").append(`<option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option`);
+				$("#colorToAddToEdit").append(`<option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option`);
+				$(".colorToAddForNewItem").append(`<option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option`);
+			}
+		},
+		error: function (error) {
+			alert("Network Error Please Refresh The Page.");
+		},
+	});
+}
+
+//................//
+function fillSize() {
+	$.ajax({
+		url: baseURL + "/Rebelle/fillSize",
+		method: "POST",
+		dataType: "JSON",
+		success: function (data) {
+			$("#itemSizeToAdd").html(`<option value="-1">--Select-- </option`);
+			$("#itemSizeToAddToEdit").html(`<option value="-1">--Select-- </option`);
+			$(".itemSizeToAddForNewItem").html(`<option value="-1">--Select-- </option`);
+            
+			for (var i = 0; i < data.length; i++) {
+				$("#itemSizeToAdd").append(`<option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option`);
+				$("#itemSizeToAddToEdit").append(`<option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option`);
+				$(".itemSizeToAddForNewItem").append(`<option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option`);
+			}
+		},
+		error: function (error) {
+			alert("Network Error Please Refresh The Page.");
+		},
+	});
 }
