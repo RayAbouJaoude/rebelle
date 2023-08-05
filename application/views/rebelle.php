@@ -154,32 +154,18 @@
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                     <label for="itemCategoryToAdd">Item Category:</label>
                     <select class="form-control form-control-sm" id="itemCategoryToAdd" name="itemCategoryToAdd">
-                
                         <option value="-1">Category</option>
-                        <option value="30">Attire</option>
-                        <option value="41">Bags</option>
-                        <option value="39">Blazer</option>
-                        <option value="33">Belts</option>
-                        <option value="38">Cardigan</option>
-                        <option value="2">Dresses</option>
-                        <option value="43">Headwear</option>
-                        <!-- <option value="34">FootWear</option> -->
-                        <option value="1">Jackets</option>
-                        <option value="35">Jewelry</option>
-                        <option value="21">Jumpsuits / Sets</option>
-                        <option value="12">Matching Clothes</option>
-                        <option value="31">Shoes</option>
-                        <option value="45">Swimsuit / Bikini</option>
-                        <option value="17">New Born</option>
-                        <option value="23">Pants / Skirts</option>
-                        <option value="37">Pants / Shorts</option>
-                        <option value="40">Pull</option>
-                        <option value="11">Pyjamas</option>
-                        <option value="32">Scarves</option>
-                        <option value="44">Socks</option>
-                        <option value="36">Tshirts</option>
-                        <option value="42">Shirts</option>
-                        <option value="22">Tops</option>
+                        <option value="1">Trousers</option>
+                        <option value="2">Overall</option>
+                        <option value="3">Skirt</option>
+                        <option value="4">Shorts</option>
+                        <option value="5">Dresses</option>
+                        <option value="6">Tops</option>
+                        <option value="7">Crop Top</option>
+                        <option value="8">Shirt</option>
+                        <option value="9">Bodysuit</option>
+                        <option value="10">Blazzers</option>
+                        <option value="10">T-shirts</option>
                         
                     </select>
                             
@@ -382,30 +368,17 @@
                         <label for="itemCategoryToAddToEdit">Item Category:</label>
                         <select class="form-control form-control-sm changesToAudit" id="itemCategoryToAddToEdit" labelToAudit="ItemCategory" oldValue="" name="itemCategoryToAddToEdit">
                             <option value="-1">Category</option>
-                            <option value="30">Attire</option>
-                            <option value="41">Bags</option>
-                            <option value="39">Blazer</option>
-                            <option value="33">Belts</option>
-                            <option value="38">Cardigan</option>
-                            <option value="2">Dresses</option>
-                            <option value="43">Headwear</option>
-                            <option value="34">FootWear</option>
-                            <option value="1">Jackets</option>
-                            <option value="35">Jewelry</option>
-                            <option value="21">Jumpsuits / Sets</option>
-                            <option value="12">Matching Clothes</option>
-                            <option value="31">Shoes</option>
-                            <option value="45">Swimsuit / Bikini</option>
-                            <option value="17">New Born</option>
-                            <option value="37">Pants / Shorts</option>
-                            <option value="23">Pants / Skirts</option>
-                            <option value="40">Pull</option>
-                            <option value="11">Pyjamas</option>
-                            <option value="32">Scarves</option>
-                            <option value="44">Socks</option>
-                            <option value="36">Tshirts</option>
-                            <option value="42">Shirts</option>
-                            <option value="22">Tops</option>
+                            <option value="1">Trousers</option>
+                            <option value="2">Overall</option>
+                            <option value="3">Skirt</option>
+                            <option value="4">Shorts</option>
+                            <option value="5">Dresses</option>
+                            <option value="6">Tops</option>
+                            <option value="7">Crop Top</option>
+                            <option value="8">Shirt</option>
+                            <option value="9">Bodysuit</option>
+                            <option value="10">Blazzers</option>
+                            <option value="10">T-shirts</option>
                         </select>
                     </div>   
 
@@ -481,30 +454,17 @@
                         <label for="itemCategoryToAddToEdit">Item Category:</label>
                         <select class="form-control form-control-sm changesToAudit" id="itemCategoryToAddToEdit" labelToAudit="ItemCategory" oldValue="" name="itemCategoryToAddToEdit">
                             <option value="-1">Category</option>
-                            <option value="30">Attire</option>
-                            <option value="41">Bags</option>
-                            <option value="39">Blazer</option>
-                            <option value="33">Belts</option>
-                            <option value="38">Cardigan</option>
-                            <option value="2">Dresses</option>
-                            <option value="43">Headwear</option>
-                            <!-- <option value="34">FootWear</option> -->
-                            <option value="1">Jackets</option>
-                            <option value="35">Jewelry</option>
-                            <option value="21">Jumpsuits / Sets</option>
-                            <option value="12">Matching Clothes</option>
-                            <option value="31">Shoes</option>
-                            <option value="45">Swimsuit / Bikini</option>
-                            <option value="17">New Born</option>
-                            <option value="37">Pants / Shorts</option>
-                            <option value="23">Pants / Skirts</option>
-                            <option value="40">Pull</option>
-                            <option value="11">Pyjamas</option>
-                            <option value="32">Scarves</option>
-                            <option value="44">Socks</option>
-                            <option value="36">Tshirts</option>
-                            <option value="42">Shirts</option>
-                            <option value="22">Tops</option>
+                            <option value="1">Trousers</option>
+                            <option value="2">Overall</option>
+                            <option value="3">Skirt</option>
+                            <option value="4">Shorts</option>
+                            <option value="5">Dresses</option>
+                            <option value="6">Tops</option>
+                            <option value="7">Crop Top</option>
+                            <option value="8">Shirt</option>
+                            <option value="9">Bodysuit</option>
+                            <option value="10">Blazzers</option>
+                            <option value="10">T-shirts</option>
                         </select>
                     </div>   
 

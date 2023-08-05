@@ -806,7 +806,8 @@ class Rebelle extends CI_Controller {
                 $result = $this->Home_Model->uploadImagesInEdit($name,$itemId ,$extension);
                 $files['name'] = $result . '.' . $extension;
 				$config['upload_path'] = FCPATH . "/assets/images/itemImages/";
-                $config['allowed_types'] = 'gif|jpg|jpeg|png|xlsx|docx|pdf|txt|xls';
+                // $config['allowed_types'] = 'gif|jpg|jpeg|png|xlsx|docx|pdf|txt|xls';
+                $config['allowed_types'] = '*';
                 $config['file_name'] = $result . '.' . $extension;
                 $this->load->library('upload', $config);
                 $this->upload->initialize($config);
@@ -832,7 +833,19 @@ class Rebelle extends CI_Controller {
             return false;
         }
 	}
+	
 
-
+	public function getItemImages(){
+		if(isset($_POST["itemId"]) && !empty($_POST["itemId"])){
+			$itemId = $_POST["itemId"];
+		}else{
+			$error = 1;
+		}
+		$this->load->model("Home_Model");
+		$imagesData = $this->Home_Model->getItemImages($itemId);
+		$data["imagesData"] = $imagesData;
+		$drawImagesTable = $this->load->view("drawImagesTable", $data, TRUE);
+		echo json_encode($drawImagesTable);
+	}
 //........................Last One............................................//
 }

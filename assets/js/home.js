@@ -1,10 +1,10 @@
 $(document).ready(function (){ 
     getItemsData();
-    
+    allColors = '';
+    allSizes = '';
     $("#cancelAddItemButton").click(function(){
         $("#addItemsForm").slideUp();
     })
-    
 
     $("#attachIconAdd").click(function(){
         if($("#propertyIdHidden").val() == ""){
@@ -134,9 +134,9 @@ $(document).ready(function (){
             colorArr = [];
             $(".itemQuantityToAddForNewItem").each( async function(){
                 var quantity = $(this).val();
-                var size = $(this).parent().next().children("input").val();
-                var color = $(this).parent().next().next().children("input").val();
-                if(quantity != ""  && size != "" && color !=""){
+                var size = $(this).parent().next().children("select").val();
+                var color = $(this).parent().next().next().children("select").val();
+                if(quantity != ""  && size != "-1" && color != "-1"){
                     quantityArr.push(quantity);
                     sizeArr.push(size);
                     colorArr.push(color);
@@ -189,11 +189,13 @@ $(document).ready(function (){
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                 <label for="itemSizeToAddForNewItem">Size:</label>
                 <select class="form-control form-control-sm itemSizeToAddForNewItem"   name="itemSizeToAddForNewItem">
+                    ${allSizes}
                 </select>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mt-2">
                 <label for="colorToAddForNewItem">Color:</label>
                 <select class="form-control form-control-sm colorToAddForNewItem"  name="colorToAddForNewItem">
+                    ${allColors}
                 </select>
             </div>
             <div class="col-xl-1">
@@ -206,8 +208,8 @@ $(document).ready(function (){
             </div>
         `;
         $(".toAppendNewSizeQ").append(append);
-        fillColor();
-        fillSize();
+        $(".itemSizeToAddForNewItem").html();
+        
     })
 
     $("body").on("click", ".deleteRowInAddItem",function(){
@@ -575,7 +577,7 @@ $(document).ready(function (){
         jQuery.each(jQuery('#hiddenAttachmentButton')[0].files, function (i, file) {
             data.append('file-' + i, file);
         });
-        data.append('itemId', $("#itemBarCodeToAddToEdit").val());        
+        data.append('itemId', $("#itemIdHidden").val());        
         $.ajax({
             url: `${baseURL}/Rebelle/uploadImagesInEdit`,
             method: 'POST',
@@ -621,53 +623,10 @@ function hideAll(){
     $("#profileInfo").addClass("displayNone");
     $("#manageItemSection").addClass("displayNone");
     $("#manageCart").addClass("displayNone");
-    // $("#managePropertyForm").hide();
-    // $("#displayAdminSectionPropertyInfo").hide();
+ 
 }
 
 
-// ----------------------------------------------------------- //
-function getAllPropertiesInBackEnd() {
-    $.ajax({
-        url: baseURL + "/Rebelle/getAllPropertiesInBackEnd",
-        method: "POST",
-        dataType: "json",
-        beforeSend:function(){
-            $(".loader").fadeIn(200);
-        },
-        success: function (data) {
-            $("#propertyTableContainer").html(data); 
-            var propertySectionTable = $('#propertySectionTable').DataTable({
-                "order": [[ 1, "desc" ]],
-                "lengthMenu": [[100, 200, -1],[100, 200, "All"]]
-            }); 
-            
-            $(".dataTables_filter").prepend(`<div class='clearSearchContainer'><i class="fas fa-times"></i></div>`);
-            $("#propertyTableContainer").on("click", ".clearSearchContainer", function () {
-                $(this).siblings("label").children("input").val("").keyup();
-                $(this).removeClass("moveClearSearchContainerLeft");
-            });  
-            $(".dataTables_filter input").attr('type', 'text');
-            // $(".dataTables_filter input").val("");
-            $("#propertyTableContainer").on("keyup", ".dataTables_filter input", function () {
-                var thisValue = $(this).val();
-                if (thisValue == "") {
-                    $(".clearSearchContainer").removeClass("moveClearSearchContainerLeft");
-                }else {
-                    $(".clearSearchContainer").addClass("moveClearSearchContainerLeft");
-                }
-            });
-            $("#propertySectionTable_length label").css("text-transform","capitalize");
-            $(".dt-button span").html(`<i class="far fa-file-excel" style="font-size: 15px;margin-right: 5px;color: green; vertical-align: text-bottom;"></i> Excel`);
-        },
-        error: function (error) {
-            alert("Network Error Please Refresh The Page.");
-        },
-        complete: function(){
-            $(".loader").fadeOut();
-        }
-    });   
-}
 
 function getItemsData() {
     archivedOrNot = $("#archiveOrNotSelect").val();
@@ -873,14 +832,17 @@ function fillColor() {
 		method: "POST",
 		dataType: "JSON",
 		success: function (data) {
-			$("#colorToAdd").html(`<option value="-1">--Select-- </option`);
-			$("#colorToAddToEdit").html(`<option value="-1">--Select-- </option`);
-			$(".colorToAddForNewItem").html(`<option value="-1">--Select-- </option`);
+			$("#colorToAdd").html(`<option value="-1">--Select-- </option>`);
+			$("#colorToAddToEdit").html(`<option value="-1">--Select-- </option>`);
+			$(".colorToAddForNewItem").html(`<option value="-1">--Select-- </option>`);
+            allColors =   '<option value="-1">--Select-- </option>';
 
 			for (var i = 0; i < data.length; i++) {
-				$("#colorToAdd").append(`<option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option`);
-				$("#colorToAddToEdit").append(`<option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option`);
-				$(".colorToAddForNewItem").append(`<option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option`);
+				$("#colorToAdd").append(`<option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option>`);
+				$("#colorToAddToEdit").append(`<option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option>`);
+				$(".colorToAddForNewItem").append(`<option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option>`);
+                allColors = allColors + ` <option value="${data[i]["colorName"]}">${data[i]["colorName"]}</option> `;
+
 			}
 		},
 		error: function (error) {
@@ -896,18 +858,81 @@ function fillSize() {
 		method: "POST",
 		dataType: "JSON",
 		success: function (data) {
-			$("#itemSizeToAdd").html(`<option value="-1">--Select-- </option`);
-			$("#itemSizeToAddToEdit").html(`<option value="-1">--Select-- </option`);
-			$(".itemSizeToAddForNewItem").html(`<option value="-1">--Select-- </option`);
-            
+			$("#itemSizeToAdd").html(`<option value="-1">--Select-- </option>`);
+			$("#itemSizeToAddToEdit").html(`<option value="-1">--Select-- </option>`);
+			$(".itemSizeToAddForNewItem").html(`<option value="-1">--Select-- </option>`);
+            allSizes =   '<option value="-1">--Select-- </option>';
 			for (var i = 0; i < data.length; i++) {
-				$("#itemSizeToAdd").append(`<option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option`);
-				$("#itemSizeToAddToEdit").append(`<option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option`);
-				$(".itemSizeToAddForNewItem").append(`<option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option`);
-			}
+				$("#itemSizeToAdd").append(`<option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option>`);
+				$("#itemSizeToAddToEdit").append(`<option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option>`);
+				$(".itemSizeToAddForNewItem").append(`<option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option>`);
+                allSizes = allSizes + ` <option value="${data[i]["sizeName"]}">${data[i]["sizeName"]}</option> `;
+            }
+
 		},
 		error: function (error) {
 			alert("Network Error Please Refresh The Page.");
 		},
 	});
 }
+
+
+
+//.......GET IMAGES
+function getItemImages() {
+    var itemId = $("#itemIdHidden").val();
+    $.ajax({
+        url: baseURL + "/Rebelle/getItemImages",
+        data: "itemId=" + itemId,
+        method: "POST",
+        dataType: "json",
+        success: function (data) {
+            $("#imagesContainer").html(data); 
+            var imagesTable = $('#imagesTable').DataTable({
+                  
+                    "lengthMenu": [[50, 100, 200, -1],[50, 100, 200, "All"]],
+                    "language" : {
+                        "sLengthMenu": "Show _MENU_"
+                    },
+                    "stateSave": true,
+                    "columnDefs": [ {
+                        "targets": 0,
+                        "orderable": false
+                        } ]
+                }); 
+    
+                if($("#imagesTable_filter label input").val()==""){
+                    $("#imagesTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;" id="imagesTableSearch"></i> <i class="fas fa-times" style="color:red; display:none; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearimagesTableSearch"></i>');
+                    $("#imagesTable_filter label input").removeAttr("type").attr("type","text");
+                    $("#clearimagesTableSearch").hide();
+                    $("#imagesTableSearch").show();
+                }else{
+                    $("#imagesTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;  display:none;" id="imagesTableSearch"></i> <i class="fas fa-times" style="color:red; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearimagesTableSearch"></i>');
+                    $("#imagesTable_filter label input").removeAttr("type").attr("type","text");
+                    $("#clearimagesTableSearch").show();
+                    $("#imagesTableSearch").hide();
+                }
+    
+                $("#clearimagesTableSearch").click(function(){
+                    imagesTable.search("").draw();
+                    $("#clearimagesTableSearch").hide();
+                    $("#imagesTableSearch").show();
+                })
+                $("#imagesTable_filter label input").on("keyup change",function(){
+                    searchInput = $("#imagesTable_filter label input").val();
+                    if (imagesTable.search() != ""){
+                        $("#clearimagesTableSearch").show();
+                        $("#imagesTableSearch").hide();
+                    }else{
+                        $("#clearimagesTableSearch").hide();
+                        $("#imagesTableSearch").show();
+                    }
+                }) 
+        },
+        error: function (error) {
+            console.log("Network Error Please Refresh The Page.");
+        }
+    });   
+}
+
+
