@@ -908,6 +908,80 @@ class Home_Model extends CI_Model {
         return $result;
     }
 
+
+    public function editItemInLogin($itemId, $itemName, $itemDescription, $itemBarCode, $itemCategory, $itemPrice, $itemQuantity, $itemSize, $itemColor, $oldBarCode, $saleToAddToEdit) {
+        $itemName = $this->db->escape($itemName);
+        $itemDescription = $this->db->escape($itemDescription);
+        $itemSize = $this->db->escape($itemSize);
+        $itemColor = $this->db->escape($itemColor);
+        $itemBarCode = $this->db->escape($itemBarCode);
+        $oldBarCode = $this->db->escape($oldBarCode);
+        $saleToAddToEdit = $this->db->escape($saleToAddToEdit);
+        
+        $sqlQuery= "UPDATE item
+                    SET itemName = $itemName, itemDescription = $itemDescription, barCode = $itemBarCode, categoryItems = $itemCategory, price = $itemPrice, sale = $saleToAddToEdit
+                    WHERE barCode = $oldBarCode";
+        $query = $this->db->query($sqlQuery);
+        $sqlQuery1= "UPDATE item
+                    SET color = $itemColor, size = $itemSize, quantity = $itemQuantity
+                    WHERE id = $itemId";
+        $query1 = $this->db->query($sqlQuery1);
+        $sqlQuery2= "UPDATE itemimage
+                    SET barCode = $itemBarCode
+                    WHERE barCode = $oldBarCode";
+        $query2 = $this->db->query($sqlQuery2);
+        $sqlQuery3= "UPDATE cart
+                    SET itemBarCode = $itemBarCode
+                    WHERE itemBarCode = $oldBarCode";
+        $query3 = $this->db->query($sqlQuery3);
+        if ($query) {
+            $result = 1;
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
+
+
+    //..............GET DATA SECTION.............//
+    public function categoryToDisplay($category) {
+        $sqlQuery = "SELECT * FROM item
+                     Where isDeleted = 0 and categoryItems = $category and archive < 1 and storage < 1 and exported < 1 and summerCollection = 0 and winterCollection =0
+                     ORDER BY id DESC";
+        $query = $this->db->query($sqlQuery);
+        $items = $query->result();
+        $itemsArray= [];
+        for ($i=0; $i < count($items); $i++) { 
+            $imagesArray=[];
+            $id = $items[$i]->id;
+            $price = $items[$i]->price;
+            $itemSize = $items[$i]->size;
+            $barCode = $items[$i]->barCode;
+            $sale = $items[$i]->sale;
+            $barCode = $this->db->escape($barCode);
+
+            $itemName = $items[$i]->itemName;
+            $quantity = $items[$i]->quantity;
+            $itemDescription = $items[$i]->itemDescription;
+            $sqlQuery1 = "SELECT * FROM itemimage
+                          Where isDeleted = 0 and barCode = $barCode";
+            $query1 = $this->db->query($sqlQuery1);
+            $images = $query1->result();
+            for ($j=0; $j < count($images); $j++) { 
+                $imageExt = $images[$j]->attachmentExt;
+                $imageId = $images[$j]->id;
+                $mainPage = $images[$j]->mainPage;
+                array_push($imagesArray,array($imageExt, $imageId, $mainPage));
+            }   
+            array_push($itemsArray,array($id, $price, $itemSize, $barCode, $itemName, $quantity, $itemDescription, $imagesArray, $sale));
+        }
+        if ($query) {
+            $result = $itemsArray;
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
 //........................LAST ONE..............................//
 }
 

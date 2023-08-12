@@ -1,8 +1,5 @@
-* {
-    border-radius: 0 !important;
-}
+
 .container {
-  
     max-width: 1350px;
 }
 
@@ -269,8 +266,16 @@ a:hover{
 
 /* .................BLUE BUTTON SUBMIT OR SEND................  */
 .greenButtonsCss{
-    background-color: #1a4345;
+    /* background-color: #1a4345;
     color:white !important;
+    font-size:15px;
+    padding:18px;
+    border-radius:43px;
+    width: 190px;
+
+    filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 0px 20px);
+    transform: none;
+    transform-origin: 50% 50% 0px; */
 }
 .redButtonsCss{
     background-color: rgba(208, 0, 0, 0.87);
@@ -370,7 +375,6 @@ a:hover{
     position: relative;
     right: -14px;
     opacity: 0;
-
     transition: 0.5s;
 }
 
@@ -449,61 +453,6 @@ table tr:hover > td {
 }
 
 
-.cardStyle{
-    box-shadow: slategray 0px 5px 10px;
-    text-align: center !important;
-    height:390px;
-}
-
-.card-img-top{
-    height:190px;
-}
-.card-button{
-    border-radius: 20px !important;
-    background-color: #1a4345 !important;
-    color: white;
-
-}
-.card-button:hover{
-    color: white !important;
-
-}
-.cardMainContainer{
-    position: relative;
-    width:286px;
-    height:420px;
-    cursor: pointer;
-}
-.theCard{
-    position: absolute;
-    width:100%;
-    height:100%;
-    transform-style: preserve-3d;
-    transition: all 0.5s ease;
-}
-
-.theFront{
-    position: absolute;
-    width:100%;
-    height:100%;
-    backface-visibility: hidden;
-}
-.theBack{
-    position: absolute;
-    width:100%;
-    height:100%;
-    backface-visibility: hidden;
-    transform:rotateY(180deg);
-}
-.transformClass{
-    transform:rotateY(180deg);
-}
-
-.cardMainContainer p {
-    height: 69px;
-}
-
-
 .headerLogo{
     width: 250px;
     position: absolute;
@@ -529,7 +478,6 @@ table tr:hover > td {
 }
 .image-container:hover .after {
     display: block;
-    
 }
 
 
@@ -669,6 +617,8 @@ table tr:hover > td {
     font-size:13px;
     
 }
+
+
 .pinkButtonsCss{
     background-color: #ed3a96;;
     color:white !important;
@@ -707,3 +657,67 @@ table tr:hover > td {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+
+
+
+.greenButtonsCss {
+	margin: auto;
+	border-radius: 20px;
+	background-color: #667292;
+	box-shadow: 5px 5px 10px #36486b90;
+	width: 220px;
+	height: 65px;
+	font-size: 20px;
+	font-family: cambria;
+	color: #bccad6;
+	border: none;
+}
+
+.greenButtonsCss:hover {
+	border: none;
+	background-color: #8d9db6;
+	opacity: 1;
+	color: #36486b;
+}
+
+
+
+.btn:hover {
+	transition: 0.5s ease-in-out;
+	background: #1a434562;
+	color: #1a4345;
+
+}
+
+.greenButtonsCss {
+	--color1: #1a4345;
+	--color2: #1a434587;
+	font-family: cambria;
+	text-align: center;
+	font-size: 25px;
+	background: repeating-linear-gradient(
+		45deg,
+		var(--color1),
+		var(--color1) 30px,
+		var(--color2) 45px,
+		var(--color2) 60px
+	);
+	background-clip: text;
+	color: transparent;
+	-webkit-background-clip: text;
+	animation: 40s linear 0s infinite move;
+}
+
+@keyframes move {
+	from {
+		background-position: 0px;
+	}
+
+	to {
+		background-position: 1000px;
+	}
+}
+
+ 

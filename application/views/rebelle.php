@@ -360,7 +360,7 @@
                         <input type="text" name="itemBarCodeToAddToEdit" id="itemBarCodeToAddToEdit" labelToAudit="Product" oldValue="" class="changesToAudit form-control form-control-sm"  />
                     </div>
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
-                        <label for="itemBarCodeToAddToEdit">Weight:</label>
+                        <label for="itemWeightToAddToEdit">Weight:</label>
                         <input type="text" name="itemWeightToAddToEdit" id="itemWeightToAddToEdit" labelToAudit="Weight" oldValue="" class="changesToAudit form-control form-control-sm"  />
                     </div>
                     
@@ -377,33 +377,10 @@
                             <option value="7">Crop Top</option>
                             <option value="8">Shirt</option>
                             <option value="9">Bodysuit</option>
-                            <option value="10">Blazzers</option>
-                            <option value="10">T-shirts</option>
+                            <option value="10">Blazers</option>
+                            <option value="11">T-shirts</option>
                         </select>
                     </div>   
-
-
-                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                        <label for="itemGenderToAddToEdit">Gender:</label>
-                        <select class="form-control form-control-sm changesToAudit" labelToAudit="Gender" oldValue="" id="itemGenderToAddToEdit" name="itemGenderToAddToEdit">
-                            <option value="-1">Gender</option>
-                            <option value="4">Accessory</option>
-                            <option value="2">Female</option>
-                            <option value="3">Kids</option>
-                            <option value="1">Male</option>
-                        </select>
-                    </div>  -->
-
-
-                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                        <label for="itemCostToAddToEdit">Cost:</label>    
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                            <input class="form-control form-control-sm changesToAudit" labelToAudit="Cost" oldValue="" type="text" name="itemCostToAddToEdit" id="itemCostToAddToEdit"/>
-                        </div>
-                    </div> -->
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                         <label for="itemPriceToAddToEdit">Price:</label>    
@@ -423,16 +400,14 @@
                 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                         <label for="itemSizeToAddToEdit">Size:</label>
-                        <!-- <select class="form-control form-control-sm changesToAudit"  labelToAudit="Size" oldValue=""  id="itemSizeToAddToEdit" name="itemSizeToAddToEdit">
-                        </select> -->
-                        <input type="text" name="itemSizeToAddToEdit" labelToAudit="Size" oldValue="" id="itemSizeToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+                        <select class="form-control form-control-sm changesToAudit"  labelToAudit="Size" oldValue=""  id="itemSizeToAddToEdit" name="itemSizeToAddToEdit">
+                        </select>
 
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
                         <label for="colorToAddToEdit">Color:</label>
-                        <!-- <select class="form-control form-control-sm changesToAudit" labelToAudit="Color" oldValue=""  id="colorToAddToEdit" name="colorToAddToEdit">
-                        </select> -->
-                        <input type="text" name="colorToAddToEdit" labelToAudit="Color" oldValue="" id="colorToAddToEdit" class="changesToAudit form-control form-control-sm"  />
+                        <select class="form-control form-control-sm changesToAudit" labelToAudit="Color" oldValue=""  id="colorToAddToEdit" name="colorToAddToEdit">
+                        </select>
 
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
@@ -440,33 +415,6 @@
                         <input type="text" placeholder="Percentage" labelToAudit="Sale" oldValue="" name="saleToAddToEdit" id="saleToAddToEdit" class="changesToAudit form-control form-control-sm"  />
                         <input type="text" placeholder="Amount"  name="saleToAddAmount" id="saleToAddAmount" class="form-control form-control-sm"  />
                     </div>
-                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                        <label for="matchingWithToEdit">Matching Group:</label>
-                        <input type="text" name="matchingWithToEdit" labelToAudit="MatchingGroup" oldValue="" id="matchingWithToEdit" class="changesToAudit form-control form-control-sm"  />
-                    </div> -->
-
-                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2">
-                        <label for="initialQuantityToEdit">initial Quantity:</label>
-                        <input type="text" name="initialQuantityToEdit" labelToAudit="InitialQuantity" oldValue="" id="initialQuantityToEdit" class="changesToAudit form-control form-control-sm"  />
-                    </div> -->
-            
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                        <label for="itemCategoryToAddToEdit">Item Category:</label>
-                        <select class="form-control form-control-sm changesToAudit" id="itemCategoryToAddToEdit" labelToAudit="ItemCategory" oldValue="" name="itemCategoryToAddToEdit">
-                            <option value="-1">Category</option>
-                            <option value="1">Trousers</option>
-                            <option value="2">Overall</option>
-                            <option value="3">Skirt</option>
-                            <option value="4">Shorts</option>
-                            <option value="5">Dresses</option>
-                            <option value="6">Tops</option>
-                            <option value="7">Crop Top</option>
-                            <option value="8">Shirt</option>
-                            <option value="9">Bodysuit</option>
-                            <option value="10">Blazzers</option>
-                            <option value="10">T-shirts</option>
-                        </select>
-                    </div>   
 
 
                     <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
@@ -479,53 +427,7 @@
                             <option value="1">Male</option>
                         </select>
                     </div>  -->
-
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                        <label for="itemPriceToAddToEdit">Price:</label>    
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>
-                            </div>
-                            <input class="form-control form-control-sm changesToAudit" labelToAudit="Price" oldValue="" type="text" name="itemPriceToAddToEdit" id="itemPriceToAddToEdit"/>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                        <label for="itemQuantityToAddToEdit">Quantity:</label>
-                        <input type="text" name="itemQuantityToAddToEdit" labelToAudit="Quantity" oldValue="" id="itemQuantityToAddToEdit" class="changesToAudit form-control form-control-sm"  />
-                    </div>
-                
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                        <label for="itemSizeToAddToEdit">Size:</label>
-                        <!-- <select class="form-control form-control-sm changesToAudit"  labelToAudit="Size" oldValue=""  id="itemSizeToAddToEdit" name="itemSizeToAddToEdit">
-                        </select> -->
-                        <input type="text" name="itemSizeToAddToEdit" labelToAudit="Size" oldValue="" id="itemSizeToAddToEdit" class="changesToAudit form-control form-control-sm"  />
-
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                        <label for="colorToAddToEdit">Color:</label>
-                        <!-- <select class="form-control form-control-sm changesToAudit" labelToAudit="Color" oldValue=""  id="colorToAddToEdit" name="colorToAddToEdit">
-                        </select> -->
-                        <input type="text" name="colorToAddToEdit" labelToAudit="Color" oldValue="" id="colorToAddToEdit" class="changesToAudit form-control form-control-sm"  />
-
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                        <label for="saleToAddToEdit">Sale:</label>
-                        <input type="text" placeholder="Percentage" labelToAudit="Sale" oldValue="" name="saleToAddToEdit" id="saleToAddToEdit" class="changesToAudit form-control form-control-sm"  />
-                        <input type="text" placeholder="Amount"  name="saleToAddAmount" id="saleToAddAmount" class="form-control form-control-sm"  />
-                    </div>
-                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                        <label for="matchingWithToEdit">Matching Group:</label>
-                        <input type="text" name="matchingWithToEdit" labelToAudit="MatchingGroup" oldValue="" id="matchingWithToEdit" class="changesToAudit form-control form-control-sm"  />
-                    </div> -->
-
-                    <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-2 displayNone">
-                        <label for="initialQuantityToEdit">initial Quantity:</label>
-                        <input type="text" name="initialQuantityToEdit" labelToAudit="InitialQuantity" oldValue="" id="initialQuantityToEdit" class="changesToAudit form-control form-control-sm"  />
-                    </div> -->
-
-
+                 
                 </div>
             
                 <div style="display: flex">
@@ -752,9 +654,7 @@
                 <div class="col-xl-1" >
                     <input type="text" id="extraLbpInEdit" name="extraLbpInEdit"  class="form-control form-control-sm">
                 </div>
-                <!-- <div class="col-xl-2" >
-                    <button class="pinkButtonsCss btn-md btn " id="editCartButtonInManageCarts" data-dismiss="modal" style="float:right;">Edit Cart</button>
-                </div> -->
+              
                 <div class="col-xl-2" >
                     <button class="redButtonsCss btn-md btn" type="button" id="cancelCartToEditForm" data-dismiss="modal" style="float:right;">Cancel</button>
                 </div>

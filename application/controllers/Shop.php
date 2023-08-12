@@ -19,5 +19,33 @@ class Shop extends CI_Controller {
 	}
 
 
+
+	//..........................GET DATA SECTION....................................//
+	public function categoryToDisplay()
+	{
+		$error = 0;
+	
+		if(isset($_POST["category"]) && !empty($_POST["category"])){
+            $category = $_POST["category"];
+        }else{
+            $error = 1;
+		}
+		
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$itemsData = $this->Home_Model->categoryToDisplay($category);
+			
+			$data["itemsData"] = $itemsData;
+
+			$itemsDisplayed = $this->load->view("displayItems", $data, TRUE);
+			echo json_encode($itemsDisplayed);
+		}else{
+
+			echo json_encode($error);
+		}
+
+	}
+
+
 //........................Last One............................................//
 }

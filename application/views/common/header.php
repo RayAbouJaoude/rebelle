@@ -46,12 +46,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>ForSale"  role="button">
+                                <a class="nav-link" href="<?php echo base_url(); ?>Shop"  role="button">
                                     SHOP
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>ForRent"   role="button">
+                                <a class="nav-link" href="<?php echo base_url(); ?>Styling"   role="button">
                                     STYLING TIPS
                                 </a>
                             </li>

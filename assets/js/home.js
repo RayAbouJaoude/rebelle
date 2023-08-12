@@ -602,6 +602,61 @@ $(document).ready(function (){
         $("#itemToEdit").slideUp();
     })
 
+
+    $("#submitEditItemButton").click(function(){
+        var postData = $("#editItemForm").serialize();
+        var itemId = $("#itemIdHidden").val();
+        var oldBarCode = $("#barCodeHidden").val();
+        
+        $.ajax({
+            url: baseURL + "/Rebelle/editItemInLogin",
+            method: "POST",
+            data: postData + "&itemId=" + itemId + "&oldBarCode=" + oldBarCode ,
+            dataType: "json",
+            beforeSend:function(){
+                $(".loader").fadeIn(500);
+            },
+            success: function (data) {
+                if(data == 1){
+                    $("#pleaseFillAllFields").modal("show");
+                }else{
+                    getItemsData();       
+                }
+            },
+            error: function (error) {
+                console.log("Network Error Please Refresh The Page.");
+            },
+            complete: function(){
+                // $(".loader").fadeOut();
+            }
+        });  
+        return false;
+    })
+
+    $(".categoryToDisplay").click(function(){
+        category = $(this).attr("dataCategoryNumber");
+        $.ajax({
+            url: baseURL + "Shop/categoryToDisplay",
+            dataType: "JSON",
+            data: "category=" + category ,
+            method: "POST",
+            beforeSend:function(){
+                $(".loader").fadeIn(500);
+            },
+            success: function (data) { 
+                $(".itemContainer").html(data);    
+
+            },complete:function(){
+                $(".loader").fadeOut(500);
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
+
+
 // last bracket 
 })
 

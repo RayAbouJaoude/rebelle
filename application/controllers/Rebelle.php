@@ -847,5 +847,83 @@ class Rebelle extends CI_Controller {
 		$drawImagesTable = $this->load->view("drawImagesTable", $data, TRUE);
 		echo json_encode($drawImagesTable);
 	}
+
+
+	public function editItemInLogin()
+	{
+		$error = 0;
+		if(isset($_POST["itemNameToAddToEdit"]) && !empty($_POST["itemNameToAddToEdit"])){
+            $itemName = $_POST["itemNameToAddToEdit"];
+        }else{
+            $error = 1;
+		}
+		if(isset($_POST["itemDescriptionToAddToEdit"]) && !empty($_POST["itemDescriptionToAddToEdit"])){
+            $itemDescription = $_POST["itemDescriptionToAddToEdit"];
+        }else{
+            $error = 1;
+		}
+		if(isset($_POST["itemBarCodeToAddToEdit"]) && !empty($_POST["itemBarCodeToAddToEdit"])){
+            $itemBarCode = $_POST["itemBarCodeToAddToEdit"];
+        }else{
+            $error = 1;
+		}
+		if(isset($_POST["itemCategoryToAddToEdit"]) && !empty($_POST["itemCategoryToAddToEdit"])){
+            $itemCategory = $_POST["itemCategoryToAddToEdit"];
+        }else{
+            $error = 6;
+		}
+		
+		if(isset($_POST["itemPriceToAddToEdit"]) && !empty($_POST["itemPriceToAddToEdit"])){
+            $itemPrice = $_POST["itemPriceToAddToEdit"];
+        }else{
+            $error = 5;
+		}
+		if(isset($_POST["itemQuantityToAddToEdit"]) && !empty($_POST["itemQuantityToAddToEdit"])){
+            $itemQuantity = $_POST["itemQuantityToAddToEdit"];
+        }else{
+            $itemQuantity =0;
+		}
+		if(isset($_POST["itemSizeToAddToEdit"]) && !empty($_POST["itemSizeToAddToEdit"])){
+            $itemSize = $_POST["itemSizeToAddToEdit"];
+        }else{
+            $error = 4;
+		}
+		if(isset($_POST["colorToAddToEdit"]) && !empty($_POST["colorToAddToEdit"])){
+            $itemColor = $_POST["colorToAddToEdit"];
+        }else{
+            $error = 3;
+		}
+		if(isset($_POST["itemId"]) && !empty($_POST["itemId"])){
+            $itemId = $_POST["itemId"];
+        }else{
+            $error = 1;
+		}
+		if(isset($_POST["saleToAddToEdit"]) && !empty($_POST["saleToAddToEdit"])){
+            $saleToAddToEdit = $_POST["saleToAddToEdit"];
+        }else{
+            $saleToAddToEdit = 0;
+		}
+		if(isset($_POST["oldBarCode"]) && !empty($_POST["oldBarCode"])){
+            $oldBarCode = $_POST["oldBarCode"];
+        }else{
+            $error = 2;
+		}
+		
+		if(isset($_POST["matchingWithToEdit"]) && !empty($_POST["matchingWithToEdit"])){
+            $matchingWithToEdit = $_POST["matchingWithToEdit"];
+        }else{
+            $matchingWithToEdit = "";
+		}
+
+		$this->load->model("Home_Model");
+		if($error == 0){
+			$transactionType = $this->Home_Model->editItemInLogin($itemId, $itemName, $itemDescription, $itemBarCode, $itemCategory, $itemPrice, $itemQuantity, $itemSize, $itemColor, $oldBarCode, $saleToAddToEdit);
+		}
+
+		echo json_encode($error);
+	}
+
+
+
 //........................Last One............................................//
 }

@@ -21,6 +21,7 @@ class Login extends CI_Controller {
     // ----------------------------------------------------------- //
 	public function loginFormSubmit() 
 	{
+		
 		if (isset($_POST["email"]) && !empty($_POST["email"])) {
 			$email = $_POST["email"];
 		} else {
@@ -33,6 +34,7 @@ class Login extends CI_Controller {
 
 		if (isset($_POST["password"]) && !empty($_POST["password"])) {
 			$password = $_POST["password"];
+
 		} else {
 			$msg = "<i class='fas fa-exclamation-circle'></i> Please Enter Your Password.";
 			$flag = -1;
