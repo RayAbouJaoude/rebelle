@@ -794,6 +794,9 @@ class Rebelle extends CI_Controller {
 	public function uploadImagesInEdit(){
 		$succ = 0;
 		$itemId = $_POST['itemId'];
+		$itemColor = $_POST['itemColor'];
+		$barcode = $_POST['barcode'];
+		
 		$this->load->model("Home_Model");
         $curr_attached_files_count = count($_FILES);
             foreach ($_FILES as $fileindex => $files) {
@@ -803,7 +806,7 @@ class Rebelle extends CI_Controller {
                 $parts = array(implode('.', $parts), $last);
                 $name = $parts[0];
                 $extension = end($parts);
-                $result = $this->Home_Model->uploadImagesInEdit($name,$itemId ,$extension);
+                $result = $this->Home_Model->uploadImagesInEdit($name,$itemId ,$extension, $itemColor, $barcode);
                 $files['name'] = $result . '.' . $extension;
 				$config['upload_path'] = FCPATH . "/assets/images/itemImages/";
                 // $config['allowed_types'] = 'gif|jpg|jpeg|png|xlsx|docx|pdf|txt|xls';
@@ -923,6 +926,23 @@ class Rebelle extends CI_Controller {
 		echo json_encode($error);
 	}
 
+
+	public function deleteItemImagesInItems()
+	{
+		$error = 0;
+		if(isset($_POST["itemImageIdToDeleteAttach"]) && !empty($_POST["itemImageIdToDeleteAttach"])){
+            $itemImageIdToDeleteAttach = $_POST["itemImageIdToDeleteAttach"];
+        }else{
+            $error = 1;
+		}
+		
+		$this->load->model("Home_Model");
+		if($error == 0){
+			$transactionType = $this->Home_Model->deleteItemImagesInItems($itemImageIdToDeleteAttach);
+		}
+
+		echo json_encode($error);
+	}
 
 
 //........................Last One............................................//

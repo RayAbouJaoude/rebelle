@@ -164,7 +164,7 @@
                         <option value="7">Crop Top</option>
                         <option value="8">Shirt</option>
                         <option value="9">Bodysuit</option>
-                        <option value="10">Blazzers</option>
+                        <option value="10">Blazers</option>
                         <option value="10">T-shirts</option>
                         
                     </select>
@@ -356,7 +356,7 @@
                     </div>
 
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
-                        <label for="itemBarCodeToAddToEdit">Product:</label>
+                        <label for="itemBarCodeToAddToEdit">Product Code:</label>
                         <input type="text" name="itemBarCodeToAddToEdit" id="itemBarCodeToAddToEdit" labelToAudit="Product" oldValue="" class="changesToAudit form-control form-control-sm"  />
                     </div>
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mt-2">
@@ -975,6 +975,27 @@
                 <div id="colorTableContainer" class="mt-2">
                 </div>
             </div>  
+        </div>  
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="deleteItemImageModalInItems" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content "  >
+            <div class="modal-header">
+                <h5 style="font-size:14px;"><i class="fas fa-exclamation-triangle" style="margin-right:10px; font-size:16px; color:rgb(38, 140, 228) ;"></i>Attention</h5>
+                <button type="button" class="close closeModal" data-dismiss="modal" id="closeModal" title="Close">×</button>
+            </div>
+            <div class="modal-body"  style="height:56px;" >
+                <p style="font-size:14px;">Are you sure you want to delete this item? <span style="color:white;">aaaaaaaaaaaaaaaa </span></p>
+            </div>  
+            <div class="modal-footer" style="height:52px;">
+                <button class="btn btn-sm  redButtonsCssModal"  data-dismiss="modal" id="yesDeleteItemImageInItems" style="float:right;">YES</button>
+                <button class="btn btn-sm blueButtonsCssModal "  data-dismiss="modal" style="float:right;"> NO</button>
+            </div>  
+
         </div>  
     </div>
 </div>

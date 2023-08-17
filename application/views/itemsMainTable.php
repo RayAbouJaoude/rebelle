@@ -67,9 +67,9 @@
                 <center>
                     <input type="checkbox" dataId= "<?php echo $itemId ?>" class="itemCheckBox">
 
-                    <a class="printItems" title="Print Items" href="javascript:void(0);" data-itemId ="<?php echo $itemId ?>">
+                    <!-- <a class="printItems" title="Print Items" href="javascript:void(0);" data-itemId ="<?php echo $itemId ?>">
                         <i class="fas fa-print" style="color:#3498db; padding-right:2.5px; font-size:12pt; vertical-align: text-bottom; text-decoration:none !important"></i>
-                    </a>
+                    </a> -->
                     
                     <!-- <a class="deleteItems" title="Delete Items" href="javascript:void(0);" data-itemId ="<?php echo $itemId ?>">
                         <i class ="fa fa-trash" style="color:#ef6b6b; font-size:11pt; padding-left:2.5px; text-decoration:none !important"></i>

@@ -578,6 +578,8 @@ $(document).ready(function (){
             data.append('file-' + i, file);
         });
         data.append('itemId', $("#itemIdHidden").val());        
+        data.append('itemColor', $("#colorToAddToEdit").val());        
+        data.append('barcode', $("#itemBarCodeToAddToEdit").val());        
         $.ajax({
             url: `${baseURL}/Rebelle/uploadImagesInEdit`,
             method: 'POST',
@@ -644,8 +646,10 @@ $(document).ready(function (){
                 $(".loader").fadeIn(500);
             },
             success: function (data) { 
-                $(".itemContainer").html(data);    
-
+                // $(".itemContainer").html(data);    
+                $("main").html(data);    
+                $("body .menuBtn").click();
+                
             },complete:function(){
                 $(".loader").fadeOut(500);
             },
@@ -655,6 +659,28 @@ $(document).ready(function (){
         });
         return false;
     })
+
+
+    $("body").on("click", ".deleteImageInEdit",function(){
+        itemImageIdToDeleteAttach = $(this).attr("data-deleteImageId");
+        $("#deleteItemImageModalInItems").modal('show');
+    })
+
+    $("#yesDeleteItemImageInItems").click(function(){
+        $.ajax({
+            method:"POST",
+            data: "itemImageIdToDeleteAttach=" + itemImageIdToDeleteAttach ,
+            url: baseURL + "Rebelle/deleteItemImagesInItems",
+            dataType:"JSON",
+            success: function(){ 
+               getItemImages();
+            },
+            error: function(){
+                console.log("Network Error Please Refresh The Page.");
+            }
+        })
+    })
+
 
 
 // last bracket 

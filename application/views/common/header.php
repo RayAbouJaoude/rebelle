@@ -45,24 +45,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     HOME
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>Shop"  role="button">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
                                     SHOP
                                 </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="10">Blazers</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="9">Bodysuit</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="7">Crop Top</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="5">Dresses</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="2">Overall</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="8">Shirt</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="3">Skirts</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="4">Shorts</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="6">Tops</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="1">Trousers</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="#10">T-shirts</a>
+                                </div>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>Styling"   role="button">
                                     STYLING TIPS
                                 </a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item ">
+                                <a class="nav-link"  role="button" data-toggle="dropdown">
                                     ABOUT
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                    <a class="dropdown-item" href="#">About Us</a>
-                                    <a class="dropdown-item" href="#">Contact Us</a>
-                                </div>
+                               
                             </li>
 <?php
     if(isset($_SESSION["userId"])){

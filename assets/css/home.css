@@ -266,16 +266,9 @@ a:hover{
 
 /* .................BLUE BUTTON SUBMIT OR SEND................  */
 .greenButtonsCss{
-    /* background-color: #1a4345;
+    background-color: #1a4345;
     color:white !important;
-    font-size:15px;
-    padding:18px;
-    border-radius:43px;
-    width: 190px;
-
-    filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 0px 20px);
-    transform: none;
-    transform-origin: 50% 50% 0px; */
+    
 }
 .redButtonsCss{
     background-color: rgba(208, 0, 0, 0.87);
@@ -662,7 +655,7 @@ table tr:hover > td {
 
 
 
-.greenButtonsCss {
+.greenButtonsCssShop {
 	margin: auto;
 	border-radius: 20px;
 	background-color: #667292;
@@ -675,7 +668,7 @@ table tr:hover > td {
 	border: none;
 }
 
-.greenButtonsCss:hover {
+.greenButtonsCssShop:hover {
 	border: none;
 	background-color: #8d9db6;
 	opacity: 1;
@@ -691,7 +684,7 @@ table tr:hover > td {
 
 }
 
-.greenButtonsCss {
+.greenButtonsCssShop {
 	--color1: #1a4345;
 	--color2: #1a434587;
 	font-family: cambria;
@@ -720,4 +713,17 @@ table tr:hover > td {
 	}
 }
 
- 
+.itemImageDisplayed{
+    width:100%;
+    height: auto;
+    padding: 15px;
+    max-height: 900px;
+    max-width: 600px;
+}
+
+.nav-item .dropdown-menu{
+    background:black;
+}
+.categoryToDisplay{
+    height:31px;
+}

@@ -5,12 +5,12 @@
 <!-- <div class="image-container"> -->
     <!-- <img class="w-100"  style="margin-top:107px; transform: translateZ(0); image-rendering: -webkit-optimize-contrast; height: 600px;" src="<?php echo base_url(); ?>assets/images/backgroundOne.png" > -->
 <!-- </div> -->
-
 <div class="container"> 
     <div class="row">
         <div class="col-xl-12" style="margin-top:130px; margin-bottom:20px;">
             <!-- <h5 style="text-transform: uppercase; color:#333; text-align:center; ">Put on some red lipstick and live a little.</h5> -->
-            <h5 style="text-transform: uppercase; color:#333; text-align:center; ">We Are Coming Soon!</h5>
+            <h1 style="text-transform: capitalize; font-size:14px; color:#333; text-align:center; line-height:22px;">Explore our shop for the “Endless Summer Vibes “ collection. <br>
+To place an order, simply reach out to us on WhatsApp or Instagram. <br> Happy shopping!</h5>
         </div>
     </div>
 <!-- end of container  -->
@@ -20,7 +20,9 @@
 <style>
 .parallax {
   /* The image used */
-  background-image: url("assets/images/mainImageWebsite.jpg");
+  /* background-image: url("assets/images/mainImageWebsite.jpg"); */
+  background-image: url("assets/images/mainImageRebelleTwo.jpg");
+  
 
   /* Set a specific height */
   min-height: 500px;
@@ -151,7 +153,7 @@
         </div>
         <div class="col-xl-3 col-6">
             <i class="fab fa-whatsapp instaIcon"></i>
-            <span style="vertical-align:super; margin-left:5px; color:#333; font-weight:700;">+961 71 61 86 82</span>
+            <span style="vertical-align:super; margin-left:5px; color:#333; font-weight:700;">+961 03 310 100</span>
         </div>
     </div>
     

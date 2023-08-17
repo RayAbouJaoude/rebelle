@@ -876,15 +876,29 @@ class Home_Model extends CI_Model {
     }
 
 	// -- -- -- -- -- # # -- -- -- -- -- //
-    public function uploadImagesInEdit($name, $itemId, $extension)
+    public function uploadImagesInEdit($name, $itemId, $extension, $itemColor, $barcode)
     {
         $name = $this->db->escape($name);
         $extension = $this->db->escape($extension);
         $itemId = $this->db->escape($itemId);
+        $barcode = $this->db->escape($barcode);
+        $itemColor = $this->db->escape($itemColor);
 
-        $sql = "INSERT INTO itemimage (`attachmentName`, `itemId` ,`attachmentExt`)
-                VALUES ($name, $itemId, $extension)";
-        $query = $this->db->query($sql);
+        // $sql = "INSERT INTO itemimage (`attachmentName`, `itemId` ,`attachmentExt`)
+        //         VALUES ($name, $itemId, $extension)";
+        // $query = $this->db->query($sql);
+        $sql1 = "SELECT * FROM item
+                 Where isDeleted = 0 and barCode = $barcode and color = $itemColor";
+        $query1 = $this->db->query($sql1);
+        $result = $query1->result();
+        for ($i=0; $i < count($result); $i++) { 
+            $id = $result[$i]->id ;
+            $sql = "INSERT INTO itemimage (`attachmentName`, `itemId` ,`attachmentExt`)
+                    VALUES ($name, $id, $extension)";
+            $query = $this->db->query($sql);
+        }
+
+
         if ($query) {
             return $this->db->insert_id();
         } else {
@@ -964,7 +978,7 @@ class Home_Model extends CI_Model {
             $quantity = $items[$i]->quantity;
             $itemDescription = $items[$i]->itemDescription;
             $sqlQuery1 = "SELECT * FROM itemimage
-                          Where isDeleted = 0 and barCode = $barCode";
+                          Where isDeleted = 0 and itemId = $id";
             $query1 = $this->db->query($sqlQuery1);
             $images = $query1->result();
             for ($j=0; $j < count($images); $j++) { 
@@ -982,6 +996,25 @@ class Home_Model extends CI_Model {
         }
         return $result;
     }
+
+
+    public function deleteItemImagesInItems($itemImageIdToDeleteAttach) {
+        
+        $sqlQuery= "UPDATE itemimage
+                    SET isDeleted = 1
+                    WHERE id = $itemImageIdToDeleteAttach";
+    
+        $query = $this->db->query($sqlQuery);
+
+        if ($query) {
+            $result = 1;
+        } else {
+            $result = -1;
+        }
+        return $result;
+    }
+
+    
 //........................LAST ONE..............................//
 }
 

@@ -1,5 +1,5 @@
-
-<div class="row">
+<div class="container">
+<div class="row" style="margin-top:110px;">
     <?php
         $barArray=[];
         $counter=0;
@@ -40,7 +40,7 @@
          
 
     ?>      
-        <div class="col-xl-3 co-lg-3 col-md-6 col-sm-6 col-6 mt-2">
+        <div class="col-xl-6 co-lg-6 col-md-12 col-sm-12 col-12 mt-2">
             <center>
                 <?php if ($imageToDisplay == ""){ ?>
                     <img loading="lazy" class="itemImageDisplayed" src="<?php echo base_url(); ?>assets/images/itemImages/<?php echo $imageId;?>.<?php echo $attachmentExt;?>" alt="NoImage" >
@@ -104,4 +104,6 @@
     ?>
 </div>
 <div style="height:60px;">
+</div>
+
 </div>
