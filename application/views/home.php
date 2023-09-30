@@ -9,8 +9,9 @@
     <div class="row">
         <div class="col-xl-12" style="margin-top:130px; margin-bottom:20px;">
             <!-- <h5 style="text-transform: uppercase; color:#333; text-align:center; ">Put on some red lipstick and live a little.</h5> -->
-            <h1 style="text-transform: capitalize; font-size:14px; color:#333; text-align:center; line-height:22px;">Explore our shop for the “Endless Summer Vibes “ collection. <br>
-To place an order, simply reach out to us on WhatsApp or Instagram. <br> Happy shopping!</h5>
+            <h1 style="text-transform: capitalize; font-size:14px; color:#333; text-align:center; line-height:22px;">
+                Explore our shop for the “Endless Summer Vibes “ collection. <br>
+                To place an order, simply reach out to us on WhatsApp or Instagram. <br> Happy shopping!</h5>
         </div>
     </div>
 <!-- end of container  -->
@@ -28,7 +29,32 @@ To place an order, simply reach out to us on WhatsApp or Instagram. <br> Happy s
   min-height: 500px;
 
   /* Create the parallax scrolling effect */
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@supports not (-webkit-touch-callout: none) {
+  /* CSS for other than iOS devices */ 
+    .parallax {
+        background-attachment: fixed;
+    }
+    .parallaxTwo {
+        background-attachment: fixed;
+    }
+
+}
+.parallaxTwo {
+  /* The image used */
+  /* background-image: url("assets/images/mainImageWebsite.jpg"); */
+  background-image: url("assets/images/secondMainPageImage.jpg");
+  
+
+  /* Set a specific height */
+  min-height: 500px;
+
+  /* Create the parallax scrolling effect */
+  /* background-attachment: fixed; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -39,109 +65,65 @@ To place an order, simply reach out to us on WhatsApp or Instagram. <br> Happy s
 <div class="parallax"></div> 
 
 
-
 <div class="container"> 
-    <!-- <div class="row" style="margin-top:30px;">  
-        <div class="col-xl-12" >
-            <h5 style="line-height: 30px; text-transform: uppercase; color:#333;">OUR TOP AGENTS</h5>
+    <div class="row"  style="text-align:center;">
+        <div class="col-12 col-xl-12 col-lg-12 col-md-12 mt-4 mb-4">
+            <h5 style="border:solid 1px #1a4345; padding:10px;">Dresses <span style="color: #1a4345; font-size:16px; padding-left:10px; cursor:pointer;" class="clickSideBarCardigan"> View More... </span></h5>
         </div>
     </div>
-    
-    <div class="row">  
-        <div class="col-xl-4" >
-            <div class="cardMainContainer" style="float:left;">
-                <div class="theCard">
-                    <div class="theFront">
-                        <div class="card cardStyle" style="width: 18rem;">
-                            <img class="card-img-top" src="<?php echo base_url(); ?>assets/images/guythree.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Ray</h5>
-                                <p class="card-text">Best dealers, fastest responce, wide variety.</p>
-                                <a href="#" class="card-button btn btn-sm ">Go somewhere</a>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="theBack">
-                        <div class="card cardStyle" style="width: 18rem;">
-                            <img class="card-img-top" src="<?php echo base_url(); ?>assets/images/guythree.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Ray</h5>
-                                <p class="card-text">
-                                    <i class="fab fa-whatsapp" style="font-size:20px; color:#333;"></i> <span> +961 71 69 63 60 </span>
-                                </p>
-                                <a href="#" class="card-button btn btn-sm ">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div id="newCardiganContainer">
+    </div>
+</div>
+
+<div class="parallaxTwo"></div> 
+
+<?php if (!isset($_SESSION["userType"])) { ?>
+<!-- account section start  -->
+<div class="container"> 
+    <div class="row"  style="text-align:center;">
+        <div class="col-12 col-xl-12 col-lg-12 col-md-12 mt-4 mb-4">
+            <h5 style="border:solid 1px #1a4345; padding:10px;">Create Account</h5>
+        </div>
+    </div>
+    <div id="errorMessageInMainPage" style="text-align:center; margin-top:-10px; margin-bottom:5px;" > </div>
+    <form method="POST" id="accountForm">
+        <div class="row  mt-1" >
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                <label for="emailMainPage" class="" >Email</label>
+                <input type ="text" value=""  class="form-control form-control-sm " name="emailMainPage" id="emailMainPage"  />
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                <label for="passwordMainPage" class=" ">Password</label>
+                <input type ="password"  value="" class=" form-control form-control-sm " name="passwordMainPage" id="passwordMainPage"  />
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                <label for="passwordConfirmMainPage" class=" ">Confirm Password</label>
+                <input type ="password"  value="" class=" form-control form-control-sm " name="passwordConfirmMainPage" id="passwordConfirmMainPage"  />
             </div>
         </div>
-        <div class="col-xl-4" style="justify-content: center; display: flex;" >
-            <div class="cardMainContainer">
-                <div class="theCard">
-                    <div class="theFront">
-                        <div class="card cardStyle" style="width: 18rem;">
-                            <img class="card-img-top" src="<?php echo base_url(); ?>assets/images/guytwo.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Ray</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor metus sem, et sodales elit vestibulum eget.
-                                </p>
-                                <a href="#" class="card-button btn btn-sm ">Go somewhere</a>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="theBack">
-                        <div class="card cardStyle" style="width: 18rem;">
-                            <img class="card-img-top" src="<?php echo base_url(); ?>assets/images/guytwo.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Ray</h5>
-                                <p class="card-text">
-                                    <i class="fab fa-whatsapp" style="font-size:20px; color:#333;"></i> <span> +961 71 86 86 86 </span>
-                                </p>
-                                <a href="#" class="card-button btn btn-sm ">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="mt-2 col-xl-12 col-12">
+                <button type="submit" class="btn btn-sm greenButtonsCss" style="float:right;" id="createAccountButton">
+                    <i class="fas fa-paper-plane" style="color:white; margin-right:4px;"></i> Create Account
+                </button>
             </div>
         </div>
-        <div class="col-xl-4"  >
-            <div class="cardMainContainer" style="float:right;">
-                <div class="theCard">
-                    <div class="theFront">
-                        <div class="card cardStyle" style="width: 18rem;">
-                            <img class="card-img-top" src="<?php echo base_url(); ?>assets/images/guy.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Ray</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at neque id metus commodo volutpat a at dui.</p>
-                                <a href="#" class="card-button btn btn-sm ">Go somewhere</a>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="theBack">
-                        
-                        <div class="card cardStyle" style="width: 18rem;">
-                            <img class="card-img-top" src="<?php echo base_url(); ?>assets/images/guy.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Ray</h5>
-                                <p class="card-text">
-                                    <i class="fab fa-whatsapp" style="font-size:20px; color:#333;"></i> <span> +961 71 21 23 24 </span>
-                                </p>
-                                <a href="#" class="card-button btn btn-sm ">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-        
+    </form>
+</div>
+<?php } ?>
+  
+<!-- account section end  -->
+
+
+
+<!-- footer  -->
+<div class="container"> 
     <div class="row" style="margin-top:30px;">  
         <div class="col-xl-12" >
             <h5 style="line-height: 30px; text-transform: uppercase; color:#333;">CONTACT / SOCIAL MEDIA</h5>
         </div>
     </div>
-    <div class="row" style="margin-top:20px; margin-top: 20px; border: solid 1px #333; padding: 5px; margin-left:0px; margin-right:0px;">  
+    <div class="row" style="margin-top:20px; margin-top: 20px; border: solid 1px #1a4345; padding: 5px; margin-left:0px; margin-right:0px;">  
         <div class="col-xl-4 col-12" >
         </div>
         <div class="col-xl-1 col-3" >

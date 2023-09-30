@@ -160,9 +160,6 @@
             </td>
             <td class="displayItemsToEdit" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" itemId="<?php echo $itemId ?>" barCode= "<?php echo $barCode ?>">
                 <p><?= ucfirst($itemName); ?></p>
-                    <?php  if($showImage == 1){ ?>          
-                        <img loading="lazy" width="70" height="60" src="https://cotlinelb.com/assets/images/itemImages/<?php echo $attachmentName;?>.<?php echo $attachmentExt;?>" alt="NoImage" >    
-                    <?php }?>
             </td>
             <td class="displayItemsToEdit" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" itemId="<?php echo $itemId ?>" barCode= "<?php echo $barCode ?>"><?= ucfirst($barCode); ?></td>
             <!-- <td class="displayItemsToEdit" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" itemId="<?php echo $itemId ?>" barCode= "<?php echo $barCode ?>"><?= ucfirst($barCodeToPrint); ?></td> -->

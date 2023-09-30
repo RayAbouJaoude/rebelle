@@ -1,5 +1,6 @@
 $(document).ready(function (){ 
     getItemsData();
+    displayCardigan();
     allColors = '';
     allSizes = '';
     $("#cancelAddItemButton").click(function(){
@@ -105,7 +106,7 @@ $(document).ready(function (){
 
     })
 
-    $("#manageItemsHeaderButton").click();
+    $("#manageProfileHeaderButton").click();
 
     $("#adminSectionHeaderButton").click(function(){
         hideAll();
@@ -330,9 +331,30 @@ $(document).ready(function (){
             }
         });  
         return false;
-
     })
     //................//
+    $("#editProfileButton").click(function(){
+        postData = $("#profileForm").serialize();
+        $.ajax({
+            url: baseURL + "/Rebelle/editProfile",
+            method: "POST",
+            data: postData,
+            dataType: "json",
+            beforeSend:function(){
+                $(".loader").fadeIn();
+            },
+            success: function (data) {
+                
+            },
+            error: function (error) {
+                console.log("Network Error Please Refresh The Page.");
+            },
+            complete: function(){
+                $(".loader").fadeOut();
+            }
+        });  
+        return false;
+    })
 
     $("#submitColor").click(function(){
         postData = $("#addColorForm").serialize();
@@ -682,6 +704,290 @@ $(document).ready(function (){
     })
 
 
+    $("body").on("click", ".viewItemsButtons",function(){
+
+        itemId = $(this).attr("itemId");
+        itemName = $(this).attr("itemName");
+        productCode = $(this).attr("productCode");
+        $.ajax({
+            url: baseURL + "/Shop/displayItemModal",
+            dataType: "JSON",
+            data: "itemId=" + itemId + "&itemName=" + itemName + "&productCode=" + productCode ,
+            method: "POST",
+            beforeSend:function(){
+                $(".loader").fadeIn(500);
+            },
+            success: function (data) { 
+                $("#itemModal .modal-content").html(data);    
+                $("#itemModal").modal("show");
+
+            },complete:function(){
+                $(".loader").fadeOut(500);
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
+    $("body").on("click", ".itemColorInModal",function(){
+        $(this).addClass("itemColorSelected");
+        $(this).siblings().removeClass("itemColorSelected");
+    })
+
+    $("body").on("click", ".itemSizeInModal",function(){
+        $(this).addClass("itemSizeSelected");
+        $(this).siblings().removeClass("itemSizeSelected");
+    })
+
+
+
+    function displayCardigan(){
+        $.ajax({
+            url: baseURL + "/Shop/displayCardigan",
+            dataType: "JSON",
+            method: "POST",
+            beforeSend:function(){
+                $(".loader").fadeIn(500);
+            },
+            success: function (data) { 
+                $("#newCardiganContainer").html(data);    
+    
+            },complete:function(){
+                $(".loader").fadeOut(500);
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    }
+    
+    //.................//
+    $("#createAccountButton").click(function(){
+        password = $("#passwordMainPage").val();
+        confirmPassword = $("#passwordConfirmMainPage").val();
+        email = $("#emailMainPage").val();
+        if(!validateEmailAddress(email)) {
+            $("#errorMessageInMainPage").html("Incorrect Email Format.")
+			return false;
+		}
+        if(email.trim() == "" || password.trim() == "") {
+            $("#errorMessageInMainPage").html("Please Fill All Fields.")
+			return false;
+        }
+        if(password == confirmPassword){
+            postData = $("#accountForm").serialize();
+            $.ajax({
+                url: baseURL + "/Home/createAccount",
+                method: "POST",
+                data: postData,
+                dataType: "json",
+                beforeSend:function(){
+                    $(".loader").fadeIn();
+                },
+                success: function (data) {
+                    if(data == -1){
+                        $("#errorMessageInMainPage").html("Email Already Used.")
+                    }else{
+                        function pageRedirect() {
+                            window.location.replace(baseURL + "/Login")
+                        }      
+                        setTimeout(pageRedirect(), 1000);
+                    }
+                },
+                error: function (error) {
+                    console.log("Network Error Please Refresh The Page.");
+                },
+                complete: function(){
+                    $(".loader").fadeOut();
+                }
+            });  
+        }else{
+            $("#errorMessageInMainPage").html("Passwords Don't Match")
+
+        }
+        return false;
+    })
+    //................//
+
+
+    
+    $("body").on("click", ".addToCartInModalButton",function(){
+        quantity = $("#itemQuantityInModal").val();
+        itemSize = $(".itemSizeSelected").html();
+        color = $(".itemColorSelected").html();
+        itemBarCode = $(this).attr("itemBarCode");
+  
+        if(itemSize != undefined ||  color != undefined){
+            $.ajax({
+                url: baseURL + "/Home/addToCart",
+                dataType: "JSON",
+                data: "quantity=" + quantity + "&itemSize=" + itemSize + "&itemBarCode=" + itemBarCode + "&color=" + color,
+                method: "POST",
+                beforeSend:function(){
+                    $(".loader").fadeIn(500);
+                },
+                success: function (data) { 
+                
+                },complete:function(){
+                    $(".loader").fadeOut(500);
+                    getCartItemsCount();
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+            return false;
+        }else{
+            // $("#pleaseFillAllFields").modal("show");
+        }
+    })
+
+    $("body").on("click", "#purchaseButtonInCartSection",function(){
+        $.ajax({
+            url: baseURL + "/Home/drawTotalInPurchaseCartModal",
+            dataType: "JSON",
+            method: "POST",
+            success: function (data) { 
+
+                if(data[1].length > 0){
+                    var errorMessage = "";
+                    for (let index = 0; index < data[1].length; index++) {
+                        var itemName= data[1][index][0];
+                        var size= data[1][index][1];
+                        var color= data[1][index][2];
+                        var quantityLeft= data[1][index][3];
+                        showError();
+
+                        errorMessage += `Sorry, We only have ${quantityLeft} item(s) left for ${itemName} (${size}, ${color}). <br>`; 
+                        
+                    }
+
+                    errorMessage += "Please Edit Cart before purchasing.";
+
+                    showError(errorMessage)
+                }else{
+                    $("#purchaseCartForm").trigger("reset");
+                    $("#purchaseCartModal").modal("show");
+                    $("#purchaseCartButtonInModal").css("display", "block");
+                    $("#fullAmountWithShipInModal").html(data[0]);
+                    $("#shippingInModalValue").html("4 $");
+
+                }
+               
+
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    });
+
+    $("#purchaseCartButtonInModal").click(function(){
+        if (isValidPurchaseCartForm()) {
+            submitPurchaseCartForm();
+            $("#purchaseCartButtonInModal").hide();
+        }
+        return false;
+    });
+
+
+    function drawCartInHome(){
+        $.ajax({
+            url: baseURL + "/Home/drawCart",
+            dataType: "JSON",
+            method: "POST",
+            success: function (data) { 
+                if(data == -1){
+                    $("#cartContainer").html("<center style='margin-top:60px;'> <h5> Cart Is Empty </h5> </center>")
+                }else{
+                    $("#cartContainer").html(data);    
+                }
+            },
+            error: function () {  
+            }
+        });
+        return false;
+    }
+    
+    $(".cartButton").click(function(){
+        $(".cartContainer").removeClass("displayNone");
+        drawCartInHome();
+    })
+
+    $("body").on("click", ".removeItemFromCartIcon",function(){
+        itemId = $(this).attr("idInCart");
+        $.ajax({
+            url: baseURL + "/Home/removeItemFromCart",
+            dataType: "JSON",
+            data: "itemId=" + itemId,
+            method: "POST",
+            success: function () { 
+                $(".cartButton").click();
+                // getCartItemsCount();
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
+
+    $("body").on("click", ".plusButtonInCart",function(){
+        quantity= $(this).parent().children().next("span").html();
+        quantity = parseInt(quantity) +1;
+        // symbol = $("#symbolHidden").val();
+        // $(this).parent().children().next("span").html(quantity);
+        // price = $(this).parent().children("input").val();
+        // price = parseInt(price) * parseInt(quantity);
+        // $(this).parent().next().html(`<b> ${price} ${symbol}<b>`);
+        // $(this).parent().next().digits();
+        // $(this).parent().next().addClass("makeBold");
+        itemId = $(this).attr("idInCart");
+        $.ajax({
+            url: baseURL + "/Home/changeItemQuantityFromCart",
+            dataType: "JSON",
+            data: "quantity=" + quantity + "&itemId=" + itemId,
+            method: "POST",
+            async:false,
+            success: function () { 
+                // $(".cartMainHeader").click();
+                drawCartInHome();
+
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
+
+    $("body").on("click", ".minusButtonInCart",function(){
+        quantity= $(this).next("span").html();
+        if(parseInt(quantity) == 0){
+        }else{
+            quantity = parseInt(quantity) -1;
+            itemId = $(this).attr("idInCart");
+            $.ajax({
+                url: baseURL + "/Home/changeItemQuantityFromCart",
+                dataType: "JSON",
+                data: "quantity=" + quantity + "&itemId=" + itemId,
+                method: "POST",
+                async:false,
+                success: function () { 
+                    // $(".cartMainHeader").click();
+                    drawCartInHome();
+
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        }
+        return false;
+    })
 
 // last bracket 
 })
@@ -1017,3 +1323,129 @@ function getItemImages() {
 }
 
 
+function validateEmailAddress(email){
+    var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return email.match(pattern);
+}
+
+
+
+
+// ----------------------------------------------------------- //
+// ----------------------------------------------------------- //
+function isValidPurchaseCartForm()
+{
+    var name = $("#customerFullNameInPurchaseCartModal").val();
+    var phoneNumber = $("#telephoneInPurchaseCartModal").val();
+    var country = $("#purchaseCartCountry").val();
+    country = "LB";
+    var cardNumber = $("#purchaseCardNumber").val();
+    var cardCVV = $("#purchaseCardCVV").val();
+
+    var state = $("#purchaseCartState").val();
+    var city = $("#purchaseCartCity").val();
+    var zipCode = $("#purchaseCartZipCode").val();
+
+    var addressText = $("#addressInPurchaseCartModal").val();
+
+    if (name.trim() == "") {
+        console.log("The Full Name field is required.");
+        $("#purchaseCartModalHeader").html("Please Enter Your Name.");
+        return false;
+    }
+    if (phoneNumber.trim() == "") {
+        console.log("The Phone Number field is required.");
+        return false;
+    } else {
+        if (!isValidPhoneNumber(phoneNumber)) {
+            console.log("Phone Number Not Valid.");
+            $("#purchaseCartModalHeader").html("Invalid Phone Number");
+            return false;
+        }
+    }
+    if (country == -1) {
+        console.log("The Country field is required.");
+        return false;
+    } else {
+        if (country == "LB") {
+            if (addressText.trim() == "") {
+                console.log("The Address field is required.");
+                $("#purchaseCartModalHeader").html("The Address field is required.");
+                return false;
+            }
+        } else {
+            
+            if (cardNumber.trim() == "") {
+                console.log("The Card Number field is required.");
+                return false;
+            }
+            if (cardCVV.trim() == "") {
+                console.log("The CVV field is required.");
+                return false;
+            }
+            if (state.trim() == "") {
+                console.log("The State field is required.");
+                return false;
+            }
+            if (city.trim() == "") {
+                console.log("The City field is required.");
+                return false;
+            }
+            if (zipCode.trim() == "") {
+                console.log("The Zip Code field is required.");
+                return false;
+            }
+        }
+    }
+    return true;
+}
+// ----------------------------------------------------------- //
+function isValidPhoneNumber(phoneNumb) 
+{
+	var pattern = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
+    return phoneNumb.match(pattern);
+}
+
+
+
+
+// ----------------------------------------------------------- //
+function submitPurchaseCartForm()
+{
+    var clientName = $("#customerFullNameInPurchaseCartModal").val();
+    var phoneNumber = $("#telephoneInPurchaseCartModal").val();
+    var addressText = $("#addressInPurchaseCartModal").val();
+    $.ajax({
+        method: "POST",
+        url: baseURL + "/Home/purchaseCart",
+        dataType: "JSON",
+        data: $("#purchaseCartForm").serialize(),
+        async: false,
+        beforeSend:function(){
+            $(".loader").fadeIn(500);
+        },
+        success: function (data) { 
+            var flag = data[0];
+            var msg = data[1];
+            if (flag == -1) {
+                console.log(msg);
+                $("#purchaseCartButtonInModal").css("display", "block");
+                $("#purchaseCartModal").modal("hide");
+                showError("Purchase failed try again.");
+            } else {
+                $("#purchaseCartModal").modal("hide");
+                showError("Thank you, your order was purchased successfully and will be delivered within 3 working days.");
+                setTimeout(function(){
+                    location.reload();
+                },10000) 
+            }
+        },
+        error: function () {
+            console.log("Error occured. Please try again later.");
+        },
+        complete: function(){
+            drawCartInHome();
+            $(".loader").fadeOut(100);
+        }
+    });
+}

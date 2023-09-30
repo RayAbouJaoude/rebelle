@@ -35,6 +35,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <a class="navbar-brand" href="<?php echo base_url(); ?>/Home">
                         <img class="headerLogo"  src="<?php echo base_url(); ?>assets/images/rebelleLogoOne.jpg" >
                     </a>
+
+                    <span style="position:absolute; right:0; margin-right:70px; font-size:23px; top:0; margin-top:27px;" class="onlyForMobile"> 
+            <?php
+                    if(isset($numberOfItemsInCart)){
+                ?>
+                    <a class="nav-link cartButton" style="z-index:999;" id="" href="#"> <i class="fas fa-cart-plus" style="margin-right:5px;"></i>(<span class="numberOfItemsInCart" style="color:red;"><?php echo $numberOfItemsInCart ?></span>) </a>           
+                <?php
+                    } else{   
+                ?>
+                    <a class="nav-link cartButton" style="z-index:999;" id="" href="#"> <i class="fas fa-cart-plus" style="margin-right:5px;"></i>(<span class="numberOfItemsInCart" style="color:red;"></span>) </a>           
+                <?php
+                    }   
+                ?>
+        
+        </span>
+
+
                     <button class="navbar-toggler menuBtn" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <i class="fa fa-bars menuBtnIcon"></i>                      
                     </button>
@@ -60,8 +77,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="4">Shorts</a>
                                     <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="6">Tops</a>
                                     <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="1">Trousers</a>
-                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="#10">T-shirts</a>
+                                    <a class="dropdown-item categoryToDisplay" dataCategoryNumber ="11">T-shirts</a>
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link cartButton"  role="button">
+                                    CART
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>Styling"   role="button">
@@ -76,19 +98,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </li>
 <?php
     if(isset($_SESSION["userId"])){
+        if(isset($_SESSION["userType"])){
+            $userType = $_SESSION["userType"];
+            if($userType == 1){
+        
 ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url(); ?>Rebelle"  role="button">
                                     ADMIN
                                 </a>
                             </li>
+<?php
+            }else{
+                
+?>               
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo base_url(); ?>Rebelle"  role="button">
+                                    PROFILE
+                                </a>
+                            </li>     
+<?php
+            }
+                
+?>         
                             <li class="nav-item">
                                 <a class="nav-link" style="cursor:pointer;" id="logoutButton"  role="button">
                                     LOGOUT
                                 </a>
                             </li>
 <?php
-    }else{
+        }}else{
 ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link "  href="<?php echo base_url(); ?>Login" role="button">
@@ -96,16 +135,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </a>
                             </li>
 <?php
+        
     }
 ?>
                         </ul>
                     </div>  
                 </div>  
             </nav>
+            <div class=" cartContainer displayNone"> 
+                <div id="cartContainer" style="margin-top:0px; z-index:10; background:white; width:100%; height:500px; max-height:500px; padding-bottom:20px;overflow-y:auto;">
+                </div>
+            </div>
         </div>
+
     </header>
     
     <div class="loader">
         <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
     </div>
+   
     <main>
+
+    

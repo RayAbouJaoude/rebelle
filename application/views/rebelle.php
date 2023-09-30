@@ -47,6 +47,7 @@
                     Profile
                 </button>
             </div>
+            <?php if ($userType == 1){ ?>
             <div class="col-xl-2 col-6 greenBackground">
                 <button type ="button" id="manageItemsHeaderButton" name="manageItemsHeaderButton" class =" whiteColor mainHeaderButtons btn btn-sm">
                     <i class="mainHeaderIcons fas fa-id-badge whiteColor"></i>
@@ -59,6 +60,7 @@
                     Manage Carts
                 </button>
             </div>
+            <?php } ?>
         </div>
     </div>
     <!-- end of main header  -->
@@ -89,7 +91,7 @@
                 </div>
             </div>
             <div class="row mt-1">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                     <label for="dateOfBirth" class=" ">Date Of Birth</label>
                     <div class='input-group date' id='datetimepicker'>
                         <input type='text' id="dateOfBirth" value="<?php echo $dateOfBirth ; ?>"   name="dateOfBirth" style="background-color:white; padding-left:13px;"  class="form-control form-control-sm"  readonly="readonly"/>
@@ -97,7 +99,7 @@
                             <span class="input-group-text far fa-calendar-alt dueDateBtn"></span>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
                     <label for="phoneNumber" class=" ">Phone Number</label>
                     <input type ="text" value="<?php echo $phoneNumber ; ?>" required class="form-control form-control-sm " name="phoneNumber" id="phoneNumber"  />
@@ -111,7 +113,7 @@
             </div>
             <div class="row">
                 <div class="mt-2 col-xl-12 col-12">
-                    <button type="submit" class="btn btn-sm greenButtonsCss" style="float:right;" id="editProfileButton">
+                    <button type="button" class="btn btn-sm greenButtonsCss" style="float:right;" id="editProfileButton">
                         <i class="fas fa-paper-plane" style="color:white; margin-right:4px;"></i> Edit Profile
                     </button>
                 </div>
@@ -122,7 +124,7 @@
 
 
     <!-- manage item section  -->
-    <div id="manageItemSection" >
+    <div id="manageItemSection" class="displayNone">
         <div class="row mt-3">
             <div class="col-lg-2 pr-0">
                 <button type ="button" id="addItemButton"  name="addItemButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>Add Item </button>
@@ -165,7 +167,7 @@
                         <option value="8">Shirt</option>
                         <option value="9">Bodysuit</option>
                         <option value="10">Blazers</option>
-                        <option value="10">T-shirts</option>
+                        <option value="11">T-shirts</option>
                         
                     </select>
                             
@@ -461,7 +463,7 @@
 
 
     <!-- manage cart section start  -->
-    <div id="manageCart">
+    <div id="manageCart" class="displayNone">
         <div class="row mt-3">
             <div class="col-lg-2 pr-0">
                 <button type ="button" id="listOfLocalCartsButton"  name="listOfLocalCartsButton" class ="btn buttonStyle"><i style="margin-right:10px" class="fas fa-caret-down"></i>List Of Local Carts </button>

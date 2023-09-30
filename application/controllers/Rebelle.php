@@ -945,5 +945,43 @@ class Rebelle extends CI_Controller {
 	}
 
 
+	// -- -- -- -- -- -- -- -- -- -- -- //
+	public function editProfile()
+	{
+		if(isset($_POST["firstName"]) && !empty($_POST["firstName"])){
+            $firstName = $_POST["firstName"];
+        }else{
+            $error = 4;
+		}
+		if(isset($_POST["lastName"]) && !empty($_POST["lastName"])){
+            $lastName = $_POST["lastName"];
+        }else{
+            $error = 4;
+		}
+		if(isset($_POST["dateOfBirth"]) && !empty($_POST["dateOfBirth"])){
+            $dateOfBirth = $_POST["dateOfBirth"];
+        }else{
+            $error = 4;
+		}
+		if(isset($_POST["phoneNumber"]) && !empty($_POST["phoneNumber"])){
+            $phoneNumber = $_POST["phoneNumber"];
+        }else{
+            $error = 4;
+		}
+		if(isset($_POST["description"]) && !empty($_POST["description"])){
+            $description = $_POST["description"];
+        }else{
+            $error = 4;
+		}
+		$userId = $_SESSION["userId"];
+		$this->load->model("Home_Model");
+		$data = $this->Home_Model->editProfile($userId, $firstName, $lastName, $phoneNumber, $description);
+
+		echo json_encode($data);
+		exit();
+	}
+
+
+	
 //........................Last One............................................//
 }

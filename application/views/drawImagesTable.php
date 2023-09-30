@@ -34,7 +34,6 @@
                 </center>
             </td>
             <td style="padding-left:18px; background-color:white;">
-                <!-- <a href="<?php echo base_url(); ?>/assets/downloadImages.php?code=fromCotlineApp&id=<?= $attachmentId ?>&ext=<?= $attachmentExt ; ?>"><?= $attachmentName; ?>.<?= $attachmentExt; ?></a> -->
                 <a download href="<?php echo base_url(); ?>assets/images/itemImages/<?= $attachmentId ?>.<?= $attachmentExt ; ?>"><?= $attachmentName; ?>.<?= $attachmentExt; ?></a>
             </td> 
         </tr>

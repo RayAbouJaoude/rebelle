@@ -131,17 +131,16 @@ head{
 
 }
 body {
-    /* font-family: "effra",sans-serif; */
     font-family: "lato", Arial, sans-serif;
-    letter-spacing: 0.8px;
-    font-size: 10pt;
+    letter-spacing: 0.5px;
+    font-size: 13px;
     color: #000000;
     margin: 0;
     padding: 0;
     text-decoration: none;
     width: 100% !important;
     overflow-y: scroll;
-    padding-bottom:50px;
+    padding-bottom:20px;
 }
 
 .form-control:focus,
@@ -211,21 +210,6 @@ th {
 
 
 
-/* parallax  */
-.parallax {
-    /* The image used */
-    background-image: url("https://lb961.com/assets/images/wide.jpg");
-    width: 100%;
-    /* Set a specific height */
-    height: 400px; 
-    /* Create the parallax scrolling effect */
-    /* background-attachment: fixed; */
-    /* background-position: center; */
-    background-repeat: no-repeat;
-    /* background-size: cover; */
-
-  
-  }
 
 .facebookIcon{
     color: #1a4345;
@@ -399,41 +383,6 @@ table tr:hover > td {
     max-width:400px;
 }
 
-
-
-#forSaleFirstSection {
-    /* The image used */
-    background-image: url("https://lb961.com/assets/images/mainSaleHeader.png");
-    /* Set a specific height */
-    height: 220px;  
-    background-repeat: no-repeat;
-    transform: translateZ(0);
-    image-rendering: -webkit-optimize-contrast;
-    /* background-attachment: fixed; */
-    /* background-position: center; */
-    background-position: revert;
-    background-size: cover;  
-    -webkit-background-size: cover;
-    -moz-background-size: cover; 
-    
-}
-
-#forRentFirstSection {
-    /* The image used */
-    background-image: url("https://lb961.com/assets/images/rectangleParallaxOne.png");
-    /* Set a specific height */
-    height: 400px;  
-    background-repeat: no-repeat;
-    /* background-attachment: fixed; */
-    /* background-position: center; */
-    background-size: cover;  
-}
-.layer {
-    background-color: rgba(0, 0, 0, 0.2);
-    width: 100%;
-    height: 100%;
-
-}
 
 
 .greenColor{
@@ -674,15 +623,10 @@ table tr:hover > td {
 	opacity: 1;
 	color: #36486b;
 }
-
-
-
-.btn:hover {
-	transition: 0.5s ease-in-out;
-	background: #1a434562;
-	color: #1a4345;
-
+.itemSizeSelected, .itemColorSelected{
+    border-color: #1a4345;
 }
+
 
 .greenButtonsCssShop {
 	--color1: #1a4345;
@@ -726,4 +670,20 @@ table tr:hover > td {
 }
 .categoryToDisplay{
     height:31px;
+    cursor:pointer;
+}
+
+
+
+/* only for mobile */
+.onlyForMobile{
+    display:none;
+}
+@media (max-width: 768px) {
+    .onlyForMobile{
+        display:flex;
+    }   
+    .removeFromMobile{
+        display:none !important;
+    }
 }
