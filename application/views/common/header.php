@@ -129,8 +129,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php
         }}else{
 ?>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link "  href="<?php echo base_url(); ?>Login" role="button">
+                            <li class="nav-item ">
+                                <a class="nav-link loginButtonInHeader"  href="<?php echo base_url(); ?>Login" role="button">
                                     LOGIN
                                 </a>
                             </li>

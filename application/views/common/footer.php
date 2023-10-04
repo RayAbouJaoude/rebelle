@@ -291,6 +291,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
+        <!-- Error Modal -->
+        <div class="modal fade modalStyle" id="errorModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ErrorModalTitle">
+                            <i class="fas fa-exclamation-triangle scocareModalTriangle"></i>
+                            Attention
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
+                    <div class="modal-body">
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <script>var baseURL = '<?php echo base_url(); ?>';</script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

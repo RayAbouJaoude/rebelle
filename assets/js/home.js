@@ -1,6 +1,24 @@
 $(document).ready(function (){ 
     getItemsData();
     displayCardigan();
+    getCartsData();
+
+    $("body").on("keyup", "#cartsTable_filter input",function(){
+        totalUsd=0.0;
+        totalLbp=0.0;
+        counterLbp  = 0;
+        counterUsd  = 0;
+        
+        $(".totalLbpClass").each(function(){
+            totalLbp= totalLbp + parseFloat($(this).attr("dataAmount"));
+            counterLbp = counterLbp +1;
+        })
+        counter =  counterLbp ;
+        // $("#totalUsdInCarts").html(totalUsd);   
+        $("#totalLbpInCarts").html(totalLbp);   
+        $("#totalNumberOfCarts").html(counter);   
+    })
+
     allColors = '';
     allSizes = '';
     $("#cancelAddItemButton").click(function(){
@@ -58,7 +76,7 @@ $(document).ready(function (){
     })
     $('#gender').selectpicker('val', $("#hiddenInputForGender").val());
     $(".selectpicker").selectpicker("refresh");
-    $('#datetimepicker, #datetimepicker1').datepicker({
+    $('#datetimepicker, #datetimepicker1, #datetimepicker2').datepicker({
         format: 'yyyy/mm/dd',
         autoclose: true,
         todayHighlight: true,
@@ -124,6 +142,7 @@ $(document).ready(function (){
         $("#managePropertyForm").slideUp();
         $("#displayAdminSectionPropertyInfo").slideUp();
     })
+
 
 
 
@@ -671,6 +690,7 @@ $(document).ready(function (){
                 // $(".itemContainer").html(data);    
                 $("main").html(data);    
                 $("body .menuBtn").click();
+                $(".cartContainer").hide();
                 
             },complete:function(){
                 $(".loader").fadeOut(500);
@@ -818,30 +838,36 @@ $(document).ready(function (){
         itemSize = $(".itemSizeSelected").html();
         color = $(".itemColorSelected").html();
         itemBarCode = $(this).attr("itemBarCode");
-  
-        if(itemSize != undefined ||  color != undefined){
-            $.ajax({
-                url: baseURL + "/Home/addToCart",
-                dataType: "JSON",
-                data: "quantity=" + quantity + "&itemSize=" + itemSize + "&itemBarCode=" + itemBarCode + "&color=" + color,
-                method: "POST",
-                beforeSend:function(){
-                    $(".loader").fadeIn(500);
-                },
-                success: function (data) { 
-                
-                },complete:function(){
-                    $(".loader").fadeOut(500);
-                    getCartItemsCount();
-                },
-                error: function () {
-                    console.log("Error");
-                }
-            });
-            return false;
+        if($.trim($(".loginButtonInHeader").html()) == "LOGIN"){
+            showError("Please Login First.");
+            setTimeout(function(){
+                window.location.replace(baseURL + "Login");
+            },3000)
         }else{
-            // $("#pleaseFillAllFields").modal("show");
+            if(itemSize != undefined ||  color != undefined){
+                $.ajax({
+                    url: baseURL + "/Home/addToCart",
+                    dataType: "JSON",
+                    data: "quantity=" + quantity + "&itemSize=" + itemSize + "&itemBarCode=" + itemBarCode + "&color=" + color,
+                    method: "POST",
+                    beforeSend:function(){
+                        $(".loader").fadeIn(500);
+                    },
+                    success: function (data) { 
+                    
+                    },complete:function(){
+                        $(".loader").fadeOut(500);
+                        // getCartItemsCount();
+                        drawCartInHome();
+                    },
+                    error: function () {
+                        console.log("Error");
+                    }
+                });
+                return false;
+            }
         }
+
     })
 
     $("body").on("click", "#purchaseButtonInCartSection",function(){
@@ -850,7 +876,6 @@ $(document).ready(function (){
             dataType: "JSON",
             method: "POST",
             success: function (data) { 
-
                 if(data[1].length > 0){
                     var errorMessage = "";
                     for (let index = 0; index < data[1].length; index++) {
@@ -858,10 +883,7 @@ $(document).ready(function (){
                         var size= data[1][index][1];
                         var color= data[1][index][2];
                         var quantityLeft= data[1][index][3];
-                        showError();
-
                         errorMessage += `Sorry, We only have ${quantityLeft} item(s) left for ${itemName} (${size}, ${color}). <br>`; 
-                        
                     }
 
                     errorMessage += "Please Edit Cart before purchasing.";
@@ -902,8 +924,11 @@ $(document).ready(function (){
             success: function (data) { 
                 if(data == -1){
                     $("#cartContainer").html("<center style='margin-top:60px;'> <h5> Cart Is Empty </h5> </center>")
+                    $("#cartContainer").css("height","150px");
                 }else{
                     $("#cartContainer").html(data);    
+                    $("#cartContainer").css("height","500px");
+
                 }
             },
             error: function () {  
@@ -913,7 +938,7 @@ $(document).ready(function (){
     }
     
     $(".cartButton").click(function(){
-        $(".cartContainer").removeClass("displayNone");
+        $(".cartContainer").toggle();
         drawCartInHome();
     })
 
@@ -988,6 +1013,82 @@ $(document).ready(function (){
         }
         return false;
     })
+
+
+    $("body").on("click", ".displayCarts",function(){
+        cartId = $(this).attr("cartId");
+        $("#cartIdHiddenInForm").val(cartId);
+        $.ajax({
+            url: baseURL + "/Rebelle/displayCarts",
+            dataType: "JSON",
+            data: "cartId=" + cartId ,
+            method: "POST",
+            success: function (data) { 
+                $("#drawCartInLogin").html(data[0]);
+                $("#topSpeedTrackingNumberInForm").val(data[1]);
+                $("#drawCartInLogin").slideDown();
+                $("#editCartInLoginForm").slideDown();
+                var cartTableInLogin = $('#cartTableInLogin').DataTable({
+                    "dom": 'lBfrtip',
+                    "buttons": [
+                        {
+                            'footer': 'true',
+                            "extend": 'excel'
+                        },
+                        { 
+                            'extend': 'print',
+                            'footer': true,
+                            'exportOptions': {
+                            'columns': ':visible'
+                            }
+                        }
+                    
+                    ],
+                    "lengthMenu": [[50, 100, 200, -1],[50, 100, 200, "All"]],
+                    "language" : {
+                        "sLengthMenu": "Show _MENU_"
+                    },
+                    "columnDefs": [ {
+                        "targets": 0,
+                        "orderable": false
+                        } ]
+                }); 
+                if($("#cartTableInLogin_filter label input").val()==""){
+                    $("#cartTableInLogin_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;" id="cartTableInLoginSearch"></i> <i class="fas fa-times" style="color:red; display:none; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearcartTableInLoginSearch"></i>');
+                    $("#cartTableInLogin_filter label input").removeAttr("type").attr("type","text");
+                    $("#clearcartTableInLoginSearch").hide();
+                    $("#cartTableInLoginSearch").show();
+                }else{
+                    $("#cartTableInLogin_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;  display:none;" id="cartTableInLoginSearch"></i> <i class="fas fa-times" style="color:red; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearcartTableInLoginSearch"></i>');
+                    $("#cartTableInLogin_filter label input").removeAttr("type").attr("type","text");
+                    $("#clearcartTableInLoginSearch").show();
+                    $("#cartTableInLoginSearch").hide();
+                }
+    
+                $("#clearcartTableInLoginSearch").click(function(){
+                    cartTableInLogin.search("").draw();
+                    $("#clearcartTableInLoginSearch").hide();
+                    $("#cartTableInLoginSearch").show();
+                })
+                $("#cartTableInLogin_filter label input").on("keyup change",function(){
+                    searchInput = $("#cartTableInLogin_filter label input").val();
+                    if (cartTableInLogin.search() != ""){
+                        $("#clearcartTableInLoginSearch").show();
+                        $("#cartTableInLoginSearch").hide();
+                    }else{
+                        $("#clearcartTableInLoginSearch").hide();
+                        $("#cartTableInLoginSearch").show();
+                    }
+                })
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
+
+
 
 // last bracket 
 })
@@ -1435,9 +1536,7 @@ function submitPurchaseCartForm()
             } else {
                 $("#purchaseCartModal").modal("hide");
                 showError("Thank you, your order was purchased successfully and will be delivered within 3 working days.");
-                setTimeout(function(){
-                    location.reload();
-                },10000) 
+               
             }
         },
         error: function () {
@@ -1448,4 +1547,94 @@ function submitPurchaseCartForm()
             $(".loader").fadeOut(100);
         }
     });
+}
+
+
+
+
+// ----------------------------------------------------------- //
+function showError(errorMessage) 
+{
+	$("#errorModal .modal-body").html(errorMessage);
+	$("#errorModal").modal();
+}
+
+
+
+function getCartsData() {
+    selectValues = $("#selectToSortLocalCarts").val();
+    fromDate = $("#dateFrom").val();
+    toDate = $("#dateTo").val();
+  
+    $.ajax({
+        url: baseURL + "/Rebelle/getCartsData",
+        method: "POST",
+        dataType: "json",
+        data: "selectValues=" + selectValues + "&fromDate=" + fromDate + "&toDate=" + toDate,
+        beforeSend:function(){
+            $(".loader").fadeIn(500);
+        },
+        success: function (data) {
+            $("#cartsInLogin").html(data); 
+            var cartsTable = $('#cartsTable').DataTable({
+                "dom": 'lBfrtip',
+                "buttons": [
+                    {
+                        "footer": true ,
+                        "extend": 'excel', 
+                        "exportOptions": {
+                        "columns": ':gt(0)' 
+                        }
+                    }
+                ],
+                "lengthMenu": [[-1, 50, 100, 200 ],["All", 50, 100, 200]],
+                "stateSave": true,
+                "iDisplayLength": -1,
+                "language" : {
+                    "sLengthMenu": "Show _MENU_"
+                },
+                // "stateSave": true,
+                "columnDefs": [ {
+                    "targets": 0,
+                    "orderable": false
+                } ],
+                'order': [[1, 'asc']]
+            }); 
+
+            if($("#cartsTable_filter label input").val()==""){
+                $("#cartsTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;" id="cartsTableSearch"></i> <i class="fas fa-times" style="color:red; display:none; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearcartsTableSearch"></i>');
+                $("#cartsTable_filter label input").removeAttr("type").attr("type","text");
+                $("#clearcartsTableSearch").hide();
+                $("#cartsTableSearch").show();
+            }else{
+                $("#cartsTable_filter label").append('<i class="fas fa-search" style="color:#A9A9A9; margin-left:5px; margin-right:5px; cursor:pointer; font-size:15px;  display:none;" id="cartsTableSearch"></i> <i class="fas fa-times" style="color:red; margin-left:5px; margin-right:5px; cursor:pointer; font-size:16px;" id="clearcartsTableSearch"></i>');
+                $("#cartsTable_filter label input").removeAttr("type").attr("type","text");
+                $("#clearcartsTableSearch").show();
+                $("#cartsTableSearch").hide();
+            }
+
+            $("#clearcartsTableSearch").click(function(){
+                cartsTable.search("").draw();
+                $("#clearcartsTableSearch").hide();
+                $("#cartsTableSearch").show();
+            })
+            $("#cartsTable_filter label input").on("keyup change",function(){
+                searchInput = $("#cartsTable_filter label input").val();
+                if (cartsTable.search() != ""){
+                    $("#clearcartsTableSearch").show();
+                    $("#cartsTableSearch").hide();
+                }else{
+                    $("#clearcartsTableSearch").hide();
+                    $("#cartsTableSearch").show();
+                }
+            })
+        },
+        error: function (error) {
+            console.log("Network Error Please Refresh The Page.");
+        },
+        complete: function(){
+            $(".loader").fadeOut();
+            $("#cartsTable_filter input").keyup();
+        }
+    });   
 }

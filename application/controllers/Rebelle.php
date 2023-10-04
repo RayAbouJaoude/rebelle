@@ -981,7 +981,56 @@ class Rebelle extends CI_Controller {
 		exit();
 	}
 
+	public function getCartsData()
+	{
+		if(isset($_POST["selectValues"]) && !empty($_POST["selectValues"])){
+			$selectValues = $_POST["selectValues"];
+		}else{
+			$selectValues = 1;
+		}
+		if(isset($_POST["fromDate"]) && !empty($_POST["fromDate"])){
+			$fromDate = $_POST["fromDate"];
+		}else{
+			$fromDate = "";
+		}
+		if(isset($_POST["toDate"]) && !empty($_POST["toDate"])){
+			$toDate = $_POST["toDate"];
+		}else{
+			$toDate = "";
+		}
+		$this->load->model("Home_Model");
+
+		$cartData = $this->Home_Model->getCartsData($selectValues, $fromDate, $toDate);
+		
+		$data["cartData"] = $cartData;
+		
+		$cartTable = $this->load->view("cartsTableInLogin", $data, TRUE);
+
+		echo json_encode($cartTable);
+	}
 
 	
+	public function displayCarts()
+	{
+		$error = 0;
+		if(isset($_POST["cartId"]) && !empty($_POST["cartId"])){
+			$cartId = $_POST["cartId"];
+		}else{
+			$error = 1;
+		}		
+			
+		$itemsDisplayed ="";
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$displayCarts = $this->Home_Model->displayCarts($cartId);
+			$data["data"] = $displayCarts[0];
+			$data["trackingNumber"] = $displayCarts[1];
+			$data["replacementItems"] = $displayCarts[2];
+
+			$itemsDisplayed = $this->load->view("drawCartInLogin", $data, TRUE);
+		}
+		
+		echo json_encode(array($itemsDisplayed, $displayCarts[1], $displayCarts[3]));
+	}
 //........................Last One............................................//
 }

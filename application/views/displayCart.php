@@ -18,16 +18,6 @@
             $itemId = $itemsData[$i][3];
             $color = $itemsData[$i][9];
             $sale = $itemsData[$i][10];
-            // $imagesArray = $itemsData[$i][11];
-            // $imageToDisplay =""; 
-            // $attachmentName = $data->attachmentName;
-            // for ($p=0; $p < count($imagesArray) ; $p++) { 
-            //     $mainPageImage = $imagesArray[$p][2];
-            //     if($mainPageImage == 1){
-            //         $imageToDisplay = '<img loading="lazy" class="itemImageDisplayed" src="'. base_url() . 'assets/images/itemImages/'. $imagesArray[$p][1] .'.'. $imagesArray[$p][0].'" alt="NoImage" >';
-            //     }
-            // }
-
 
             $finalPrice = $price -($price * $sale / 100);
 
