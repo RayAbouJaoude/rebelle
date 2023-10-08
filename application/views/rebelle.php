@@ -480,7 +480,7 @@
                     <!-- <option value="2">Shipped</option> -->
                     <!-- <option value="3">Submitted</option>
                     <option value="6">Not Submitted</option> -->
-                    <option value="8">Restocked</option>
+                    <!-- <option value="8">Restocked</option> -->
                 </select>
             </div>
             <div class="col-xl-1">
@@ -513,30 +513,30 @@
         </div>
         <form method="POST" id="editCartInLoginForm" name="editCartInLoginForm" class="displayNone">
             <div class="row form-group mt-2">  
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                    <label for="topSpeedTrackingNumberInForm">TopSpeed tracking Numb:</label>
+                <!-- <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                    <label for="topSpeedTrackingNumberInForm">tracking Numb:</label>
                     <input type="hidden" name="cartIdHiddenInForm" id="cartIdHiddenInForm">
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
                     <input type="text" name="topSpeedTrackingNumberInForm" id="topSpeedTrackingNumberInForm" class="form-control form-control-sm"  />
-                </div>
-                <div class="col-xl-1" >
+                </div> -->
+                <!-- <div class="col-xl-1" >
                     <label for="extraLbpInDisplay">Extra LBP:</label>
                 </div>
                 <div class="col-xl-1" >
                     <input type="text" id="extraLbpInDisplay" name="extraLbpInDisplay"  class="form-control form-control-sm">
-                </div>
-                <div class="col-xl-1" >
+                </div> -->
+                <!-- <div class="col-xl-1" >
                     <label for="checkBoxForFreeDelivery">Free Delivery:</label>
                 </div>
                 <div class="col-xl-1" >
                     <input type="checkbox" id="checkBoxForFreeDelivery" name="checkBoxForFreeDelivery"  class="form-control form-control-sm">
-                </div>
+                </div> -->
                 <div class="col-xl-4 "> 
-                    <button type ="submit" id="addEditTopSpeedForm" name="addEditTopSpeedForm" style="float:right;" class ="btn btn-md blueButtonsCss">
+                    <!-- <button type ="submit" id="addEditTopSpeedForm" name="addEditTopSpeedForm" style="float:right;" class ="btn btn-md blueButtonsCss">
                         <i class="fas fa-paper-plane" style="margin-right:5px; color:white;"> </i>
                         Save
-                    </button>
+                    </button> -->
                     <button type ="button" id="cancelEditItemButtonInTopSpeedForm" name="cancelEditItemButton" style="float:right;" class ="btn btn-md redButtonsCss">
                         <i class="fas fa-times" style="color:white; margin-right:5px;"> </i> 
                         Cancel 
@@ -865,7 +865,7 @@
             <div class="modal-body"  style="height:56px;"  >
                 <p style="font-size:14px;">Are you sure you want to Delete All Checked ITEMS?  <span style="color:white;"> </span></p>
             </div>  
-            <div class="modal-footer"  style="height:52px;" >
+            <div class="modal-footer"  style="height:60px;" >
                 <button class="btn btn-sm  redButtonsCssModal"  data-dismiss="modal" id="yesdeleteMainPageButton" style="float:right;">YES</button>
                 <button class="btn btn-sm blueButtonsCssModal "  data-dismiss="modal" style="float:right;"> NO</button>
             </div>  
@@ -993,7 +993,7 @@
             <div class="modal-body"  style="height:56px;" >
                 <p style="font-size:14px;">Are you sure you want to delete this item? <span style="color:white;">aaaaaaaaaaaaaaaa </span></p>
             </div>  
-            <div class="modal-footer" style="height:52px;">
+            <div class="modal-footer" style="height:60px;">
                 <button class="btn btn-sm  redButtonsCssModal"  data-dismiss="modal" id="yesDeleteItemImageInItems" style="float:right;">YES</button>
                 <button class="btn btn-sm blueButtonsCssModal "  data-dismiss="modal" style="float:right;"> NO</button>
             </div>  

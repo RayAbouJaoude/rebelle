@@ -1,15 +1,15 @@
 <table id="cartsTable" class="table table-striped" style="table-layout: fixed !important; width:100%;">
     <thead>
         <tr>
-            <th style="width: 100px !important; ">Action </th>
-            <th style="width: 275px !important; ">Name</th>
-            <th style="width: 225px !important; ">Address</th>
-            <th style="width: 150px !important; ">Number</th>
-            <th style="width: 150px !important; ">Date</th>
-            <th style="width: 100px !important; ">Total</th>
-            <th style="width: 50px !important; ">Type</th>
-            <th style="width: 50px !important; ">discount</th>
-            <th style="width: 120px !important; " title="Top Speed tracking number.">TSpeed Traking N</th>
+            <th style="width: 5% !important; ">Action </th>
+            <th style="width: 26%!important; ">Name</th>
+            <th style="width: 31% !important; ">Address</th>
+            <th style="width: 13% !important; ">Number</th>
+            <th style="width: 10% !important; ">Date</th>
+            <th style="width: 5% !important; ">Total</th>
+            <!-- <th style="width: 50px !important; ">Type</th> -->
+            <th style="width: 10% !important; ">discount</th>
+            <!-- <th style="width: 12% !important; " title="Top Speed tracking number.">TSpeed Traking N</th> -->
         </tr>
     </thead>
     <tbody>
@@ -64,6 +64,16 @@
         <tr>
             <td> 
                 <center>
+                <?php
+                    if (isset($_SESSION["userType"]) && $_SESSION["userType"] == 1) {
+                ?>    
+                    <a class="deleteCartInLogin" title="Delete Cart" href="javascript:void(0);"  cartId ="<?php echo $cartId ?>">
+                        <i class ="fa fa-trash" style="color:#ef6b6b; font-size:11pt; padding-left:2.5px; margin-right:5px; text-decoration:none !important"></i>
+                    </a>
+                <?php 
+                    }
+                ?>
+
                 <?php 
                     if($note != ""){
                 ?>
@@ -140,11 +150,11 @@
                 cartId= "<?php echo $cartId ?>" title="<?= $totalAmount  ?>">
                 <?= $totalAmount; ?>
             </td>
-            <td class="displayCarts makeEllipsis" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" userId= "<?php echo $userId ?>" cartId= "<?php echo $cartId ?>" title="<?= ucfirst($type); ?>"><?= ucfirst($type); ?></td>
+            <!-- <td class="displayCarts makeEllipsis" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" userId= "<?php echo $userId ?>" cartId= "<?php echo $cartId ?>" title="<?= ucfirst($type); ?>"><?= ucfirst($type); ?></td> -->
             <td class="displayCarts makeEllipsis" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" userId= "<?php echo $userId ?>" cartId= "<?php echo $cartId ?>" title="<?= ucfirst($discount); ?>"><?= ucfirst($discount); ?></td>
             <!-- <td class=" makeEllipsis" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" userId= "<?php echo $userId ?>" cartId= "<?php echo $cartId ?>" title="<?= ucfirst($trackingNumber); ?>">
     <?php
-            if (isset($_SESSION["adminType"]) && $_SESSION["adminType"] == 1) {
+            if (isset($_SESSION["userType"]) && $_SESSION["userType"] == 1) {
             if($collected == 1){
     ?>
                     <a class="collectedInCartLogin " title="Collected Or Not" href="javascript:void(0);" userId= "<?php echo $userId ?>" cartId ="<?php echo $cartId ?>">
@@ -159,29 +169,21 @@
     <?php   }} ?>
                 <?= ucfirst($trackingNumber); ?>
             </td> -->
-            <td class=" makeEllipsis" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" userId= "<?php echo $userId ?>" cartId= "<?php echo $cartId ?>" title="<?= ucfirst($topSpeedTrackingNumber); ?>">
-                <?php
-                    if (isset($_SESSION["adminType"]) && $_SESSION["adminType"] == 1) {
-                ?>    
-                    <a class="deleteCartInLogin" title="Delete Cart" href="javascript:void(0);"  cartId ="<?php echo $cartId ?>">
-                        <i class ="fa fa-trash" style="color:#ef6b6b; font-size:11pt; padding-left:2.5px; text-decoration:none !important"></i>
-                    </a>
-                <?php 
-                    }
-                ?>
+            <!-- <td class=" makeEllipsis" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" userId= "<?php echo $userId ?>" cartId= "<?php echo $cartId ?>" title="<?= ucfirst($topSpeedTrackingNumber); ?>"> -->
+                
                 <?php
                     if($restockedItem == 0 and $type == "replacement"){
                 ?>
-                    <a class="restockItems"  title="Restock Items" href="javascript:void(0);" userId= "<?php echo $userId ?>" cartId ="<?php echo $cartId ?>">
+                    <!-- <a class="restockItems"  title="Restock Items" href="javascript:void(0);" userId= "<?php echo $userId ?>" cartId ="<?php echo $cartId ?>">
                         <i class ="fas fa-history limegreen" style="padding-left:7px; font-size:11pt; text-decoration:none !important"></i>
-                    </a>
+                    </a> -->
                 <?php 
                     } 
                 ?>
 
                 <?= ucfirst($topSpeedTrackingNumber); ?>
 
-            </td>
+            <!-- </td> -->
         </tr>
     <?php
         }
@@ -197,8 +199,8 @@
             <td>Total= <span id="totalLbpInCarts"><?= number_format($totalPriceLBP); ?> </span> USD</td>            
             <td>Total Carts= <span id="totalNumberOfCarts" > </span></td>            
             <td> </td>
-            <td> </td>
-            <td> </td>
+            <!-- <td> </td> -->
+            <!-- <td> </td> -->
         </tr>
     </tfoot>
 </table>

@@ -543,6 +543,22 @@ class Rebelle extends CI_Controller {
 		echo json_encode($getItemDataInItemsToEdit);
 	}
 
+	public function changeTopSpeedIcon()
+	{
+		$error = 0;
+		if(isset($_POST["cartId"]) && !empty($_POST["cartId"])){
+			$cartId = $_POST["cartId"];
+		}else{
+			$error = 1;
+		}		
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$changeOctopusIcon = $this->Home_Model->changeTopSpeedIcon($cartId);
+			
+		}
+		echo json_encode($changeOctopusIcon);
+	}
+
 	public function newCollectionItem()
 	{
 		$error = 0;
@@ -1009,6 +1025,22 @@ class Rebelle extends CI_Controller {
 		echo json_encode($cartTable);
 	}
 
+	public function changePendingIcon()
+	{
+		$error = 0;
+		if(isset($_POST["cartId"]) && !empty($_POST["cartId"])){
+			$cartId = $_POST["cartId"];
+		}else{
+			$error = 1;
+		}		
+		if($error == 0){
+			$this->load->model("Home_Model");
+			$changePendingIcon = $this->Home_Model->changePendingIcon($cartId);
+			
+		}
+		
+		echo json_encode($changePendingIcon);
+	}
 	
 	public function displayCarts()
 	{

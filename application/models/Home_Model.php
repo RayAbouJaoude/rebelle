@@ -1340,7 +1340,16 @@ class Home_Model extends CI_Model {
         return array($result, $itemThatAreSoldOut);
     }
 
+    public function getUserInfoForCart($userId){
 
+        // to check item eza 5ales aw la2 
+        $sqlQuery = "SELECT * FROM users
+                     Where id = $userId and is_deleted = 0";    
+        $query = $this->db->query($sqlQuery);
+        $result = $query->result();
+        return $result;
+    }
+    
 
     public function purchaseCart($userId, $name, $telephone, $address, $city, $state, $zipCode, $localShippingFlag){
         $name = $this->db->escape($name);
@@ -1582,45 +1591,43 @@ class Home_Model extends CI_Model {
             $imageInfo = $query4->result();
             
             $sqlQuery2 = "SELECT DISTINCT * FROM  item
-                          WHERE barCodeToPrint = $barCodeToPrint and isDeleted = 0";   
+                          WHERE id = $barCodeToPrint and isDeleted = 0";   
             $query2 = $this->db->query($sqlQuery2);
             $itemInfo = $query2->result();
 
-            $attachmentName = $imageInfo[0]->id;
-            $attachmentExt = $imageInfo[0]->attachmentExt;
+            // $attachmentName = $imageInfo[0]->id;
+            // $attachmentExt = $imageInfo[0]->attachmentExt;
+            $attachmentExt = "empty";
+            $attachmentName = "empty";
             $itemName = $itemInfo[0]->itemName;
             $OriginalPrice = $itemInfo[0]->price;
             $itemId = $itemInfo[0]->id;
             $newCollection = $itemInfo[0]->newCollection;
             $sale = $itemInfo[0]->sale;
             $stockLeft = $itemInfo[0]->quantity;
-
-            $getRealSoldPriceQuery = "SELECT  * FROM  purchaseditems
-                                      WHERE barCodeToPrint = $barCodeToPrint and userId = $userId ";   
-            $queryGetPrice = $this->db->query($getRealSoldPriceQuery);
-            $purchasedCartInfo = $queryGetPrice->result();
-            $price = $purchasedCartInfo[0]->price;
-            
-            array_push($array,array($barCodeWithoutescape, $itemSize, $quantity, $price, $itemName, $attachmentName, $attachmentExt, $userId, $itemId, $color, $cartId, $number, $userName, $newCollection, $barCodeToPrint, $sale, $OriginalPrice, $discountPercentage, $stockLeft));
+            $userId ="0";
+            array_push($array,array($barCodeWithoutescape, $itemSize, $quantity, $OriginalPrice, $itemName, $attachmentName, $attachmentExt, $userId, $itemId, $color, $cartId, $number, $userName, $newCollection, $barCodeToPrint, $sale, $OriginalPrice, $discountPercentage, $stockLeft));
         }
         // get tracking number 
-        $sqlGettopSpeedTrackingNumber = "SELECT topSpeedTrackingNumber,extraInLbp FROM cartpurchased
-                                         Where  userId = $userId and isDeleted = 0";    
+        // $sqlGettopSpeedTrackingNumber = "SELECT topSpeedTrackingNumber,extraInLbp FROM cartpurchased
+        //                                  Where  userId = $userId and isDeleted = 0";    
                      
-        $queryToGettopSpeedTrackingNumber = $this->db->query($sqlGettopSpeedTrackingNumber);
-        $queryToGettopSpeedTrackingNumber = $queryToGettopSpeedTrackingNumber->row();
-        $topSpeedTrackingNumber = $queryToGettopSpeedTrackingNumber->topSpeedTrackingNumber;
-        $extraInLbp = $queryToGettopSpeedTrackingNumber->extraInLbp;
+        // $queryToGettopSpeedTrackingNumber = $this->db->query($sqlGettopSpeedTrackingNumber);
+        // $queryToGettopSpeedTrackingNumber = $queryToGettopSpeedTrackingNumber->row();
+        // $topSpeedTrackingNumber = $queryToGettopSpeedTrackingNumber->topSpeedTrackingNumber;
+        // $extraInLbp = $queryToGettopSpeedTrackingNumber->extraInLbp;
         // end get tracking number 
 
         // get replacement items 
-        $sqlGetReplacement = "SELECT replacementcartitems.* , item.itemName, item.barCode, item.size, item.quantity as stockLeft, item.newCollection , item.sale FROM replacementcartitems
-                              LEFT JOIN item ON replacementcartitems.barCodeToPrint = item.barCodeToPrint  
-                              Where replacementcartitems.userId = $userId";   
-        $queryGetReplacement = $this->db->query($sqlGetReplacement);
-        $replacementItems = $queryGetReplacement->result();
+        // $sqlGetReplacement = "SELECT replacementcartitems.* , item.itemName, item.barCode, item.size, item.quantity as stockLeft, item.newCollection , item.sale FROM replacementcartitems
+        //                       LEFT JOIN item ON replacementcartitems.barCodeToPrint = item.barCodeToPrint  
+        //                       Where replacementcartitems.userId = $userId";   
+        // $queryGetReplacement = $this->db->query($sqlGetReplacement);
+        // $replacementItems = $queryGetReplacement->result();
         // end get replacement items 
-
+        $topSpeedTrackingNumber = "0";
+        $replacementItems = "0";
+        $extraInLbp = "0";
         if ($query) {
             $result= array($array, $topSpeedTrackingNumber, $replacementItems, $extraInLbp);
         }
@@ -1628,6 +1635,40 @@ class Home_Model extends CI_Model {
             $result= -1;
         }
         return $result;
+    }
+
+
+    public function changeTopSpeedIcon($cartId){
+        $sqlQuery = "UPDATE cartpurchased
+                         SET topspeed = CASE 
+                                            WHEN topspeed = 0 then 1
+                                            WHEN topspeed = 1 then 0
+                                        END
+                         WHERE  isDeleted =0  and id = $cartId";
+            $query=$this->db->query($sqlQuery);  
+            if($query){
+                $result =1;
+            }else{
+                $result = -1;
+            }
+            return $result;
+    }
+
+
+    public function changePendingIcon($cartId){
+        $sqlQuery = "UPDATE cartpurchased
+                     SET pending = CASE 
+                                    WHEN pending = 0 then 1
+                                    WHEN pending = 1 then 0
+                                   END
+                     WHERE  isDeleted =0  and id = $cartId";
+            $query=$this->db->query($sqlQuery);  
+            if($query){
+                $result =1;
+            }else{
+                $result = -1;
+            }
+            return $result;
     }
 
 //........................LAST ONE..............................//

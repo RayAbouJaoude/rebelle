@@ -9,9 +9,9 @@
             <th style="width: 100px !important; max-width:150px !important; ">Size</th>
             <th style="width: 150px !important; max-width:150px !important; ">Color</th>
             <?php
-                if (isset($_SESSION["adminType"]) && $_SESSION["adminType"] == 1) {
+                if (isset($_SESSION["userType"]) && $_SESSION["userType"] == 1) {
             ?>
-            <th style="width: 150px !important; max-width:150px !important; ">Cost</th>
+            <!-- <th style="width: 150px !important; max-width:150px !important; ">Cost</th> -->
             <?php
             }
                 
@@ -167,9 +167,9 @@
             <td class="displayItemsToEdit" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" itemId="<?php echo $itemId ?>" barCode= "<?php echo $barCode ?>"><?= ucfirst($size); ?></td>
             <td class="displayItemsToEdit" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" itemId="<?php echo $itemId ?>" barCode= "<?php echo $barCode ?>"><?= ucfirst($color); ?></td>
             <?php
-                if (isset($_SESSION["adminType"]) && $_SESSION["adminType"] == 1) {
+                if (isset($_SESSION["userType"]) && $_SESSION["userType"] == 1) {
             ?>
-            <td class="displayItemsToEdit getCostInViewItem" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" itemId="<?php echo $itemId ?>" costData = "<?= $cost * $quantity; ?>"  barCode= "<?php echo $barCode ?>"><?= $cost; ?></td>
+            <!-- <td class="displayItemsToEdit getCostInViewItem" style="padding-left:18px; cursor:pointer;" href="javascript:void(0);" itemId="<?php echo $itemId ?>" costData = "<?= $cost * $quantity; ?>"  barCode= "<?php echo $barCode ?>"><?= $cost; ?></td> -->
             <?php
                 }
             ?>
@@ -192,14 +192,14 @@
         <tr>
             <td> </td>
             <td> </td>
-            <td> </td>
+            <!-- <td> </td> -->
             <td> </td>
             <td> </td>            
             <td>Total Items = <span id="totalItemsInMainTable"> <?= $totalItems; ?> </span></td>  
             <?php
-                if (isset($_SESSION["adminType"]) && $_SESSION["adminType"] == 1) {
+                if (isset($_SESSION["userType"]) && $_SESSION["userType"] == 1) {
             ?>          
-            <td>Total Cost = <span id="totalCostInMainTable"><?= number_format($totalCost); ?> </span> USD</td>       
+            <!-- <td>Total Cost = <span id="totalCostInMainTable"><?= number_format($totalCost); ?> </span> USD</td>        -->
             <?php
                 }
             ?>    

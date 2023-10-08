@@ -114,9 +114,9 @@ class Home extends CI_Controller {
 			$userId = $_SESSION["userId"];
 			$this->load->model("Home_Model");
 			$total = $this->Home_Model->drawTotalInPurchaseCartModal($userId);
-			
+			$userInfo = $this->Home_Model->getUserInfoForCart($userId );
 		}
-		echo json_encode($total);
+		echo json_encode(array($total, $userInfo));
 	}
 
 	public function removeItemFromCart()

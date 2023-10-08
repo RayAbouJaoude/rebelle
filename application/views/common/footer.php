@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="modal-body"  style="height:56px;" >
                         <p style="font-size:14px;">Are you sure you want to delete this record? </p>
                     </div>  
-                    <div class="modal-footer" style="height:52px;">
+                    <div class="modal-footer" style="height:60px;">
                         <button class="btn btn-sm  redButtonsCssModal"  data-dismiss="modal" id="yesDeleteModalToChange" style="float:right;">YES</button>
                         <button class="btn btn-sm blueButtonsCssModal "  data-dismiss="modal" style="float:right;"> NO</button>
                     </div>  
@@ -289,6 +289,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 
 
+        <div class="modal fade" id="topSpeedInCartInLoginModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content "  >
+                    <div class="modal-header">
+                        <h5 style="font-size:14px;"><i class="fas fa-exclamation-triangle" style="margin-right:10px; font-size:16px; color:rgb(38, 140, 228) ;"></i>Attention</h5>
+                        <button type="button" class="close closeModal" data-dismiss="modal" id="closeModal" title="Close">×</button>
+                    </div>
+                    <div class="modal-body"  style="height:56px;" >
+                        <p style="font-size:14px;">Are you sure you want to Ship this Item? <span style="color:white;">aaaaaaaaaaaaaaaa </span></p>
+                    </div>  
+                    <div class="modal-footer" style="height:60px;">
+                        <button class="btn btn-sm  redButtonsCssModal"  data-dismiss="modal" id="yesShipTopSpeedItem" style="float:right;">YES</button>
+                        <button class="btn btn-sm blueButtonsCssModal "  data-dismiss="modal" style="float:right;"> NO</button>
+                    </div>  
+                </div>  
+            </div>
+        </div>
+
+        <div class="modal fade" id="pendingItemModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content "  >
+                    <div class="modal-header">
+                        <h5 style="font-size:14px;"><i class="fas fa-exclamation-triangle" style="margin-right:10px; font-size:16px; color:rgb(38, 140, 228) ;"></i>Attention</h5>
+                        <button type="button" class="close closeModal" data-dismiss="modal" id="closeModal" title="Close">×</button>
+                    </div>
+                    <div class="modal-body"  style="height:56px;" >
+                        <p style="font-size:14px;">Are you sure you want to put this cart in the pending list? <span style="color:white;"> </span></p>
+                    </div>  
+                    <div class="modal-footer" style="height:60px;">
+                        <button class="btn btn-sm  redButtonsCssModal"  data-dismiss="modal" id="yesPendingItem" style="float:right;">YES</button>
+                        <button class="btn btn-sm blueButtonsCssModal "  data-dismiss="modal" style="float:right;"> NO</button>
+                    </div>  
+                </div>  
+            </div>
+        </div>
 
 
         <!-- Error Modal -->

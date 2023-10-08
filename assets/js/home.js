@@ -876,29 +876,28 @@ $(document).ready(function (){
             dataType: "JSON",
             method: "POST",
             success: function (data) { 
-                if(data[1].length > 0){
+                if(data[0][1].length > 0){
                     var errorMessage = "";
-                    for (let index = 0; index < data[1].length; index++) {
-                        var itemName= data[1][index][0];
-                        var size= data[1][index][1];
-                        var color= data[1][index][2];
-                        var quantityLeft= data[1][index][3];
+                    for (let index = 0; index < data[0][1].length; index++) {
+                        var itemName= data[0][1][index][0];
+                        var size= data[0][1][index][1];
+                        var color= data[0][1][index][2];
+                        var quantityLeft= data[0][1][index][3];
                         errorMessage += `Sorry, We only have ${quantityLeft} item(s) left for ${itemName} (${size}, ${color}). <br>`; 
                     }
-
                     errorMessage += "Please Edit Cart before purchasing.";
-
                     showError(errorMessage)
                 }else{
                     $("#purchaseCartForm").trigger("reset");
                     $("#purchaseCartModal").modal("show");
                     $("#purchaseCartButtonInModal").css("display", "block");
-                    $("#fullAmountWithShipInModal").html(data[0]);
+                    $("#fullAmountWithShipInModal").html(data[0][0]);
                     $("#shippingInModalValue").html("4 $");
-
                 }
-               
 
+                $("#telephoneInPurchaseCartModal").val(data[1][0]["phoneNumber"]);
+                $("#customerFullNameInPurchaseCartModal").val(data[1][0]["fname"] + " " + data[1][0]["lname"]);
+                $("#addressInPurchaseCartModal").val(data[1][0]["description"]);
             },
             error: function () {
                 console.log("Error");
@@ -1014,6 +1013,11 @@ $(document).ready(function (){
         return false;
     })
 
+    $("body").on("click", "#cancelEditItemButtonInTopSpeedForm",function(){
+        $("#drawCartInLogin").slideUp();
+        $("#editCartInLoginForm").slideUp();
+    })
+
 
     $("body").on("click", ".displayCarts",function(){
         cartId = $(this).attr("cartId");
@@ -1089,7 +1093,77 @@ $(document).ready(function (){
     })
 
 
+    $("body").on("click", ".topSpeedInCartInLogin",function(){
+        cartId = $(this).attr("cartId");
+        $("#topSpeedInCartInLoginModal").modal('show');
+    })
+    $("body").on("click", "#yesShipTopSpeedItem",function(){
+        $("#topSpeedInCartInLoginModal").modal('hide');
+        if($(`.topSpeedInCartInLogin[cartId=${cartId}]`).children().hasClass("limegreen")){
+            $(`.topSpeedInCartInLogin[cartId=${cartId}]`).children().removeClass("limegreen");
+            $(`.topSpeedInCartInLogin[cartId=${cartId}]`).children().addClass("grey");
+        }else{
+            $(`.topSpeedInCartInLogin[cartId=${cartId}]`).children().addClass("limegreen");
+            $(`.topSpeedInCartInLogin[cartId=${cartId}]`).children().removeClass("grey");
+        }
+        $.ajax({
+            url: baseURL + "/Rebelle/changeTopSpeedIcon",
+            dataType: "JSON",
+            data: "cartId=" + cartId,
+            method: "POST",
+            success: function (data) { 
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
 
+    $("#refreshCart").click(function(){
+        getCartsData();
+         // disable button for 3 sec 
+         var fewSeconds = 2;
+         var btn = $(this);
+         btn.addClass("displayNone");
+         setTimeout(function(){
+             btn.removeClass("displayNone");
+         }, fewSeconds*1000);
+         // end disable button for 3 sec 
+    })
+
+    $("body").on("click", ".pendingInCartInLogin",function(){
+        cartId = $(this).attr("cartId");
+        $("#pendingItemModal").modal('show');
+    })
+    $("body").on("click", "#yesPendingItem",function(){
+        $("#pendingItemModal").modal('hide');
+        if($(`.pendingInCartInLogin[cartId=${cartId}]`).children().hasClass("limegreen")){
+            $(`.pendingInCartInLogin[cartId=${cartId}]`).children().removeClass("limegreen");
+            $(`.pendingInCartInLogin[cartId=${cartId}]`).children().addClass("grey");
+        }else{
+            $(`.pendingInCartInLogin[cartId=${cartId}]`).children().addClass("limegreen");
+            $(`.pendingInCartInLogin[cartId=${cartId}]`).children().removeClass("grey");
+        }
+        $(`.pendingInCartInLogin[cartId=${cartId}]`).parent().parent().parent().remove();
+        
+        $.ajax({
+            url: baseURL + "/Rebelle/changePendingIcon",
+            dataType: "JSON",
+            data: "cartId=" + cartId,
+            method: "POST",
+            success: function (data) { 
+                // getCartsData() ;
+                getPendingCount();
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+        return false;
+    })
+
+    
 // last bracket 
 })
 
